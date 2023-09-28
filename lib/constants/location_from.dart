@@ -117,6 +117,7 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -169,7 +170,7 @@ class _LocationState extends State<Location> {
               widget.onDistrictChanged(newValue!);
             });
           },
-          items: widget
+          items:  widget
               .district[widget.divisions.indexOf(widget.selectedDivision)]
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
@@ -185,4 +186,7 @@ class _LocationState extends State<Location> {
       ],
     );
   }
+
+
+
 }

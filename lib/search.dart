@@ -114,6 +114,7 @@ class _SearchState extends State<Search> {
               // Display search results as a ListView
               ListView.builder(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: searchResults.length,
                 itemBuilder: (context, index) {
                   return SearchResultItem(

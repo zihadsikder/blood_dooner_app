@@ -107,11 +107,11 @@ class Home extends StatelessWidget {
             SizedBox(height: 8.0), // Add some space between the carousel and the image
 
             // Your donation picture with desired size
-            Image.asset(
-              'assets/donation.png',
-              width: 300, // Adjust the width as needed
-              height: 250, // Adjust the height as needed
-            ),
+            // Image.asset(
+            //   'assets/donation.png',
+            //   width: 300, // Adjust the width as needed
+            //   height: 250, // Adjust the height as needed
+            // ),
           //   Expanded(
           //   child: Image.asset(
           //     'assets/donation.png',

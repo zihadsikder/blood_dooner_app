@@ -2,9 +2,9 @@ import 'constants/location_from.dart';
 import 'main_page.dart';
 import 'package:flutter/material.dart';
 
-
 class Register extends StatefulWidget {
-  Register({Key? key}) : super(key: key);
+  Register({super.key});
+
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -82,21 +82,18 @@ class _RegisterState extends State<Register> {
                   selectedBloodGroup: selectedBloodGroup,
                   selectedDivision: selectedDivision,
                   selectedDistrict: selectedDistrict,
-
                   onBloodGroupChanged: (newValue) {
                     setState(() {
                       selectedBloodGroup = newValue;
                     });
                   },
                   onDivisionChanged: (newValue) {
-                    setState(() {
-                      selectedDivision = newValue;
-                    });
+                    selectedDivision = newValue;
+                    setState(() {});
                   },
                   onDistrictChanged: (newValue) {
-                    setState(() {
-                      selectedDistrict = newValue;
-                    });
+                    selectedDistrict = newValue;
+                    setState(() {});
                   },
                 ),
                 TextField(
@@ -121,13 +118,16 @@ class _RegisterState extends State<Register> {
                           lastDate: DateTime(2050),
                         );
 
-                        if (pickedDate != null && pickedDate != dobController.text) {
+                        if (pickedDate != null &&
+                            pickedDate != dobController.text) {
                           setState(() {
-                            dobController.text = "${pickedDate.toLocal()}".split(' ')[0];
+                            dobController.text =
+                                "${pickedDate.toLocal()}".split(' ')[0];
                           });
                         }
                       },
-                      icon: Icon(Icons.calendar_today,color: Colors.red.shade900),
+                      icon: Icon(Icons.calendar_today,
+                          color: Colors.red.shade900),
                     ),
                   ),
                   keyboardType: TextInputType.datetime,
@@ -143,18 +143,21 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 16.0),
                 TextField(
                   controller: passwordController,
-                  obscureText: _obscureText, // Use a boolean variable to toggle password visibility
+                  obscureText: _obscureText,
+                  // Use a boolean variable to toggle password visibility
                   decoration: InputDecoration(
                     labelText: 'Enter Password',
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
-                          _obscureText = !_obscureText; // Toggle the password visibility
+                          _obscureText =
+                              !_obscureText; // Toggle the password visibility
                         });
                       },
                       icon: Icon(
                         _obscureText ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey, // Customize the icon color as needed
+                        color:
+                            Colors.grey, // Customize the icon color as needed
                       ),
                     ),
                   ),
@@ -169,12 +172,14 @@ class _RegisterState extends State<Register> {
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
-                          _obscureText = !_obscureText; // Toggle the password visibility
+                          _obscureText =
+                              !_obscureText; // Toggle the password visibility
                         });
                       },
                       icon: Icon(
                         _obscureText ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey, // Customize the icon color as needed
+                        color:
+                            Colors.grey, // Customize the icon color as needed
                       ),
                     ),
                   ),
@@ -189,7 +194,7 @@ class _RegisterState extends State<Register> {
                       onChanged: (value) {
                         setState(() {
                           weightOver50Controller.text =
-                          value == true ? 'Yes' : 'No';
+                              value == true ? 'Yes' : 'No';
                         });
                       },
                     ),
@@ -197,14 +202,14 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 16.0),
                 ElevatedButton(
-                  onPressed:
-                    _validateFields,
-                  child: Text('Submit',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  onPressed: _validateFields,
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -223,10 +228,14 @@ class _RegisterState extends State<Register> {
         selectedDivision != 'Select District' &&
         _isValidEmail(emailController.text) &&
         _isValidPassword(passwordController.text) &&
-        _isValidConfirmPassword(passwordController.text, confirmPasswordController.text) &&
+        _isValidConfirmPassword(
+            passwordController.text, confirmPasswordController.text) &&
         _isValidMobileNumber(mobileNumberController.text) &&
-        _isValidDateOfBirth(dobController.text) && weightOver50Controller.text.isNotEmpty) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Mainpage()),
+        _isValidDateOfBirth(dobController.text) &&
+        weightOver50Controller.text.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Mainpage()),
       );
     } else {
       showDialog(
@@ -235,7 +244,7 @@ class _RegisterState extends State<Register> {
           return AlertDialog(
             title: Text('Error'),
             content: Text('Please fill in all required fields.'),
-            actions:[
+            actions: [
               TextButton(
                 child: Text('OK'),
                 onPressed: () {

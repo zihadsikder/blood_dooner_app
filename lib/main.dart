@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +18,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Login(),
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.red,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             minimumSize: Size(w, 50),
             backgroundColor: Colors.red.shade900,
+            foregroundColor: Colors.white,
             elevation: 5,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10), // Adjust the value as needed
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.red.shade900,
+          foregroundColor: Colors.white,
           elevation: 5,
         ),
          listTileTheme: ListTileThemeData(
