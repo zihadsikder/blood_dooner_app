@@ -1,0 +1,188 @@
+import 'package:flutter/src/material/dropdown.dart';
+import 'package:flutter/material.dart';
+
+class Location extends StatefulWidget {
+  final List<String> bloodGroups = [
+    'A+',
+    'A-',
+    'A',
+    'AB',
+    'AB+',
+    'AB-',
+    'B',
+    'B-',
+    'B+',
+    'O',
+    'O+',
+    'O-'
+  ];
+  String selectedBloodGroup = 'A+';
+
+  final List<String> divisions = [
+    'Select Division',
+    'Dhaka',
+    'Chattogram',
+    'Rajshahi',
+    'Sylhet',
+    'Barishal',
+    'Mymensingh',
+    'Khulna',
+    'Rangpur',
+  ];
+
+  final List<List<String>> district = [
+    ['Select District'],
+    [
+      'Gazipur',
+      'Dhaka',
+      'Kishorganj',
+      'Manikganj',
+      'Munshiganj',
+      'Narayanganj',
+      'Narsingdi',
+      'Tangail',
+      'Faridpur',
+      'Gopalganj',
+      'Madaripur',
+      'Rajbari',
+      'Shariatpur'
+    ],
+    [
+      'Coxs Bazar',
+      'Chittagong',
+      'Brahmanbaria',
+      'Comilla',
+      'Chandpur',
+      'Lakshmipur',
+      'Maijdee',
+      'Feni',
+      'Khagrachhari',
+      'Rangamati',
+      'Bandarban'
+    ],
+    [
+      'Chapainawabganj',
+      'Natore',
+      'Rajshahi',
+      'Sirajganj',
+      'Pabna',
+      'Bogura',
+      'Naogaon',
+      'Joypurhat'
+    ],
+    ['', 'Sunamganj', 'Sylhet', 'Moulvibazar', 'Habiganj'],
+    ['', 'Bhola', 'Barishal', 'Patuakhali', 'Pirojpur', 'Barguna', 'Jhalokati'],
+    ['', 'Mymensingh', 'Jamalpur', 'Netrokona', 'Sherpur'],
+    [
+      'Bagherhat',
+      'Chuadanga',
+      'Jessore',
+      'Jhenaidah',
+      'Khulna',
+      'Kushtia',
+      'Magura',
+      'Meherpur',
+      'Narail',
+      'Satkhira'
+    ],
+    [
+      'Dinajpur',
+      'Kurigram',
+      'Gaibandha',
+      'Lalmonirhat',
+      'Nilphamari',
+      'Panchagarh',
+      'Rangpur',
+      'Takurgaon'
+    ],
+  ];
+  late String selectedDivision = 'Select Division';
+  late String selectedDistrict = 'Select Disttrict';
+
+  final ValueChanged<String> onBloodGroupChanged;
+  final ValueChanged<String> onDivisionChanged;
+  final ValueChanged<String> onDistrictChanged;
+
+  Location({
+    required this.selectedBloodGroup,
+    required this.selectedDivision,
+    required this.selectedDistrict,
+    required this.onBloodGroupChanged,
+    required this.onDivisionChanged,
+    required this.onDistrictChanged,
+  });
+
+  @override
+  _LocationState createState() => _LocationState();
+}
+
+class _LocationState extends State<Location> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DropdownButtonFormField<String>(
+          value: widget.selectedBloodGroup,
+          onChanged: (newValue) {
+            setState(() {
+              widget.selectedBloodGroup = newValue!;
+              widget.onBloodGroupChanged(newValue!);
+            });
+          },
+          items:
+              widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          decoration: InputDecoration(
+            labelText: 'Blood Group',
+          ),
+        ),
+        SizedBox(height: 16.0),
+        DropdownButtonFormField<String>(
+          value: widget.selectedDivision,
+          onChanged: (newValue) {
+            setState(() {
+              widget.selectedDivision = newValue!;
+              widget.onDivisionChanged(newValue!);
+            });
+          },
+          items: widget.divisions.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          decoration: InputDecoration(
+            labelText: 'Select Division',
+          ),
+        ),
+        SizedBox(height: 16.0),
+        DropdownButtonFormField<String>(
+          value: widget.selectedDistrict,
+          onChanged: (newValue) {
+            setState(() {
+              widget.selectedDistrict = newValue!;
+              widget.onDistrictChanged(newValue!);
+            });
+          },
+          items: widget
+              .district[widget.divisions.indexOf(widget.selectedDivision)]
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          decoration: InputDecoration(
+            labelText: 'Select District',
+          ),
+        ),
+        SizedBox(height: 16.0),
+      ],
+    );
+  }
+}
