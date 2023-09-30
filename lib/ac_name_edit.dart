@@ -10,6 +10,9 @@ class AcName extends StatefulWidget {
 
 class _AcNameState extends State<AcName> {
   String selectedBloodGroup = 'A+';
+  String selectedDivision = 'Select Division';
+  String selectedDistrict = 'Select District';
+  //String selectedThana ='';
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +29,16 @@ class _AcNameState extends State<AcName> {
           //SizedBox(height: 8.0),
           Location(
             selectedBloodGroup: selectedBloodGroup,
-            selectedDivision: 'Select Division',
-            selectedDistrict: 'Select District',
-            onBloodGroupChanged: (newValue) {
-              setState(() {
-                selectedBloodGroup = newValue;
-              });
-            },
-            onDivisionChanged: (newValue) {},
-            onDistrictChanged: (newValue) {},
+            selectedDivision: selectedDivision,
+            selectedDistrict: selectedDistrict,
+            //selectedThana: selectedThana,
+            // onBloodGroupChanged: (newValue) {
+            //   setState(() {
+            //     selectedBloodGroup = newValue;
+            //   });
+            // },
+            // onDivisionChanged: (newValue) {},
+            // onDistrictChanged: (newValue) {},
           ),
         ],
       ),

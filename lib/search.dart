@@ -13,6 +13,7 @@ class _SearchState extends State<Search> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = 'Select District';
+  //String selectedThana ='';
   // Sample search results
   List<Map<String, String>> searchResults = [
     {
@@ -55,21 +56,21 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    // double w = MediaQuery.of(context).size.width;
+    // double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Find A Blood Donor"),
+        title: const Text("Find A Blood Donor"),
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.red.shade900,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
         ),
       ),
       body:  SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -77,23 +78,24 @@ class _SearchState extends State<Search> {
                 selectedBloodGroup: selectedBloodGroup,
                 selectedDivision: selectedDivision,
                 selectedDistrict: selectedDistrict,
-                onBloodGroupChanged: (newValue) {
-                  setState(() {
-                    selectedBloodGroup = newValue;
-                  });
-                },
-                onDivisionChanged: (newValue) {
-                  setState(() {
-                    selectedDivision = newValue;
-                  });
-                },
-                onDistrictChanged: (newValue) {
-                  setState(() {
-                    selectedDistrict = newValue;
-                  });
-                },
+                //selectedThana: selectedThana,
+                // onBloodGroupChanged: (newValue) {
+                //   setState(() {
+                //     selectedBloodGroup = newValue;
+                //   });
+                // },
+                // onDivisionChanged: (newValue) {
+                //   setState(() {
+                //     selectedDivision = newValue;
+                //   });
+                // },
+                // onDistrictChanged: (newValue) {
+                //   setState(() {
+                //     selectedDistrict = newValue;
+                //   });
+                // },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   // Simulate a search, you can replace this with your search logic
@@ -102,7 +104,7 @@ class _SearchState extends State<Search> {
                     // Here, we are using sample data
                   });
                 },
-                child: Text(
+                child: const Text(
                   'Search',
                   style: TextStyle(
                     fontSize: 18,
@@ -110,11 +112,11 @@ class _SearchState extends State<Search> {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // Display search results as a ListView
               ListView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: searchResults.length,
                 itemBuilder: (context, index) {
                   return SearchResultItem(

@@ -20,8 +20,9 @@ class _RegisterState extends State<Register> {
 
   bool areFieldsValid = false;
   String selectedBloodGroup = 'A+';
-  String selectedDivision = 'Select Division';
-  String selectedDistrict = 'Select District';
+  String selectedDivision = '';
+  String selectedDistrict = '';
+  //String selectedThana ='';
   bool _obscureText = true;
 
   @override
@@ -82,19 +83,20 @@ class _RegisterState extends State<Register> {
                   selectedBloodGroup: selectedBloodGroup,
                   selectedDivision: selectedDivision,
                   selectedDistrict: selectedDistrict,
-                  onBloodGroupChanged: (newValue) {
-                    setState(() {
-                      selectedBloodGroup = newValue;
-                    });
-                  },
-                  onDivisionChanged: (newValue) {
-                    selectedDivision = newValue;
-                    setState(() {});
-                  },
-                  onDistrictChanged: (newValue) {
-                    selectedDistrict = newValue;
-                    setState(() {});
-                  },
+                  //selectedThana: selectedThana,
+                  // onBloodGroupChanged: (newValue) {
+                  //   setState(() {
+                  //     selectedBloodGroup = newValue;
+                  //   });
+                  // },
+                  // onDivisionChanged: (newValue) {
+                  //   selectedDivision = newValue;
+                  //   setState(() {});
+                  // },
+                  // onDistrictChanged: (newValue) {
+                  //   selectedDistrict = newValue;
+                  //   setState(() {});
+                  // },
                 ),
                 TextField(
                   controller: emailController,
