@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
 class Location extends StatefulWidget {
-  final List<String> bloodGroups = ['A+', 'A-', 'A', 'AB', 'AB+', 'AB-', 'B', 'B-', 'B+', 'O', 'O+', 'O-'];
+  final List<String> bloodGroups = [
+    'A+',
+    'A-',
+    'A',
+    'AB',
+    'AB+',
+    'AB-',
+    'B',
+    'B-',
+    'B+',
+    'O',
+    'O+',
+    'O-'
+  ];
   String selectedBloodGroup = 'A+';
 
   final List<String> divisions = [
@@ -16,43 +29,33 @@ class Location extends StatefulWidget {
     'Rangpur',
   ];
 
-  final List<List<String>> district = [
-    ['Select District','dfff'],
-    ['Gazipur', 'Dhaka', 'Kishorganj', 'Manikganj', 'Munshiganj', 'Narayanganj', 'Narsingdi', 'Tangail', 'Faridpur', 'Gopalganj', 'Madaripur', 'Rajbari', 'Shariatpur'],
-    ['Coxs Bazar', 'Chittagong', 'Brahmanbaria', 'Comilla', 'Chandpur', 'Lakshmipur', 'Maijdee', 'Feni', 'Khagrachhari', 'Rangamati', 'Bandarban'],
-    ['Chapainawabganj', 'Natore', 'Rajshahi', 'Sirajganj', 'Pabna', 'Bogura', 'Naogaon', 'Joypurhat'],
-    ['Sunamganj', 'Sylhet', 'Moulvibazar', 'Habiganj'],
-    ['Bhola', 'Barishal', 'Patuakhali', 'Pirojpur', 'Barguna', 'Jhalokati'],
-    ['Mymensingh', 'Jamalpur', 'Netrokona', 'Sherpur'],
-    ['Bagherhat', 'Chuadanga', 'Jessore', 'Jhenaidah', 'Khulna', 'Kushtia', 'Magura', 'Meherpur', 'Narail', 'Satkhira'],
-    ['Dinajpur', 'Kurigram', 'Gaibandha', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Rangpur', 'Takurgaon'],
-  ];
-   String selectedDivision = 'Select Division';
-   String selectedDistrict = 'Select District';
+  final List<String> district = ['','Coxs Bazar', 'Chittagong'];
+  final List<String> Thana = ['','Kutubdia'];
 
-   // final List<String> Thana =[''];
-   // String selectedThana= '';
-
-  // final ValueChanged<String> onBloodGroupChanged;
-  // final ValueChanged<String> onDivisionChanged;
-  // final ValueChanged<String> onDistrictChanged;
+  //   ['Select District','dfff'],
+  //   ['Gazipur', 'Dhaka', 'Kishorganj', 'Manikganj', 'Munshiganj', 'Narayanganj', 'Narsingdi', 'Tangail', 'Faridpur', 'Gopalganj', 'Madaripur', 'Rajbari', 'Shariatpur'],
+  //   ['Coxs Bazar', 'Chittagong', 'Brahmanbaria', 'Comilla', 'Chandpur', 'Lakshmipur', 'Maijdee', 'Feni', 'Khagrachhari', 'Rangamati', 'Bandarban'],
+  //   ['Chapainawabganj', 'Natore', 'Rajshahi', 'Sirajganj', 'Pabna', 'Bogura', 'Naogaon', 'Joypurhat'],
+  //   ['Sunamganj', 'Sylhet', 'Moulvibazar', 'Habiganj'],
+  //   ['Bhola', 'Barishal', 'Patuakhali', 'Pirojpur', 'Barguna', 'Jhalokati'],
+  //   ['Mymensingh', 'Jamalpur', 'Netrokona', 'Sherpur'],
+  //   ['Bagherhat', 'Chuadanga', 'Jessore', 'Jhenaidah', 'Khulna', 'Kushtia', 'Magura', 'Meherpur', 'Narail', 'Satkhira'],
+  //   ['Dinajpur', 'Kurigram', 'Gaibandha', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Rangpur', 'Takurgaon'],
+  // ];
+  String selectedDivision = 'Select Division';
+  String selectedDistrict = ' ';
+  String selectedThana = ' ';
 
   Location({
     required this.selectedBloodGroup,
     required this.selectedDivision,
     required this.selectedDistrict,
-    //required this.selectedThana,
-    // required this.onBloodGroupChanged,
-    // required this.onDivisionChanged,
-    // required this.onDistrictChanged,
+    required this.selectedThana,
   });
-
   @override
   _LocationState createState() => _LocationState();
 }
-
 class _LocationState extends State<Location> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,7 +66,6 @@ class _LocationState extends State<Location> {
           onChanged: (newValue) {
             setState(() {
               widget.selectedBloodGroup = newValue!;
-              //widget.onBloodGroupChanged(newValue!);
             });
           },
           items:
@@ -104,43 +106,38 @@ class _LocationState extends State<Location> {
               widget.selectedDistrict = newValue!;
             });
           },
-          items:  widget
-              .district[widget.divisions.indexOf(widget.selectedDivision)]
+          items: widget.district
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
             );
-          })
-              .toList(),
+          }).toList(),
           decoration: const InputDecoration(
             labelText: 'Select District',
           ),
         ),
         const SizedBox(height: 16.0),
-        // DropdownButtonFormField<String>(
-        //   value: widget.selectedThana,
-        //   onChanged: (newValue) {
-        //     setState(() {
-        //       widget.selectedThana = newValue!;
-        //       //widget.onBloodGroupChanged(newValue!);
-        //     });
-        //   },
-        //   items:
-        //   widget.Thana.map<DropdownMenuItem<String>>((String value) {
-        //     return DropdownMenuItem<String>(
-        //       value: value,
-        //       child: Text(value),
-        //     );
-        //   }).toList(),
-        //   decoration: const InputDecoration(
-        //     labelText: 'Select Thana',
-        //   ),
-        // ),
+        DropdownButtonFormField<String>(
+          value: widget.selectedThana,
+          onChanged: (newValue) {
+            setState(() {
+              widget.selectedThana = newValue!;
+            });
+          },
+          items: widget.district
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          decoration: const InputDecoration(
+            labelText: 'Select Thana/ Upazila',
+          ),
+        ),
+        const SizedBox(height: 16.0),
       ],
     );
   }
-
-
-
 }

@@ -12,9 +12,9 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
-  String selectedDistrict = 'Select District';
-  //String selectedThana ='';
-  // Sample search results
+  String selectedDistrict = '';
+  String selectedThana ='';
+
   List<Map<String, String>> searchResults = [
     {
       'name': 'Zihad',
@@ -78,22 +78,7 @@ class _SearchState extends State<Search> {
                 selectedBloodGroup: selectedBloodGroup,
                 selectedDivision: selectedDivision,
                 selectedDistrict: selectedDistrict,
-                //selectedThana: selectedThana,
-                // onBloodGroupChanged: (newValue) {
-                //   setState(() {
-                //     selectedBloodGroup = newValue;
-                //   });
-                // },
-                // onDivisionChanged: (newValue) {
-                //   setState(() {
-                //     selectedDivision = newValue;
-                //   });
-                // },
-                // onDistrictChanged: (newValue) {
-                //   setState(() {
-                //     selectedDistrict = newValue;
-                //   });
-                // },
+                selectedThana: selectedThana,
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(

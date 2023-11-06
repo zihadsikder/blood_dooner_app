@@ -1,5 +1,7 @@
-import 'package:blood/constants/location_from.dart';
+
 import 'package:flutter/material.dart';
+
+import 'constants/location_from.dart';
 
 class AcName extends StatefulWidget {
   const AcName({super.key});
@@ -11,8 +13,8 @@ class AcName extends StatefulWidget {
 class _AcNameState extends State<AcName> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
-  String selectedDistrict = 'Select District';
-  //String selectedThana ='';
+  String selectedDistrict = ' ';
+  String selectedThana ='';
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +30,10 @@ class _AcNameState extends State<AcName> {
           ),
           //SizedBox(height: 8.0),
           Location(
-            selectedBloodGroup: selectedBloodGroup,
-            selectedDivision: selectedDivision,
-            selectedDistrict: selectedDistrict,
-            //selectedThana: selectedThana,
-            // onBloodGroupChanged: (newValue) {
-            //   setState(() {
-            //     selectedBloodGroup = newValue;
-            //   });
-            // },
-            // onDivisionChanged: (newValue) {},
-            // onDistrictChanged: (newValue) {},
+          selectedBloodGroup: selectedBloodGroup,
+          selectedDivision: selectedDivision,
+          selectedDistrict: selectedDistrict,
+            selectedThana: selectedThana,
           ),
         ],
       ),

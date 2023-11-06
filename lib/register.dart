@@ -17,12 +17,14 @@ class _RegisterState extends State<Register> {
   var confirmPasswordController = TextEditingController();
   var dobController = TextEditingController();
   var weightOver50Controller = TextEditingController();
+  var donationController = TextEditingController();
 
   bool areFieldsValid = false;
   String selectedBloodGroup = 'A+';
-  String selectedDivision = '';
+  String selectedDivision = 'Select Division';
   String selectedDistrict = '';
-  //String selectedThana ='';
+  String selectedThana ='';
+
   bool _obscureText = true;
 
   @override
@@ -83,20 +85,7 @@ class _RegisterState extends State<Register> {
                   selectedBloodGroup: selectedBloodGroup,
                   selectedDivision: selectedDivision,
                   selectedDistrict: selectedDistrict,
-                  //selectedThana: selectedThana,
-                  // onBloodGroupChanged: (newValue) {
-                  //   setState(() {
-                  //     selectedBloodGroup = newValue;
-                  //   });
-                  // },
-                  // onDivisionChanged: (newValue) {
-                  //   selectedDivision = newValue;
-                  //   setState(() {});
-                  // },
-                  // onDistrictChanged: (newValue) {
-                  //   selectedDistrict = newValue;
-                  //   setState(() {});
-                  // },
+                  selectedThana: selectedThana,
                 ),
                 TextField(
                   controller: emailController,
@@ -186,6 +175,35 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   keyboardType: TextInputType.visiblePassword,
+                ),
+                SizedBox(height: 16.0),
+                TextField(
+                  controller: donationController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    labelText: 'Enter Your Last Donation',
+                    suffixIcon: IconButton(
+                      onPressed: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1950),
+                          lastDate: DateTime(2050),
+                        );
+
+                        if (pickedDate != null &&
+                            pickedDate != donationController.text) {
+                          setState(() {
+                            donationController.text =
+                            "${pickedDate.toLocal()}".split(' ')[0];
+                          });
+                        }
+                      },
+                      icon: Icon(Icons.calendar_today,
+                          color: Colors.red.shade900),
+                    ),
+                  ),
+                  keyboardType: TextInputType.datetime,
                 ),
                 SizedBox(height: 16.0),
                 Row(
