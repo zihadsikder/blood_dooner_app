@@ -1,4 +1,4 @@
-import 'account.dart';
+import 'other_service.dart';
 import 'home.dart';
 import 'dashboard.dart';
 import 'moor.dart';
@@ -15,7 +15,7 @@ class _MainpageState extends State<Mainpage> {
   List pages = [
     Dashboard(),
     Home(),
-    Account(),
+    OtherService(),
     Moor(),
   ];
   int currentIndex = 0;
@@ -30,21 +30,21 @@ class _MainpageState extends State<Mainpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("Search a Blood Donar"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Search()), // Use the correct search page
-              );
-            },
-          ),
-        ],
-        elevation: 10,
-      ),
+      // appBar: AppBar(
+      //   title: Text("Search a Blood Donar"),
+      //   actions: [
+      //     IconButton(
+      //       icon: Icon(Icons.search),
+      //       onPressed: () {
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(builder: (context) => Search()), // Use the correct search page
+      //         );
+      //       },
+      //     ),
+      //   ],
+      //   elevation: 10,
+      // ),
       body: pages [currentIndex],
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(

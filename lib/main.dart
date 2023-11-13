@@ -18,7 +18,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Login(),
       theme: ThemeData(
-        primaryColor: Colors.red,
+        primaryColor: Colors.red.shade900,
+        primarySwatch: Colors.red,
+        // inputDecorationTheme: const InputDecorationTheme(
+        //   fillColor: Colors.white,
+        //   filled: true,
+        //   border: OutlineInputBorder(
+        //     borderSide: BorderSide.none,
+        //   ),
+        //   focusedBorder: OutlineInputBorder(
+        //     borderSide: BorderSide.none,
+        //   ),
+        // ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             minimumSize: Size(w, 50),

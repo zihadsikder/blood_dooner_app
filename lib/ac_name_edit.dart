@@ -1,7 +1,5 @@
-
+import 'package:blood/Widget/location_from.dart';
 import 'package:flutter/material.dart';
-
-import 'constants/location_from.dart';
 
 class AcName extends StatefulWidget {
   const AcName({super.key});

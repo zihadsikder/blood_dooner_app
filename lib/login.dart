@@ -1,8 +1,6 @@
 import 'package:blood/ac_mobile_edit.dart';
 import 'package:blood/forget_pass.dart';
-
 import 'main_page.dart';
-
 import 'register.dart';
 import 'package:flutter/material.dart';
 class Login extends StatefulWidget {
@@ -13,8 +11,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController _numberTEController = TextEditingController();
+  final TextEditingController _passwordTEController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _loginInProgress = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,163 +66,187 @@ class _LoginState extends State<Login> {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.all(20),
-                    child: Column(
-                      children:[
-                      SizedBox(height: 40,),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [BoxShadow(
-                              color: Color.fromRGBO(225, 95, 27, .3),
-                              blurRadius: 20,
-                              offset: Offset(0, 10)
-                          )]
-                      ),
+                    child: Form(
+                      key: _formKey,
                       child: Column(
                         children:[
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                border: Border(bottom: BorderSide(color: Colors.grey.shade200))
+                        SizedBox(height: 40,),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [BoxShadow(
+                                color: Color.fromRGBO(225, 95, 27, .3),
+                                blurRadius: 20,
+                                offset: Offset(0, 10)
+                            )]
+                        ),
+                        child: Column(
+                          children:[
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey.shade200))
+                              ),
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                controller: _numberTEController,
+                                decoration: InputDecoration(
+                                    hintText: "Phone number",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none
+                                ),
+                                validator: (String? value) {
+                                  if (value?.trim().isEmpty ?? true) {
+                                    return 'Enter valid number';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "Phone number",
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none
+                            //SizedBox(height: 20),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey.shade200))
+                              ),
+                              child: TextFormField(
+                                controller: _passwordTEController,
+                                decoration: InputDecoration(
+                                    hintText: "Password",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none
+                                ),
+                                validator: (String? value) {
+                                  if (value?.trim().isEmpty ?? true) {
+                                    return 'Enter valid email';
+                                  }
+                                  return null;
+                                },
+                              )
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 30,),
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) => ForgetPass()
+                          );
+                        },
+                      child : Text("Forgot Password?", style: TextStyle(color: Colors.grey),),
+                      ),
+                      SizedBox(height: 16,),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context)=> Mainpage())
+                          );
+                        },
+                        child: Container(
+                          height: 50,
+                          margin: EdgeInsets.symmetric(horizontal: 50),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.red.shade800
+                          ),
+                          child: Visibility(
+                            visible: _loginInProgress == false,
+                            replacement: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            child: Center(
+                              child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
-                          //SizedBox(height: 20),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                border: Border(bottom: BorderSide(color: Colors.grey.shade200))
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "Password",
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none
-                              ),
-                            ),
+                        ),
+                      ),
+                      SizedBox(height: 0,),
+                          Row(
+                            children:[
+                              Text('Does not have account?',style: TextStyle(color: Colors.grey.shade500),),
+                              TextButton(
+                                child: const Text(
+                                  'Sign Up',
+                                  style: TextStyle(color: Colors.red,fontSize: 20),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context)=> Register())
+                                  );
+                                },
+                              )
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
                           ),
+
+                      // Text("Continue with social media", style: TextStyle(color: Colors.grey),),
+                      // SizedBox(height: 16,),
+                      // Row(
+                      //   children:[
+                      //     Expanded(
+                      //       child: GestureDetector(
+                      //         onTap: () {
+                      //           // Your onTap action here
+                      //           // For example, you can open Facebook when tapped
+                      //           launchFacebook();
+                      //         },
+                      //         child: Container(
+                      //           height: 50,
+                      //           decoration: BoxDecoration(
+                      //             borderRadius: BorderRadius.circular(50),
+                      //             color: Colors.red.shade800,
+                      //           ),
+                      //           child: Row(
+                      //             mainAxisAlignment: MainAxisAlignment.center,
+                      //             children: [
+                      //               Icon(
+                      //                 Icons.facebook, // You can change this to the desired Facebook icon
+                      //                 color: Colors.white,
+                      //               ),
+                      //               SizedBox(width: 8), // Adjust the spacing between icon and text
+                      //               Text(
+                      //                 "Facebook",
+                      //                 style: TextStyle(
+                      //                   color: Colors.white,
+                      //                   fontWeight: FontWeight.bold,
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //       SizedBox(width: 30,),
+                      //       Expanded(
+                      //         child: GestureDetector(
+                      //           onTap: () {
+                      //             // Your onTap action here
+                      //             // For example, you can open Facebook when tapped
+                      //             launchGoogle();
+                      //           },
+                      //         child:Container(
+                      //           height: 50,
+                      //           decoration: BoxDecoration(
+                      //               borderRadius: BorderRadius.circular(50),
+                      //               color: Colors.red.shade800
+                      //           ),
+                      //           child: Center(
+                      //             child: Text("Google", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //       ),
+                      //       ],
+                      //     )
                         ],
                       ),
-                    ),
-                    SizedBox(height: 30,),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) => ForgetPass()
-                        );
-                      },
-                    child : Text("Forgot Password?", style: TextStyle(color: Colors.grey),),
-                    ),
-                    SizedBox(height: 16,),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context)=> Mainpage())
-                        );
-                      },
-                      child: Container(
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 50),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.red.shade800
-                        ),
-                        child: Center(
-                          child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 0,),
-                        Row(
-                          children:[
-                            Text('Does not have account?',style: TextStyle(color: Colors.grey.shade500),),
-                            TextButton(
-                              child: const Text(
-                                'Sign Up',
-                                style: TextStyle(color: Colors.red,fontSize: 20),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context)=> Register())
-                                );
-                              },
-                            )
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                        SizedBox(height: 0,),
-                    Text("Continue with social media", style: TextStyle(color: Colors.grey),),
-                    SizedBox(height: 16,),
-                    Row(
-                      children:[
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              // Your onTap action here
-                              // For example, you can open Facebook when tapped
-                              launchFacebook();
-                            },
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.red.shade800,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.facebook, // You can change this to the desired Facebook icon
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 8), // Adjust the spacing between icon and text
-                                  Text(
-                                    "Facebook",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                          SizedBox(width: 30,),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                // Your onTap action here
-                                // For example, you can open Facebook when tapped
-                                launchGoogle();
-                              },
-                            child:Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.red.shade800
-                              ),
-                              child: Center(
-                                child: Text("Google", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                              ),
-                            ),
-                          ),
-                          ),
-                          ],
-                        )
-                      ],
                     ),
                   ),
                 ),
@@ -231,9 +257,46 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
-
-
+  // Future<void> login() async {
+  //   if (!_formKey.currentState!.validate()) {
+  //     return;
+  //   }
+  //   _loginInProgress = true;
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  //   NetworkResponse response = await NetworkCaller().postRequest(Urls.login, body: {
+  //     'email' : _emailTEController.text.trim(),
+  //     'password' : _passwordTEController.text,
+  //   });
+  //   _loginInProgress = false;
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  //   if (response.isSuccess) {
+  //     await AuthController.saveUserInformation(
+  //         response.jsonResponse['token'], UserModel.fromJson(response.jsonResponse['data']));
+  //     if (mounted) {
+  //       Navigator.push(context,
+  //           MaterialPageRoute(builder: (context) => const MainBottomNavScreen()));
+  //     }
+  //   } else {
+  //     if (response.statusCode == 401) {
+  //       if (mounted) {
+  //         showSnackMessage(context, 'Please check email/password');
+  //       }
+  //     } else {
+  //       if (mounted) {
+  //         showSnackMessage(context, 'Login failed. Try again');
+  //       }
+  //     }
+  //   }
+  // }
+  @override
+  void dispose() {
+    _numberTEController.dispose();
+    _passwordTEController.dispose();
+    super.dispose();
+  }
 }
-void launchGoogle() {}
-void launchFacebook() {}
+

@@ -1,6 +1,6 @@
+import 'Widget/location_from.dart';
 import 'search_result_item.dart';
 import 'package:flutter/material.dart';
-import 'constants/location_from.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});

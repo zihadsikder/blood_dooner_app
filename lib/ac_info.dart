@@ -3,6 +3,7 @@ import 'package:blood/ac_mobile_edit.dart';
 import 'package:blood/ac_name_edit.dart';
 import 'package:blood/donation_history.dart';
 import 'package:blood/login.dart';
+import 'package:blood/search.dart';
 import 'package:flutter/material.dart';
 
 class Ac_Info extends StatefulWidget {
@@ -17,13 +18,19 @@ class _Ac_InfoState extends State<Ac_Info> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Blood Donor Bd',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          title: Text("Search a Blood Donar"),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Search()), // Use the correct search page
+                );
+              },
             ),
-          ),
+          ],
+          elevation: 10,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -69,11 +76,13 @@ class _Ac_InfoState extends State<Ac_Info> {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                              Image.asset(
-                                'assets/map.png',
-                                height: 24,
-                                width: 24,
-                              ),
+                              Icon(Icons.bloodtype_outlined,color: Colors.red.shade900,),
+                              SizedBox(height: 5,),
+                              // Image.asset(
+                              //   'assets/map.png',
+                              //   height: 24,
+                              //   width: 24,
+                              // ),
                               Text('1'),
                               GestureDetector(
                                   onTap: () {
@@ -90,11 +99,13 @@ class _Ac_InfoState extends State<Ac_Info> {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                              Image.asset(
-                                'assets/map.png',
-                                height: 24,
-                                width: 24,
-                              ),
+                              Icon(Icons.bloodtype_outlined,color: Colors.red.shade900,),
+                              SizedBox(height: 5,),
+                              // Image.asset(
+                              //   'assets/map.png',
+                              //   height: 24,
+                              //   width: 24,
+                              // ),
                               Text('A+'),
                               Text('Blood Group'),
                             ],
@@ -104,13 +115,15 @@ class _Ac_InfoState extends State<Ac_Info> {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                              Image.asset(
-                                'assets/map.png',
-                                height: 24,
-                                width: 24,
-                              ),
-                              Text('1'),
-                              Text('Blood reques'),
+                              Icon(Icons.bloodtype_outlined,color: Colors.red.shade900,),
+                              SizedBox(height: 5,),
+                              // Image.asset(
+                              //   'assets/map.png',
+                              //   height: 24,
+                              //   width: 24,
+                              // ),
+                              Text('11-11-23'),
+                              Text('Total donation'),
                             ],
                           ),
                         ),
@@ -228,6 +241,26 @@ class _Ac_InfoState extends State<Ac_Info> {
               SizedBox(
                 height: 16,
               ),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {}, child: Text('Donate your blood',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
+                      Spacer(),
+                      Switch(
+                          value: true,
+                          onChanged: (isTrue) {
+                            // setState(() {
+                            //   donateBlood = isTrue;
+                            // });
+                          })
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 16,),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,

@@ -17,9 +17,21 @@ class _DashboardState extends State<Dashboard> {
     double w =MediaQuery.of(context).size.width;
     double h =MediaQuery.of(context).size.height;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('flutterassets.com'),
-      // ),
+      appBar: AppBar(
+        title: Text("Search a Blood Donar"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Search()), // Use the correct search page
+              );
+            },
+          ),
+        ],
+        elevation: 10,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(

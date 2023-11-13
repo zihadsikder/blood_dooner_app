@@ -1,4 +1,4 @@
-import 'constants/location_from.dart';
+import 'Widget/location_from.dart';
 import 'main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,14 +10,14 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  var usernameController = TextEditingController();
-  var mobileNumberController = TextEditingController();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
-  var dobController = TextEditingController();
-  var weightOver50Controller = TextEditingController();
-  var donationController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _mobileNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _weightOver50Controller = TextEditingController();
+  final TextEditingController _donationController = TextEditingController();
 
   bool areFieldsValid = false;
   String selectedBloodGroup = 'A+';
@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
                     ],
                   ),
                 ),
-                TextField(
+                TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Username',
                   ),
@@ -87,16 +87,16 @@ class _RegisterState extends State<Register> {
                   selectedDistrict: selectedDistrict,
                   selectedThana: selectedThana,
                 ),
-                TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Enter Email',
-                  ),
+                TextFormField(
+                  controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    hintText: 'Email',
+                  ),
                 ),
                 SizedBox(height: 16.0),
-                TextField(
-                  controller: dobController,
+                TextFormField(
+                  controller: _dobController,
                   readOnly: true,
                   decoration: InputDecoration(
                     labelText: 'Date of Birth',
@@ -110,9 +110,9 @@ class _RegisterState extends State<Register> {
                         );
 
                         if (pickedDate != null &&
-                            pickedDate != dobController.text) {
+                            pickedDate != _dobController.text) {
                           setState(() {
-                            dobController.text =
+                            _dobController.text =
                                 "${pickedDate.toLocal()}".split(' ')[0];
                           });
                         }
@@ -124,16 +124,16 @@ class _RegisterState extends State<Register> {
                   keyboardType: TextInputType.datetime,
                 ),
                 SizedBox(height: 16.0),
-                TextField(
-                  controller: mobileNumberController,
+                TextFormField(
+                  controller: _mobileNumberController,
                   decoration: InputDecoration(
                     labelText: 'Enter Valid Number',
                   ),
                   keyboardType: TextInputType.phone,
                 ),
                 SizedBox(height: 16.0),
-                TextField(
-                  controller: passwordController,
+                TextFormField(
+                  controller: _passwordController,
                   obscureText: _obscureText,
                   // Use a boolean variable to toggle password visibility
                   decoration: InputDecoration(
@@ -155,8 +155,8 @@ class _RegisterState extends State<Register> {
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 SizedBox(height: 16.0),
-                TextField(
-                  controller: confirmPasswordController,
+                TextFormField(
+                  controller: _confirmPasswordController,
                   obscureText: _obscureText,
                   decoration: InputDecoration(
                     labelText: 'Confirm Password',
@@ -177,8 +177,8 @@ class _RegisterState extends State<Register> {
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 SizedBox(height: 16.0),
-                TextField(
-                  controller: donationController,
+                TextFormField(
+                  controller: _donationController,
                   readOnly: true,
                   decoration: InputDecoration(
                     labelText: 'Enter Your Last Donation',
@@ -192,9 +192,9 @@ class _RegisterState extends State<Register> {
                         );
 
                         if (pickedDate != null &&
-                            pickedDate != donationController.text) {
+                            pickedDate != _donationController.text) {
                           setState(() {
-                            donationController.text =
+                            _donationController.text =
                             "${pickedDate.toLocal()}".split(' ')[0];
                           });
                         }
@@ -209,11 +209,14 @@ class _RegisterState extends State<Register> {
                 Row(
                   children: [
                     Text('Weight over 50 kg?'),
+                    Spacer(),
                     Checkbox(
-                      value: weightOver50Controller.text.toLowerCase() == 'yes',
+                      activeColor: Colors.red.shade800,
+                      checkColor: Colors.white,
+                      value: _weightOver50Controller.text.toLowerCase() == 'yes',
                       onChanged: (value) {
                         setState(() {
-                          weightOver50Controller.text =
+                          _weightOver50Controller.text =
                               value == true ? 'Yes' : 'No';
                         });
                       },
@@ -242,17 +245,17 @@ class _RegisterState extends State<Register> {
 
   void _validateFields() {
     // Check if all fields are valid before allowing submission
-    if (usernameController.text.isNotEmpty &&
+    if (_usernameController.text.isNotEmpty &&
         selectedBloodGroup.isNotEmpty &&
         selectedDivision != 'Select Division' &&
         selectedDivision != 'Select District' &&
-        _isValidEmail(emailController.text) &&
-        _isValidPassword(passwordController.text) &&
+        _isValidEmail(_emailController.text) &&
+        _isValidPassword(_passwordController.text) &&
         _isValidConfirmPassword(
-            passwordController.text, confirmPasswordController.text) &&
-        _isValidMobileNumber(mobileNumberController.text) &&
-        _isValidDateOfBirth(dobController.text) &&
-        weightOver50Controller.text.isNotEmpty) {
+            _passwordController.text, _confirmPasswordController.text) &&
+        _isValidMobileNumber(_mobileNumberController.text) &&
+        _isValidDateOfBirth(_dobController.text) &&
+        _weightOver50Controller.text.isNotEmpty) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Mainpage()),
