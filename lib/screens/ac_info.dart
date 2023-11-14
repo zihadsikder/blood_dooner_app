@@ -1,10 +1,12 @@
-import 'package:blood/ac_email_edit.dart';
-import 'package:blood/ac_mobile_edit.dart';
-import 'package:blood/ac_name_edit.dart';
-import 'package:blood/donation_history.dart';
-import 'package:blood/login.dart';
-import 'package:blood/search.dart';
+import 'package:blood/screens/ac_email_edit.dart';
+import 'package:blood/screens/search.dart';
+
 import 'package:flutter/material.dart';
+
+import 'ac_mobile_edit.dart';
+import 'ac_name_edit.dart';
+import 'donation_history.dart';
+import 'login.dart';
 
 class Ac_Info extends StatefulWidget {
   const Ac_Info({super.key});
@@ -264,7 +266,7 @@ class _Ac_InfoState extends State<Ac_Info> {
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
                   child: Text('Logout'))
             ],

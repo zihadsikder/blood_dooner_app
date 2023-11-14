@@ -1,4 +1,5 @@
-import 'package:blood/login.dart';
+
+import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'My First App',
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: LoginScreen(),
       theme: ThemeData(
         primaryColor: Colors.red.shade900,
         primarySwatch: Colors.red,

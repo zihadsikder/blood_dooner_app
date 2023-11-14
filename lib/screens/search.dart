@@ -1,5 +1,7 @@
-import 'Widget/location_from.dart';
-import 'search_result_item.dart';
+import 'package:blood/screens/search_result_item.dart';
+
+import '../Widget/location_from.dart';
+
 import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
