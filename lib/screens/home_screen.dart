@@ -4,14 +4,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'search.dart';
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class Home_Screen extends StatefulWidget {
+  const Home_Screen({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<Home_Screen> createState() => _Home_ScreenState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _Home_ScreenState extends State<Home_Screen> {
   final TextEditingController _searchController = TextEditingController();
   final List<String> imageUrls = [
     'assets/rltn.png',

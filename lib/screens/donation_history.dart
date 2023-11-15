@@ -39,7 +39,7 @@ class _DonationState extends State<Donation> {
                 Text('Add Donation'),
               ],
             ),
-            subtitle: Text('1 Unit'),
+            subtitle: Text('30.11.2023'),
             trailing: GestureDetector(
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(

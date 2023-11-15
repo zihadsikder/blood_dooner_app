@@ -5,14 +5,14 @@ import 'privacy.dart';
 import 'support.dart';
 import 'events.dart';
 import 'package:flutter/material.dart';
-class Moor extends StatefulWidget {
-  const Moor({super.key});
+class Settings_screen extends StatefulWidget {
+  const Settings_screen({super.key});
 
   @override
-  State<Moor> createState() => _MoorState();
+  State<Settings_screen> createState() => _Settings_screenState();
 }
 
-class _MoorState extends State<Moor> {
+class _Settings_screenState extends State<Settings_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

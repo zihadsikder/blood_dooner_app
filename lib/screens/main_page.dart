@@ -1,10 +1,9 @@
-
+import 'package:blood/screens/account_screen.dart';
+import 'package:blood/screens/dashboard_screen.dart';
+import 'package:blood/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'setting_screen.dart';
 
-import 'dashboard.dart';
-import 'home.dart';
-import 'moor.dart';
-import 'other_service.dart';
 
 class Mainpage extends StatefulWidget {
   const Mainpage({Key? key});
@@ -14,10 +13,10 @@ class Mainpage extends StatefulWidget {
 
 class _MainpageState extends State<Mainpage> {
   List pages = [
-    Dashboard(),
-    Home(),
-    OtherService(),
-    Moor(),
+    Home_Screen(),
+    Dashboard_Screen(),
+    Account_Screen(),
+    Settings_screen(),
   ];
   int currentIndex = 0;
 
@@ -65,10 +64,10 @@ class _MainpageState extends State<Mainpage> {
           showSelectedLabels: false,
           elevation: 0,
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(label: ("Dashboard"), icon: Icon(Icons.dashboard_outlined)),
             BottomNavigationBarItem(label: ("Home"), icon: Icon(Icons.home)),
+            BottomNavigationBarItem(label: ("Dashboard"), icon: Icon(Icons.dashboard_outlined)),
             BottomNavigationBarItem(label: ("Account"), icon: Icon(Icons.person)),
-            BottomNavigationBarItem(label: ("Moor"), icon: Icon(Icons.dashboard_rounded)),
+            BottomNavigationBarItem(label: ("Settings"), icon: Icon(Icons.settings)),
           ],
         ),
       ),

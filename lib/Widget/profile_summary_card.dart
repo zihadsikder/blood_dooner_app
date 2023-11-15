@@ -1,7 +1,8 @@
-
+import 'package:blood/Widget/account_information.dart';
+import 'package:blood/controller/auth_controller.dart';
+import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/ac_info.dart';
 
 class ProfileSummaryCard extends StatefulWidget {
   const ProfileSummaryCard({super.key,});
@@ -11,7 +12,7 @@ class ProfileSummaryCard extends StatefulWidget {
 }
 
 class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
-  //final bool enableOnTap;
+  //late final bool enableOnTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -22,38 +23,36 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Ac_Info(),
+              builder: (context) => const AcInformation (),
             ),
           );
-        // if (enableOnTap) {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => const EditProfileScreen(),
-        //     ),
-        //   );
-        // }
+      //   if (enableOnTap) {
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => const AcInformation(),
+      //       ),
+      //     );
+      //   }
       },
-      leading:  CircleAvatar(
+      leading:  const CircleAvatar(
         child: Icon(Icons.person),
       ),
-      title: Text('Zihad',
+      title: const Text('Zihad',
         //fullName,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
       ),
-      subtitle: Text('zihad@gmail.com',
+      subtitle: const Text('zihad@gmail.com',
        // AuthController.user?.email ?? '',
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white),
       ),
       trailing: IconButton(
-        onPressed: (){},
-        // onPressed: () async {
-        //   await AuthController.clearAuthData();
-        //   // TODO : solve this warning
-        //   Navigator.pushAndRemoveUntil(
-        //       context, MaterialPageRoute(builder: (context) => const LoginScreen()), (
-        //       route) => false);
-        // },
+        onPressed: () async {
+          await AuthController.clearAuthData();
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => const LoginScreen()), (
+              route) => false);
+        },
         icon: const Icon(Icons.logout,color: Colors.white,),
       ),
       tileColor: Colors.red.shade800,

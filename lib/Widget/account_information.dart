@@ -1,21 +1,19 @@
 import 'package:blood/screens/ac_email_edit.dart';
+import 'package:blood/screens/ac_mobile_edit.dart';
+import 'package:blood/screens/ac_name_edit.dart';
+import 'package:blood/screens/donation_history.dart';
+import 'package:blood/screens/login.dart';
 import 'package:blood/screens/search.dart';
-
 import 'package:flutter/material.dart';
 
-import 'ac_mobile_edit.dart';
-import 'ac_name_edit.dart';
-import 'donation_history.dart';
-import 'login.dart';
-
-class Ac_Info extends StatefulWidget {
-  const Ac_Info({super.key});
+class AcInformation extends StatefulWidget {
+  const AcInformation({super.key});
 
   @override
-  State<Ac_Info> createState() => _Ac_InfoState();
+  State<AcInformation> createState() => _AcInformationState();
 }
 
-class _Ac_InfoState extends State<Ac_Info> {
+class _AcInformationState extends State<AcInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

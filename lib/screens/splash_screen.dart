@@ -1,7 +1,6 @@
-import 'package:blood/screens/dashboard.dart';
+import 'package:blood/screens/home_screen.dart';
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
-
 import '../Widget/body_background.dart';
 import '../controller/auth_controller.dart';
 
@@ -28,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
           context,
           MaterialPageRoute(
               builder: (context) => isLoggedIn
-                  ? const Dashboard()
+                  ? const Home_Screen()
                   : const LoginScreen()),
               (route) => false);
     });
