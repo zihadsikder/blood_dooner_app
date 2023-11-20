@@ -1,5 +1,8 @@
 import 'package:blood/Widget/profile_summary_card.dart';
+import 'package:flutter/services.dart';
 
+import 'diet_chart.dart';
+import 'exercises.dart';
 import 'privacy.dart';
 
 import 'support.dart';
@@ -15,6 +18,7 @@ class Settings_screen extends StatefulWidget {
 class _Settings_screenState extends State<Settings_screen> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.red.shade800,statusBarIconBrightness: Brightness.light));
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -57,6 +61,28 @@ class _Settings_screenState extends State<Settings_screen> {
                       context,
                       MaterialPageRoute(builder: (context)=> privacy())
                   );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Icon(Icons.fitness_center, color: Colors.red.shade800),
+                title: Text('Exercise Guidelines'),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Exercises()));
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Icon(Icons.fastfood, color: Colors.red.shade800),
+                title: Text('Diet Chart'),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DietChart()));
                 },
               ),
             ),

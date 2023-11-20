@@ -1,5 +1,5 @@
-import 'package:blood/Widget/account_information.dart';
 import 'package:blood/controller/auth_controller.dart';
+import 'package:blood/screens/account_screen.dart';
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AcInformation (),
+              builder: (context) => const Account_Screen (),
             ),
           );
       //   if (enableOnTap) {
@@ -55,7 +55,7 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
         },
         icon: const Icon(Icons.logout,color: Colors.white,),
       ),
-      tileColor: Colors.red.shade800,
+      tileColor: Colors.red.shade900,
     );
   }
 

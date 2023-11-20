@@ -1,6 +1,4 @@
-import 'package:blood/screens/sign_up_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 import 'search.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +25,8 @@ class _Home_ScreenState extends State<Home_Screen> {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    //double w = MediaQuery.of(context).size.width;
+    //double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text("Search a Blood Donar"),
@@ -56,12 +54,7 @@ class _Home_ScreenState extends State<Home_Screen> {
                 CarouselSlider.builder(
                   itemCount: imageUrls.length,
                   itemBuilder: (context, index, realIndex) {
-                   // setState(() {
-                   //   _selectedIndex = index;
-                   // });
-
                     print("selected index ::: $index");
-
                     return Container(
                       margin: EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
@@ -83,6 +76,11 @@ class _Home_ScreenState extends State<Home_Screen> {
                     enableInfiniteScroll: true,
                     autoPlayAnimationDuration: Duration(milliseconds: 800),
                     viewportFraction: 0.8,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
+                    },
                   ),
                 ),
                 Row(
@@ -110,23 +108,40 @@ class _Home_ScreenState extends State<Home_Screen> {
                 Row(
                   children: [
                     Expanded(
-                      child: Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Search()),
-                              );
-                            },
-                            child: Text(
-                              'Search a Doner',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Search()),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 16,
                           ),
-                        ],
+                          decoration: BoxDecoration(
+                            color: Colors.red.shade900,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Icons.search,
+                                color: Colors.white,
+                                size: 32,
+                              ),
+                              Text(
+                                'Emergency Search',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(width: 16),
@@ -176,10 +191,5 @@ class _Home_ScreenState extends State<Home_Screen> {
         ),
       ),
     );
-    // return Container(
-    //   child: Center(
-    //     child: Text("Welcome to Dashboard"),
-    //   ),
-    // );
   }
 }

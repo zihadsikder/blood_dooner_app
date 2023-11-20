@@ -13,7 +13,9 @@ class _privacyState extends State<privacy> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.red,
+        backgroundColor:Colors.red.shade900,
+        title: const Text('Privacy Policy ', style: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white)),
       ),
       body: SingleChildScrollView(
         child: Padding(
