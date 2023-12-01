@@ -213,65 +213,65 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                           ),
 
-                          // Text("Continue with social media", style: TextStyle(color: Colors.grey),),
-                          // SizedBox(height: 16,),
-                          // Row(
-                          //   children:[
-                          //     Expanded(
-                          //       child: GestureDetector(
-                          //         onTap: () {
-                          //           // Your onTap action here
-                          //           // For example, you can open Facebook when tapped
-                          //           launchFacebook();
-                          //         },
-                          //         child: Container(
-                          //           height: 50,
-                          //           decoration: BoxDecoration(
-                          //             borderRadius: BorderRadius.circular(50),
-                          //             color: Colors.red.shade800,
-                          //           ),
-                          //           child: Row(
-                          //             mainAxisAlignment: MainAxisAlignment.center,
-                          //             children: [
-                          //               Icon(
-                          //                 Icons.facebook, // You can change this to the desired Facebook icon
-                          //                 color: Colors.white,
-                          //               ),
-                          //               SizedBox(width: 8), // Adjust the spacing between icon and text
-                          //               Text(
-                          //                 "Facebook",
-                          //                 style: TextStyle(
-                          //                   color: Colors.white,
-                          //                   fontWeight: FontWeight.bold,
-                          //                 ),
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //       SizedBox(width: 30,),
-                          //       Expanded(
-                          //         child: GestureDetector(
-                          //           onTap: () {
-                          //             // Your onTap action here
-                          //             // For example, you can open Facebook when tapped
-                          //             launchGoogle();
-                          //           },
-                          //         child:Container(
-                          //           height: 50,
-                          //           decoration: BoxDecoration(
-                          //               borderRadius: BorderRadius.circular(50),
-                          //               color: Colors.red.shade800
-                          //           ),
-                          //           child: Center(
-                          //             child: Text("Google", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //       ),
-                          //       ],
-                          //     )
+                          Text("Continue with social media", style: TextStyle(color: Colors.grey),),
+                          SizedBox(height: 16,),
+                          Row(
+                            children:[
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    // Your onTap action here
+                                    // For example, you can open Facebook when tapped
+                                    launchFacebook();
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.red.shade800,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.facebook, // You can change this to the desired Facebook icon
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(width: 8), // Adjust the spacing between icon and text
+                                        Text(
+                                          "Facebook",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                                SizedBox(width: 30,),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      // Your onTap action here
+                                      // For example, you can open Facebook when tapped
+                                      launchGoogle();
+                                    },
+                                  child:Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.red.shade800
+                                    ),
+                                    child: Center(
+                                      child: Text("Google", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                    ),
+                                  ),
+                                ),
+                                ),
+                                ],
+                              )
                         ],
                       ),
                     ),
@@ -326,4 +326,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordTEController.dispose();
     super.dispose();
   }
+
+  void launchFacebook() {}
+
+  void launchGoogle() {}
 }

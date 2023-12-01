@@ -3,24 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Widget/profile_summary_card.dart';
 
-// class Dashboard_Screen extends StatelessWidget {
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SafeArea(
-//         child: SingleChildScrollView(
-//           child: Column(
-//             children: [
-//               ProfileSummaryCard(),
-//
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 class Dashboard_Screen extends StatefulWidget {
   const Dashboard_Screen({super.key});
 
