@@ -20,6 +20,7 @@ class _ExercisesState extends State<Exercises> {
             fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white)),
       ),
       body: SingleChildScrollView(
+
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -28,7 +29,7 @@ class _ExercisesState extends State<Exercises> {
               Image.asset('assets/fitness.jpg', width: MediaQuery
                   .of(context)
                   .size
-                  .width - 32, height: 210, fit: BoxFit.cover),
+                  .width - 32, height: 210, fit: BoxFit.contain),
               const SizedBox(height: 20),
               const Text(
                   '5 Exercises That Will Improve Your Poor Circulation Immediately',
@@ -77,7 +78,7 @@ class _ExercisesState extends State<Exercises> {
               Image.asset('assets/ankle.jpg', width: MediaQuery
                   .of(context)
                   .size
-                  .width - 32, height: 210, fit: BoxFit.cover),
+                  .width - 32, height: 210, fit: BoxFit.contain),
               const SizedBox(height: 10),
               const Text(
                   "This exercise works the calf muscle—a large, lower extremity muscle in close proximity to veins and arteries. \"The pumping action of the calf muscle—contracting and releasing—helps move blood and lymph through the veins and arteries of the lower leg, which are prone to blood clots and leg swelling,\" says Alice Holland, director and doctor of physical therapy at Stride Strong Physical Therapy in Portland, Oregon. From a comfortable standing position, raise your heels to transfer your weight to the balls of your feet, and squeeze your calf muscles for just 1 second. (Try not to squeeze too strongly or tightly to avoid cramping.) Repeat 3 sets of 20 reps.",

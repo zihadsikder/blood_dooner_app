@@ -11,6 +11,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +44,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     height: 24,
                   ),
                   TextFormField(
+                    controller: _emailTEController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       fillColor: Colors.white,
@@ -62,6 +64,32 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
+    // onPressed: () async{
+    //
+    // String val = emailInputController.text.trim();
+    //
+    // if(val.isEmpty){
+    // showSnackMessage(context, 'enter a valid email', true);
+    // return;
+    // }
+    //
+    // //widget.showProgress(true);
+    // final response = await NetworkCaller()
+    //     .getRequest('${Urls.recoveryVerifyEmail}/$val');
+    // if (response.isSuccess) {
+    //
+    // Navigator.push(
+    // context,
+    // MaterialPageRoute(
+    // builder: (context) =>  PinVerificationScreen(email: val,),
+    //
+    // ),
+    // );
+    // }else{
+    // showSnackMessage(context, 'Error : ${response.statusCode}', true);
+    // return;
+    // }
+    // // widget.showProgress(false);
                       onPressed: () {
                         Navigator.push(
                           context,

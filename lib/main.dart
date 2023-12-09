@@ -1,18 +1,19 @@
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(BloodApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class BloodApp extends StatelessWidget {
+  const BloodApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     //double h = MediaQuery.of(context).size.height;
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'My First App',
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
@@ -62,7 +63,15 @@ class MyApp extends StatelessWidget {
             side: BorderSide(color: Colors.red.shade100)
           ),
         ),
-      )
+      ),
+      initialBinding: ControllerBinder(),
     );
+  }
+}
+
+class ControllerBinder extends Bindings {
+  @override
+  void dependencies() {
+    // TODO: implement dependencies
   }
 }

@@ -1,31 +1,32 @@
 import 'package:blood/screens/search.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'ac_email_edit.dart';
 import 'ac_mobile_edit.dart';
 import 'ac_name_edit.dart';
 import 'donation_history.dart';
 import 'login.dart';
 
-class Account_Screen extends StatefulWidget {
-  const Account_Screen({super.key});
+class AccountScreen extends StatefulWidget {
+  const AccountScreen({super.key});
 
   @override
-  State<Account_Screen> createState() => _Account_ScreenState();
+  State<AccountScreen> createState() => _AccountScreenState();
 }
 
-class _Account_ScreenState extends State<Account_Screen> {
+class _AccountScreenState extends State<AccountScreen> {
     @override
   Widget build(BuildContext context) {
       return Scaffold(
           appBar: AppBar(
-            title: Text("Search a Blood Donar"),
+            title: const Text("Search a Blood Donar"),
             actions: [
               IconButton(
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Search()), // Use the correct search page
+                    MaterialPageRoute(builder: (context) => const Search()), // Use the correct search page
                   );
                 },
               ),
@@ -38,31 +39,31 @@ class _Account_ScreenState extends State<Account_Screen> {
               children: [
                 Card(
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 0, color: Colors.transparent),
+                    side: const BorderSide(width: 0, color: Colors.transparent),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
                     children: [
                       ListTile(
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 0, color: Colors.transparent),
+                          side: const BorderSide(width: 0, color: Colors.transparent),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        leading: CircleAvatar(
+                        leading: const CircleAvatar(
                           backgroundImage: AssetImage('assets/blood.png'),
                         ),
-                        title: Row(
+                        title: const Row(
                           children: [
                             Text('User Name'),
                           ],
                         ),
-                        subtitle: Text('Blood : Available'),
+                        subtitle: const Text('Blood : Available'),
                         trailing: GestureDetector(
                             onTap: () {
                               showDialog(
                                   barrierDismissible: false,
                                   context: context,
-                                  builder: (context) => AcName());
+                                  builder: (context) => const AcName());
                             },
                             child: Icon(
                               Icons.edit,
@@ -77,21 +78,21 @@ class _Account_ScreenState extends State<Account_Screen> {
                             child: Column(
                               children: [
                                 Icon(Icons.bloodtype_outlined,color: Colors.red.shade900,),
-                                SizedBox(height: 5,),
+                                const SizedBox(height: 5,),
                                 // Image.asset(
                                 //   'assets/map.png',
                                 //   height: 24,
                                 //   width: 24,
                                 // ),
-                                Text('1'),
+                                const Text('1'),
                                 GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Donation()));
+                                              builder: (context) => const Donation()));
                                     },
-                                    child: Text('Total Donate')),
+                                    child: const Text('Total Donate')),
                               ],
                             ),
                           ),
@@ -100,14 +101,14 @@ class _Account_ScreenState extends State<Account_Screen> {
                             child: Column(
                               children: [
                                 Icon(Icons.bloodtype_outlined,color: Colors.red.shade900,),
-                                SizedBox(height: 5,),
+                                const SizedBox(height: 5,),
                                 // Image.asset(
                                 //   'assets/map.png',
                                 //   height: 24,
                                 //   width: 24,
                                 // ),
-                                Text('A+'),
-                                Text('Blood Group'),
+                                const Text('A+'),
+                                const Text('Blood Group'),
                               ],
                             ),
                           ),
@@ -116,14 +117,14 @@ class _Account_ScreenState extends State<Account_Screen> {
                             child: Column(
                               children: [
                                 Icon(Icons.bloodtype_outlined,color: Colors.red.shade900,),
-                                SizedBox(height: 5,),
+                                const SizedBox(height: 5,),
                                 // Image.asset(
                                 //   'assets/map.png',
                                 //   height: 24,
                                 //   width: 24,
                                 // ),
-                                Text('11-11-23'),
-                                Text('Total donation'),
+                                const Text('11-11-23'),
+                                const Text('Total donation'),
                               ],
                             ),
                           ),
@@ -132,12 +133,12 @@ class _Account_ScreenState extends State<Account_Screen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 ListTile(
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 2, color: Colors.white),
+                    side: const BorderSide(width: 2, color: Colors.white),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   leading: Icon(
@@ -145,18 +146,18 @@ class _Account_ScreenState extends State<Account_Screen> {
                     color: Colors.red.shade700,
                     size: 30,
                   ),
-                  title: Row(
+                  title: const Row(
                     children: [
                       Text('Mobile'),
                     ],
                   ),
-                  subtitle: Text('018000000000'),
+                  subtitle: const Text('018000000000'),
                   trailing: GestureDetector(
                       onTap: () {
                         showDialog(
                             barrierDismissible: false,
                             context: context,
-                            builder: (context) => AcMobile());
+                            builder: (context) => const AcMobile());
                       },
                       child: Icon(
                         Icons.edit,
@@ -169,7 +170,7 @@ class _Account_ScreenState extends State<Account_Screen> {
                 ),
                 ListTile(
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 2, color: Colors.white),
+                    side: const BorderSide(width: 2, color: Colors.white),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   leading: Icon(
@@ -177,18 +178,18 @@ class _Account_ScreenState extends State<Account_Screen> {
                     color: Colors.red.shade700,
                     size: 30,
                   ),
-                  title: Row(
+                  title: const Row(
                     children: [
                       Text('Email'),
                     ],
                   ),
-                  subtitle: Text('norplay@gmail.com'),
+                  subtitle: const Text('norplay@gmail.com'),
                   trailing: GestureDetector(
                       onTap: () {
                         showDialog(
                             barrierDismissible: false,
                             context: context,
-                            builder: (context) => AcEmail());
+                            builder: (context) => const AcEmail());
                       },
                       child: Icon(
                         Icons.edit,
@@ -201,7 +202,7 @@ class _Account_ScreenState extends State<Account_Screen> {
                 ),
                 ListTile(
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 2, color: Colors.white),
+                    side: const BorderSide(width: 2, color: Colors.white),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   leading: SizedBox(
@@ -216,12 +217,12 @@ class _Account_ScreenState extends State<Account_Screen> {
                       ),
                     ),
                   ),
-                  title: Row(
+                  title: const Row(
                     children: [
                       Text('Address'),
                     ],
                   ),
-                  subtitle: Text('Chattogram'),
+                  subtitle: const Text('Chattogram'),
                   // trailing: GestureDetector(
                   //     onTap: () {
                   //       showDialog(
@@ -238,7 +239,7 @@ class _Account_ScreenState extends State<Account_Screen> {
                   height: 1,
                   color: Colors.red.shade400,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Card(
@@ -247,8 +248,8 @@ class _Account_ScreenState extends State<Account_Screen> {
                     child: Row(
                       children: [
                         TextButton(
-                            onPressed: () {}, child: Text('Donate your blood',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
-                        Spacer(),
+                            onPressed: () {}, child: const Text('Donate your blood',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
+                        const Spacer(),
                         Switch(
                             value: true,
                             onChanged: (isTrue) {
@@ -260,13 +261,14 @@ class _Account_ScreenState extends State<Account_Screen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16,),
+                const SizedBox(height: 16,),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                      //Get.offAll(const LoginScreen());
+                      Get.showSnackbar('Are you sure?' as GetSnackBar);
                     },
-                    child: Text('Logout'))
+                    child: const Text('Logout'))
               ],
             ),
           ));

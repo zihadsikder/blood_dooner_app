@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 
 
 class ProfileSummaryCard extends StatefulWidget {
-  const ProfileSummaryCard({super.key,});
+  const ProfileSummaryCard({
+    super.key,
+    this.enableOnTap = true,
+  });
+
+  final bool enableOnTap;
 
   @override
   State<ProfileSummaryCard> createState() => _ProfileSummaryCardState();
@@ -23,7 +28,7 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Account_Screen (),
+              builder: (context) => const AccountScreen (),
             ),
           );
       //   if (enableOnTap) {
@@ -38,6 +43,14 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
       leading:  const CircleAvatar(
         child: Icon(Icons.person),
       ),
+      // title: Text(
+      //   fullName,
+      //   style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+      // ),
+      // subtitle: Text(
+      //   AuthController.user?.email ?? '',
+      //   style: const TextStyle(color: Colors.white),
+      // ),
       title: const Text('Zihad',
         //fullName,
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
