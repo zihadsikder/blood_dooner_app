@@ -25,7 +25,7 @@ class _ExercisesState extends State<Exercises> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Image.asset('assets/exercise.jpg', width: MediaQuery
+              Image.asset('assets/fitness.jpg', width: MediaQuery
                   .of(context)
                   .size
                   .width - 32, height: 210, fit: BoxFit.cover),
@@ -45,10 +45,10 @@ class _ExercisesState extends State<Exercises> {
                   fontSize: 14,
                   color: Colors.black)),
               const SizedBox(height: 10),
-              Image.asset('assets/ex-1.jpg', width: MediaQuery
+              Image.asset('assets/squat.jpg', width: MediaQuery
                   .of(context)
                   .size
-                  .width - 32, height: 210, fit: BoxFit.cover),
+                  .width - 32, height: 210, fit: BoxFit.contain),
               const SizedBox(height: 10),
               const Text(
                   "This exercise works the posterior subsystem (hamstrings, glutes, and lats) and thanks to the resistance band, it qualifies as both a cardio and resistance workout, says Shapiro. Start by attaching a resistance band to an anchor position—say, a tree or sturdy column—at stomach level. Hold both ends of the bands and step a foot or so away from the anchor, then squat down with your arms fully extended. Come up to a full upright position as you bend your elbows to pull in the band, keeping your elbows close to your body. Repeat 3 sets of 10-15 reps.",
@@ -60,10 +60,10 @@ class _ExercisesState extends State<Exercises> {
                   fontSize: 14,
                   color: Colors.black)),
               const SizedBox(height: 10),
-              Image.asset('assets/ex-2.jpg', width: MediaQuery
+              Image.asset('assets/pushup.png', width: MediaQuery
                   .of(context)
                   .size
-                  .width - 32, height: 210, fit: BoxFit.cover),
+                  .width - 32, height: 210, fit: BoxFit.contain),
               const SizedBox(height: 10),
               const Text(
                   "This basic move is also double-whammy cardio and resistance exercise, which not only gets the heart rate up but also strengthens your arms, shoulders, chest, and core muscles, says Martin. \"If you can't do push-ups off your toes, don't drop to your knees. Instead, place your hands on a bench or another incline so you're still able to engage your core and stabilizer muscles in a 'plank' position,\" says Martin. Hold a plank position with your hands directly under your shoulders and feet hip-width distance. Bend your elbows out to either side to lower part-way down towards the floor, and then lift yourself back up. Repeat 3 sets of 10-15 reps. (See how to do the perfect push-up here.)",
@@ -74,7 +74,7 @@ class _ExercisesState extends State<Exercises> {
                   fontSize: 14,
                   color: Colors.black)),
               const SizedBox(height: 10),
-              Image.asset('assets/ex-3.jpg', width: MediaQuery
+              Image.asset('assets/ankle.jpg', width: MediaQuery
                   .of(context)
                   .size
                   .width - 32, height: 210, fit: BoxFit.cover),
@@ -88,7 +88,7 @@ class _ExercisesState extends State<Exercises> {
                   fontSize: 14,
                   color: Colors.black)),
               const SizedBox(height: 10),
-              Image.asset('assets/ex-4.jpg', width: MediaQuery
+              Image.asset('assets/breathing.png', width: MediaQuery
                   .of(context)
                   .size
                   .width - 32, height: 210, fit: BoxFit.cover),
@@ -110,6 +110,21 @@ class _ExercisesState extends State<Exercises> {
               const SizedBox(height: 10),
               const Text(
                   "This cardiovascular exercise will warm you up quickly and boost circulation because it puts the larger muscle groups of the arms to work, which boosts blood flow. \"Flexion and extension of the elbows works your arms, rotating your trunk targets your abdominal muscles, and exhaling as you punch also works the diaphragm,\" says Holland. The result? \"This move will warm you up quickly and increase blood flow throughout your body,\" she says. From a comfortable standing position, punch one arm out as far as you can and add a little twist in your spine as you do so. Bring this arm back to your chest, then punch with the other arm. Repeat 3 sets of 20 punches on each side, being sure to exhale fully (and even audibly) on each punch.",
+                  style: TextStyle(
+                      letterSpacing: 0.4, fontSize: 13, color: Colors.black)),
+              const SizedBox(height: 15),
+              const Text('6. Crunches', style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.black)),
+              const SizedBox(height: 10),
+              Image.asset('assets/CRUNCHES.jpg', width: MediaQuery
+                  .of(context)
+                  .size
+                  .width - 32, height: 210, fit: BoxFit.cover),
+              const SizedBox(height: 10),
+              const Text(
+                  "The crunch is an abdominal exercise that works the rectus abdominis muscle. It enables both building 'six-pack' abs and tightening the belly.",
                   style: TextStyle(
                       letterSpacing: 0.4, fontSize: 13, color: Colors.black)),
               const SizedBox(height: 15),
