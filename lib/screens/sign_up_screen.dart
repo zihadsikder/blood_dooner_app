@@ -44,7 +44,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     double h = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Account Registration'),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -131,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                         },
                         icon: Icon(Icons.calendar_today,
-                            color: Colors.red.shade900),
+                            color: Colors.grey),
                       ),
                     ),
                     keyboardType: TextInputType.datetime,
@@ -213,7 +215,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                         },
                         icon: Icon(Icons.calendar_today,
-                            color: Colors.red.shade900),
+                            color: Colors.grey),
                       ),
                     ),
                     keyboardType: TextInputType.datetime,

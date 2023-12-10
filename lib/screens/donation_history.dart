@@ -8,54 +8,115 @@ class Donation extends StatefulWidget {
 }
 
 class _DonationState extends State<Donation> {
+
+  List<Todo> todo = [];
+  TextEditingController fild1 = TextEditingController();
+  TextEditingController fild2 = TextEditingController();
+  TextEditingController todoTEController1 = TextEditingController();
+  TextEditingController todoTEController2 = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('To be a hero! Donate Blood'),
+        title: const Text('Donation History'),
+
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(width: 2, color: Colors.white),
-              borderRadius: BorderRadius.circular(5),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextFormField(
+              controller: fild1,
+              decoration: const InputDecoration(
+                hintText: 'Place',
+                border: OutlineInputBorder(),
+              ),
             ),
-            leading: SizedBox(
-              width: 32,
-              //color: Colors.grey,
-              child: Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/bloodicon.png',
-                  height: 36,
-                  width: 24,
+            const SizedBox(
+              height: 8,
+            ),
+            TextFormField(
+              controller: fild2,
+              decoration: InputDecoration(
+                hintText: 'Date of Donation',
+                border: const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  onPressed: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1950),
+                      lastDate: DateTime(2050),
+                    );
+
+                    if (pickedDate != null && pickedDate != fild2.text) {
+                      setState(() {
+                        fild2.text = "${pickedDate.toLocal()}".split(' ')[0];
+                      });
+                    }
+                  },
+                  icon: const Icon(Icons.calendar_today, color: Colors.grey),
                 ),
               ),
             ),
-            title: Row(
-              children: [
-                Text('Add Donation'),
-              ],
+            const SizedBox(
+              height: 8,
             ),
-            subtitle: Text('30.11.2023'),
-            trailing: GestureDetector(
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1950),
-                    lastDate: DateTime(2050),
-                  );
-                },
-                child: Icon(
-                  Icons.calendar_today,
-                  color: Colors.red.shade700,
-                )),
-          ),
+            ElevatedButton(
+              onPressed: () {
+                String str1 = fild1.text.trim();
+                String str2 = fild2.text.trim();
+                Todo todoo = Todo(str1, str2);
+                todo.add(todoo);
+                fild1.text = '';
+                fild2.text = '';
+                setState(() {});
+              },
+              child: const Text(
+                'Add',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Expanded(
+              flex: 70,
+              child: ListView.builder(
+                  itemCount: todo.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        tileColor: Colors.grey.shade200,
+                        leading: CircleAvatar(
+                          child: Text('${index+1}',style: TextStyle(fontWeight: FontWeight.bold)),
+                          backgroundColor: Colors.red,
+                        ),
+                        title: Text(todo[index].name),
+                        subtitle: Text('Date: ${todo[index].description}'),
+                        trailing: Icon(Icons.delete_outline_sharp,),
+                        onTap: () {},
+                      ),
+                    );
+                  }),
+            ),
+          ],
         ),
       ),
     );
   }
+}
+
+class Todo {
+  String name;
+  String description;
+
+  Todo(
+    this.name,
+    this.description,
+  );
 }
