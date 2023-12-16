@@ -12,28 +12,30 @@ class _AcNameState extends State<AcName> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = ' ';
-  String selectedThana ='';
+  String selectedThana =' ';
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Edit Profile"),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Type Your Name',
+      title: const Text("Edit Profile"),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Type Your Name',
+              ),
             ),
-          ),
-          //SizedBox(height: 8.0),
-          Location(
-          selectedBloodGroup: selectedBloodGroup,
-          selectedDivision: selectedDivision,
-          selectedDistrict: selectedDistrict,
-            selectedThana: selectedThana,
-          ),
-        ],
+            //SizedBox(height: 8.0),
+            Location(
+            selectedBloodGroup: selectedBloodGroup,
+            selectedDivision: selectedDivision,
+            selectedDistrict: selectedDistrict,
+              selectedThana: selectedThana,
+            ),
+          ],
+        ),
       ),
       actions: [
         TextButton(

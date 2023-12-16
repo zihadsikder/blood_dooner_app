@@ -2,6 +2,7 @@ import 'package:blood/controller/auth_controller.dart';
 import 'package:blood/screens/account_screen.dart';
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ProfileSummaryCard extends StatefulWidget {
@@ -51,8 +52,7 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
       //   AuthController.user?.email ?? '',
       //   style: const TextStyle(color: Colors.white),
       // ),
-      title: const Text('Zihad',
-        //fullName,
+      title: const Text('Zihad Sikder',
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
       ),
       subtitle: const Text('zihad@gmail.com',
@@ -62,9 +62,10 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
       trailing: IconButton(
         onPressed: () async {
           await AuthController.clearAuthData();
-          Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (context) => const LoginScreen()), (
-              route) => false);
+          Get.offAll(const LoginScreen());
+          // Navigator.pushAndRemoveUntil(
+          //     context, MaterialPageRoute(builder: (context) => const LoginScreen()), (
+          //     route) => false);
         },
         icon: const Icon(Icons.logout,color: Colors.white,),
       ),

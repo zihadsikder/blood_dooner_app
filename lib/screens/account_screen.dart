@@ -19,7 +19,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search a Blood Donar"),
+        title: const Text("Search a Blood Donor"),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -95,7 +95,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             const Text('1'),
                             GestureDetector(
                                 onTap: () {
-                                  Get.offAll(Donation());
+                                  Get.offAll(const Donation());
                                 },
                                 child: const Text('Total Donate')),
                           ],
@@ -276,10 +276,25 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                  showDialog(context: context, builder: (BuildContext context){
+                    return AlertDialog(
+                      title: const Text('Alert!'),
+                      content: const Text('Are You Sure!'),
+                      actions: [
+                        TextButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, child: const Text('No', style: TextStyle(color: Colors.red),)),
+                        TextButton(onPressed: (){
+                          Get.offAll(const LoginScreen());
+                        }, child: const Text('Yes', style: TextStyle(color: Colors.red),)),
+                      ],
+                    );
+
+                  } );
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => LoginScreen()));
                   //Get.offAll(const LoginScreen());
-                  Get.showSnackbar('Are you sure?' as GetSnackBar);
+
                 },
                 child: const Text('Logout')),
           ],
@@ -287,9 +302,9 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.offAll(Donation());
+          Get.offAll(const Donation());
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
 
       ),
     );

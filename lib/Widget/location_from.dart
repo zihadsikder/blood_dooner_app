@@ -43,10 +43,10 @@ class Location extends StatefulWidget {
   //   ['Dinajpur', 'Kurigram', 'Gaibandha', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Rangpur', 'Takurgaon'],
   // ];
   String selectedDivision = 'Select Division';
-  String selectedDistrict = ' ';
-  String selectedThana = ' ';
+  String selectedDistrict = 'Select District';
+  String selectedThana = 'Select Thana';
 
-  Location({
+  Location({super.key,
     required this.selectedBloodGroup,
     required this.selectedDivision,
     required this.selectedDistrict,
@@ -125,7 +125,7 @@ class _LocationState extends State<Location> {
               widget.selectedThana = newValue!;
             });
           },
-          items: widget.district
+          items: widget.Thana
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,

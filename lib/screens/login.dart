@@ -102,13 +102,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     keyboardType: TextInputType.number,
                                     controller: _numberTEController,
                                     decoration: const InputDecoration(
-                                        hintText: "Phone number",
+                                        hintText: "Email",
                                         hintStyle:
                                             TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (String? value) {
                                       if (value?.trim().isEmpty ?? true) {
-                                        return 'Enter valid number';
+                                        return 'Enter valid email';
                                       }
                                       return null;
                                     },
@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           border: InputBorder.none),
                                       validator: (String? value) {
                                         if (value?.trim().isEmpty ?? true) {
-                                          return 'Enter valid email';
+                                          return 'Enter correct password';
                                         }
                                         return null;
                                       },

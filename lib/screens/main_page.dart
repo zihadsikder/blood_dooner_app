@@ -16,7 +16,7 @@ class _MainpageState extends State<Mainpage> {
     Home_Screen(),
     Dashboard_Screen(),
     AccountScreen(),
-    Settings_screen(),
+    SettingsScreen(),
   ];
   int currentIndex = 0;
 

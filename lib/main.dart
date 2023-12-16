@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(BloodApp());
+  runApp(const BloodApp());
 }
 
 class BloodApp extends StatelessWidget {
@@ -17,20 +17,10 @@ class BloodApp extends StatelessWidget {
       title: 'My First App',
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: const LoginScreen(),
       theme: ThemeData(
         primaryColor: Colors.red.shade900,
         primarySwatch: Colors.red,
-        // inputDecorationTheme: const InputDecorationTheme(
-        //   fillColor: Colors.white,
-        //   filled: true,
-        //   border: OutlineInputBorder(
-        //     borderSide: BorderSide.none,
-        //   ),
-        //   focusedBorder: OutlineInputBorder(
-        //     borderSide: BorderSide.none,
-        //   ),
-        // ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             minimumSize: Size(w, 50),
