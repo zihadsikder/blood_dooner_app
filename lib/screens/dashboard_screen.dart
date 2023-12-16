@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Widget/profile_summary_card.dart';
 
-class Dashboard_Screen extends StatefulWidget {
-  const Dashboard_Screen({super.key});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
 
   @override
-  State<Dashboard_Screen> createState() => _Dashboard_ScreenState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _Dashboard_ScreenState extends State<Dashboard_Screen> {
+class _DashboardScreenState extends State<DashboardScreen> {
   final List<ServiceData> websites = [
     ServiceData(
       name: 'BD Tickets',
@@ -39,10 +39,10 @@ class _Dashboard_ScreenState extends State<Dashboard_Screen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ProfileSummaryCard(),
+                const ProfileSummaryCard(),
                 Expanded(
                   child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                     ),
                     itemCount: websites.length,

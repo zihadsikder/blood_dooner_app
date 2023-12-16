@@ -1,11 +1,9 @@
 import 'package:blood/Widget/profile_summary_card.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'diet_chart.dart';
 import 'exercises.dart';
 import 'privacy.dart';
-
 import 'support.dart';
 import 'events.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onTap: (){
                       Get.offAll(const Events());
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios),
+                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
                   ),
                   const SizedBox(height: 8,),
                   ListTile(
@@ -51,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onTap: (){
                       Get.offAll(const Support());
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios),
+                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
                   ),
                   const SizedBox(height: 8,),
                   ListTile(
@@ -66,7 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           MaterialPageRoute(builder: (context)=> const privacy())
                       );
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios),
+                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
                   ),
                   const SizedBox(height: 8,),
                   ListTile(
@@ -79,7 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => const Exercises()));
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios),
+                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
                   ),
                   const SizedBox(height: 8,),
                   ListTile(
@@ -92,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => const DietChart()));
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios),
+                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
                   ),
                 ],
               ),

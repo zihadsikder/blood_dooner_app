@@ -3,20 +3,18 @@ import 'package:blood/screens/dashboard_screen.dart';
 import 'package:blood/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'setting_screen.dart';
-
-
-class Mainpage extends StatefulWidget {
-  const Mainpage({Key? key});
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key});
   @override
-  _MainpageState createState() => _MainpageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _MainpageState extends State<Mainpage> {
+class _MainPageState extends State<MainPage> {
   List pages = [
-    Home_Screen(),
-    Dashboard_Screen(),
-    AccountScreen(),
-    SettingsScreen(),
+     Home_Screen(),
+     DashboardScreen(),
+     AccountScreen(),
+     SettingsScreen(),
   ];
   int currentIndex = 0;
 

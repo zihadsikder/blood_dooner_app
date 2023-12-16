@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Mainpage()));
+                                      builder: (context) => const MainPage()));
                             },
                             child: Container(
                               height: 50,

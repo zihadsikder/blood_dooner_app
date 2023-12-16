@@ -1,14 +1,27 @@
+import 'package:blood/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class Support extends StatelessWidget {
+class Support extends StatefulWidget {
   const Support({super.key});
 
+  @override
+  State<Support> createState() => _SupportState();
+}
+
+class _SupportState extends State<Support> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Give Blood Save Life"),
+        title: const Text(
+          'Give Blood Save Life ',
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> const SettingsScreen()));
+          },
+        ),
       ),
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(

@@ -1,3 +1,4 @@
+import 'package:blood/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 
 class Events extends StatelessWidget {
@@ -7,7 +8,15 @@ class Events extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      backgroundColor: Colors.red.shade900,
+        title: const Text(
+          'Events ',
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> const SettingsScreen()));
+          },
+        ),
       ),
       body: Container(
         child: Center(

@@ -14,7 +14,7 @@ class BloodApp extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     //double h = MediaQuery.of(context).size.height;
     return GetMaterialApp(
-      title: 'My First App',
+      title: 'Blood Donor App',
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
@@ -33,6 +33,9 @@ class BloodApp extends StatelessWidget {
           ),
         ),
         appBarTheme: AppBarTheme(
+          titleTextStyle: const TextStyle(fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.white,),
           backgroundColor: Colors.red.shade900,
           foregroundColor: Colors.white,
           elevation: 5,

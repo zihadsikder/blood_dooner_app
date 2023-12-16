@@ -298,7 +298,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _weightOver50Controller.text.isNotEmpty) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Mainpage()),
+        MaterialPageRoute(builder: (context) => MainPage()),
       );
     } else {
       showDialog(
