@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   List pages = [
-     Home_Screen(),
+     HomeScreen(),
      DashboardScreen(),
      AccountScreen(),
      SettingsScreen(),

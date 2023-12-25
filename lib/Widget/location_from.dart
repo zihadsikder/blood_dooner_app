@@ -32,16 +32,6 @@ class Location extends StatefulWidget {
   final List<String> district = ['','Coxs Bazar', 'Chittagong'];
   final List<String> Thana = ['','Kutubdia'];
 
-  //   ['Select District','dfff'],
-  //   ['Gazipur', 'Dhaka', 'Kishorganj', 'Manikganj', 'Munshiganj', 'Narayanganj', 'Narsingdi', 'Tangail', 'Faridpur', 'Gopalganj', 'Madaripur', 'Rajbari', 'Shariatpur'],
-  //   ['Coxs Bazar', 'Chittagong', 'Brahmanbaria', 'Comilla', 'Chandpur', 'Lakshmipur', 'Maijdee', 'Feni', 'Khagrachhari', 'Rangamati', 'Bandarban'],
-  //   ['Chapainawabganj', 'Natore', 'Rajshahi', 'Sirajganj', 'Pabna', 'Bogura', 'Naogaon', 'Joypurhat'],
-  //   ['Sunamganj', 'Sylhet', 'Moulvibazar', 'Habiganj'],
-  //   ['Bhola', 'Barishal', 'Patuakhali', 'Pirojpur', 'Barguna', 'Jhalokati'],
-  //   ['Mymensingh', 'Jamalpur', 'Netrokona', 'Sherpur'],
-  //   ['Bagherhat', 'Chuadanga', 'Jessore', 'Jhenaidah', 'Khulna', 'Kushtia', 'Magura', 'Meherpur', 'Narail', 'Satkhira'],
-  //   ['Dinajpur', 'Kurigram', 'Gaibandha', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Rangpur', 'Takurgaon'],
-  // ];
   String selectedDivision = 'Select Division';
   String selectedDistrict = 'Select District';
   String selectedThana = 'Select Thana';
@@ -78,6 +68,12 @@ class _LocationState extends State<Location> {
           decoration: const InputDecoration(
             labelText: 'Blood Group',
           ),
+          validator: (String? value) {
+            if (value?.trim().isEmpty ?? true) {
+              return 'Enter your password';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: 16.0),
         DropdownButtonFormField<String>(
@@ -97,6 +93,12 @@ class _LocationState extends State<Location> {
           decoration: const InputDecoration(
             labelText: 'Select Division',
           ),
+          validator: (String? value) {
+            if (value?.trim().isEmpty ?? true) {
+              return 'Enter your password';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: 16.0),
         DropdownButtonFormField<String>(
@@ -116,6 +118,12 @@ class _LocationState extends State<Location> {
           decoration: const InputDecoration(
             labelText: 'Select District',
           ),
+          validator: (String? value) {
+            if (value?.trim().isEmpty ?? true) {
+              return 'Enter your password';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: 16.0),
         DropdownButtonFormField<String>(

@@ -1,5 +1,11 @@
+import 'package:blood/Widget/snack_message.dart';
+import 'package:blood/controller/auth_controller.dart';
+import 'package:blood/data/network_caller/network_caller.dart';
+import 'package:blood/data/network_caller/network_response.dart';
+import 'package:blood/data/utility/urls.dart';
+import 'package:blood/model/user_model.dart';
+import 'package:blood/screens/main_page.dart';
 import 'forget_pass_screen/forgot_password_screen.dart';
-import 'main_page.dart';
 import 'sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _loginInProgress = false;
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   Image.asset(
-                    'assets/bloodbd.png', // Replace with your image path
-                    width: 150, // Adjust the width as needed
-                    height: 80, // Adjust the height as needed
+                    'assets/bloodbd.png',
+                    width: 150,
+                    height: 80,
                   ),
                 ],
               ),
@@ -84,8 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  const BoxShadow(
+                                boxShadow: const [
+                                  BoxShadow(
                                       color: Color.fromRGBO(225, 95, 27, .3),
                                       blurRadius: 20,
                                       offset: Offset(0, 10))
@@ -116,25 +123,45 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 //SizedBox(height: 20),
                                 Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: TextFormField(
-                                      controller: _passwordTEController,
-                                      decoration: const InputDecoration(
-                                          hintText: "Password",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                      validator: (String? value) {
-                                        if (value?.trim().isEmpty ?? true) {
-                                          return 'Enter correct password';
-                                        }
-                                        return null;
-                                      },
-                                    )),
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.grey.shade200))),
+                                  child: TextFormField(
+                                    controller: _passwordTEController,
+                                    obscureText: _obscureText,
+                                    // Use a boolean variable to toggle password visibility
+                                    decoration: InputDecoration(
+                                      hintText: 'Password',
+                                      hintStyle:
+                                          const TextStyle(color: Colors.grey),
+                                      border: InputBorder.none,
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _obscureText =
+                                                !_obscureText; // Toggle the password visibility
+                                          });
+                                        },
+                                        icon: Icon(
+                                          _obscureText
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                          color: Colors
+                                              .grey, // Customize the icon color as needed
+                                        ),
+                                      ),
+                                    ),
+                                    keyboardType: TextInputType.visiblePassword,
+                                    validator: (String? value) {
+                                      if (value?.trim().isEmpty ?? true) {
+                                        return 'Enter your password';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -142,15 +169,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 30,
                           ),
                           GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const MainPage()));
-                            },
+                            onTap: login,
                             child: Container(
                               height: 50,
-                              margin: const EdgeInsets.symmetric(horizontal: 50),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 50),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.red.shade800),
@@ -179,7 +202,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               showDialog(
                                   barrierDismissible: false,
                                   context: context,
-                                  builder: (context) => const ForgotPasswordScreen());
+                                  builder: (context) =>
+                                      const ForgotPasswordScreen());
                             },
                             child: const Text(
                               "Forgot Password?",
@@ -207,16 +231,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SignUpScreen()));
+                                              const SignUpScreen()));
                                 },
                               )
                             ],
                           ),
-
-                          const Text("Continue with social media", style: TextStyle(color: Colors.grey),),
-                          const SizedBox(height: 16,),
+                          const Text(
+                            "Continue with social media",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
                           Row(
-                            children:[
+                            children: [
                               Expanded(
                                 child: GestureDetector(
                                   onTap: () {
@@ -231,13 +259,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.red.shade800,
                                     ),
                                     child: const Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          Icons.facebook, // You can change this to the desired Facebook icon
+                                          Icons.facebook,
+                                          // You can change this to the desired Facebook icon
                                           color: Colors.white,
                                         ),
-                                        SizedBox(width: 8), // Adjust the spacing between icon and text
+                                        SizedBox(width: 8),
+                                        // Adjust the spacing between icon and text
                                         Text(
                                           "Facebook",
                                           style: TextStyle(
@@ -250,28 +281,34 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                                const SizedBox(width: 30,),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      // Your onTap action here
-                                      // For example, you can open Facebook when tapped
-                                      launchGoogle();
-                                    },
-                                  child:Container(
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    // Your onTap action here
+                                    // For example, you can open Facebook when tapped
+                                    launchGoogle();
+                                  },
+                                  child: Container(
                                     height: 50,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
-                                        color: Colors.red.shade800
-                                    ),
+                                        color: Colors.red.shade800),
                                     child: const Center(
-                                      child: Text("Google", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                      child: Text(
+                                        "Google",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
                                 ),
-                                ),
-                                ],
-                              )
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -285,41 +322,43 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Future<void> login() async {
-  //   if (!_formKey.currentState!.validate()) {
-  //     return;
-  //   }
-  //   _loginInProgress = true;
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  //   NetworkResponse response = await NetworkCaller().postRequest(Urls.login, body: {
-  //     'email' : _emailTEController.text.trim(),
-  //     'password' : _passwordTEController.text,
-  //   });
-  //   _loginInProgress = false;
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  //   if (response.isSuccess) {
-  //     await AuthController.saveUserInformation(
-  //         response.jsonResponse['token'], UserModel.fromJson(response.jsonResponse['data']));
-  //     if (mounted) {
-  //       Navigator.push(context,
-  //           MaterialPageRoute(builder: (context) => const MainBottomNavScreen()));
-  //     }
-  //   } else {
-  //     if (response.statusCode == 401) {
-  //       if (mounted) {
-  //         showSnackMessage(context, 'Please check email/password');
-  //       }
-  //     } else {
-  //       if (mounted) {
-  //         showSnackMessage(context, 'Login failed. Try again');
-  //       }
-  //     }
-  //   }
-  // }
+  Future<void> login() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    _loginInProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
+    NetworkResponse response =
+        await NetworkCaller().postRequest(Urls.login, body: {
+      "mobile": _numberTEController.text.trim(),
+      'password': _passwordTEController.text,
+    });
+    _loginInProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
+    if (response.isSuccess) {
+      if (mounted) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const MainPage()));
+      }
+      await AuthController.saveUserInformation(response.jsonResponse?['token'],
+          UserModel.fromJson(response.jsonResponse?['data']));
+    } else {
+      if (response.statusCode == 401) {
+        if (mounted) {
+          showSnackMessage(context, 'Please check email/password');
+        }
+      } else {
+        if (mounted) {
+          showSnackMessage(context, 'Login failed. Try again');
+        }
+      }
+    }
+  }
+
   @override
   void dispose() {
     _numberTEController.dispose();

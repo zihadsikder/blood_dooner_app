@@ -2,16 +2,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'search.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class Home_Screen extends StatefulWidget {
-  const Home_Screen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<Home_Screen> createState() => _Home_ScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-// ignore: camel_case_types
-class _Home_ScreenState extends State<Home_Screen> {
+class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   final List<String> imageUrls = [
     'assets/rltn.png',
@@ -20,15 +18,12 @@ class _Home_ScreenState extends State<Home_Screen> {
     'assets/3.png',
     'assets/4.png',
     'assets/5.png',
-    // Add more image URLs as needed
   ];
 
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    //double w = MediaQuery.of(context).size.width;
-    //double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Search a Blood Donar"),
@@ -109,9 +104,9 @@ class _Home_ScreenState extends State<Home_Screen> {
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Search()));
+                        MaterialPageRoute(builder: (context) => const Search()));
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
@@ -131,130 +126,6 @@ class _Home_ScreenState extends State<Home_Screen> {
                       ),
                     ],
                   )),
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: InkWell(
-              //         onTap: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(builder: (context) => const Search()),
-              //           );
-              //         },
-              //         child: Container(
-              //           padding: const EdgeInsets.symmetric(
-              //             horizontal: 8,
-              //             vertical: 16,
-              //           ),
-              //           decoration: BoxDecoration(
-              //             color: Colors.red.shade900,
-              //             borderRadius: BorderRadius.circular(8),
-              //           ),
-              //           child: const Column(
-              //             children: [
-              //               Icon(
-              //                 Icons.search,
-              //                 color: Colors.white,
-              //                 size: 32,
-              //               ),
-              //               Text(
-              //                 'Emergency Search',
-              //                 style: TextStyle(
-              //                   fontSize: 16,
-              //                   fontWeight: FontWeight.bold,
-              //                   color: Colors.white,
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     const SizedBox(width: 16),
-              //     Expanded(
-              //       child: InkWell(
-              //         onTap: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(builder: (context) => const Search()),
-              //           );
-              //         },
-              //         child: Container(
-              //           padding: const EdgeInsets.symmetric(
-              //             horizontal: 8,
-              //             vertical: 16,
-              //           ),
-              //           decoration: BoxDecoration(
-              //             color: Colors.red.shade900,
-              //             borderRadius: BorderRadius.circular(8),
-              //           ),
-              //           child: const Column(
-              //             children: [
-              //               Icon(
-              //                 Icons.search,
-              //                 color: Colors.white,
-              //                 size: 32,
-              //               ),
-              //               Text(
-              //                 'Search a Doner',
-              //                 style: TextStyle(
-              //                   fontSize: 16,
-              //                   fontWeight: FontWeight.bold,
-              //                   color: Colors.white,
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: InkWell(
-              //         onTap: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(builder: (context) => const Search()),
-              //           );
-              //         },
-              //         child: Container(
-              //           padding: const EdgeInsets.symmetric(
-              //             horizontal: 8,
-              //             vertical: 8,
-              //           ),
-              //           decoration: BoxDecoration(
-              //             color: Colors.red.shade900,
-              //             borderRadius: BorderRadius.circular(8),
-              //           ),
-              //           child: Row(
-              //             mainAxisAlignment: MainAxisAlignment.center,
-              //             children: [
-              //               Icon(
-              //                 Icons.search,
-              //                 color: Colors.white,
-              //                 size: 32,
-              //               ),
-              //              SizedBox(
-              //                width: 8,
-              //              ),
-              //               Text(
-              //                 'Search a Doner',
-              //                 style: TextStyle(
-              //                   fontSize: 16,
-              //                   fontWeight: FontWeight.bold,
-              //                   color: Colors.white,
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               Image.asset('assets/savelife.png'),
             ],
           ),
