@@ -1,10 +1,9 @@
+import 'package:blood/controller/sign_up_controller.dart';
 import 'package:blood/screens/login.dart';
+import 'package:get/get.dart';
 import '../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 import '../Widget/snack_message.dart';
-import '../data/network_caller/network_caller.dart';
-import '../data/network_caller/network_response.dart';
-import '../data/utility/urls.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -21,11 +20,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordTEController = TextEditingController();
   final TextEditingController _postOfficeTEController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
-  bool _weightOver50Controller = false;
   final TextEditingController _donationController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final SignUpController _signUpController = Get.find<SignUpController>();
 
-  bool _signUpInProgress = false;
+  bool _weightOver50Controller = false;
   bool areFieldsValid = false;
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
@@ -104,12 +103,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           selectedDistrict: selectedDistrict,
                           selectedThana: selectedThana,
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         TextFormField(
                           controller: _postOfficeTEController,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
-                            hintText: 'posy office',
+                            hintText: 'Post Office',
                           ),
                           validator: (String? value) {
                             if (value?.trim().isEmpty ?? true) {
@@ -118,21 +117,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         TextFormField(
-                          controller: _emailTEController,
                           keyboardType: TextInputType.emailAddress,
+                          controller: _emailTEController,
                           decoration: const InputDecoration(
-                            hintText: 'Email',
+                            labelText: "Email",
                           ),
                           validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your email';
+                            // if (value?.trim().isEmpty ?? true) {
+                            //   return 'Enter a valid email';
+                            // }
+                            // Email validation with '@' and '.'
+                            bool isValidEmail = RegExp(
+                                    r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                .hasMatch(value!);
+
+                            if (!isValidEmail) {
+                              return 'Enter a valid email address';
                             }
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         TextFormField(
                           controller: _dobController,
                           readOnly: true,
@@ -167,21 +174,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         TextFormField(
                           controller: _mobileNumberTEController,
                           decoration: const InputDecoration(
                             labelText: 'Mobile',
                           ),
+                          keyboardType: TextInputType.phone,
                           validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your phone number';
+                            // if (value?.trim().isEmpty ?? true) {
+                            //   return 'Enter a valid mobile number';
+                            // }
+                            // Phone number validation
+                            bool isValidPhoneNumber =
+                                RegExp(r"^0[0-9]{10}$").hasMatch(value!);
+
+                            if (!isValidPhoneNumber) {
+                              return 'Enter a valid 11-digit mobile number starting with 0';
                             }
+
                             return null;
                           },
-                          keyboardType: TextInputType.phone,
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         TextFormField(
                           controller: _passwordTEController,
                           obscureText: _obscureText,
@@ -212,7 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         TextFormField(
                           controller: _donationController,
                           readOnly: true,
@@ -241,7 +256,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           keyboardType: TextInputType.datetime,
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -268,24 +283,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       color: Colors.red, fontSize: 12))
                           ],
                         ),
-                        const SizedBox(height: 16.0),
-                        Visibility(
-                          visible: _signUpInProgress == false,
-                          replacement: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          child: ElevatedButton(
-                            onPressed: _registration,
-                            child: const Text(
-                              'Submit',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                        const SizedBox(height: 8.0),
+                        GetBuilder<SignUpController>(
+                            builder: (signUpController) {
+                          return Visibility(
+                            visible: signUpController.signUpInProgress == false,
+                            replacement: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            child: ElevatedButton(
+                              onPressed: _registration,
+                              child: const Text(
+                                'Submit',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                        ),
+                          );
+                        }),
                         const SizedBox(
                           height: 18,
                         ),
@@ -301,11 +319,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const LoginScreen()));
+                                Get.offAll(const LoginScreen());
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             const LoginScreen()));
                               },
                               child: const Text(
                                 'Sign In',
@@ -319,69 +338,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-  // int parseDivisionId(String selectedDivision) {
-  //   if (selectedDivision == 'Select Division') {
-  //     // Handle the case where 'Select Division' is selected
-  //     // You can return a default value or handle it as needed
-  //     return -1; // Or any other default value
-  //   } else {
-  //     // Parse the selected division as an integer
-  //     return int.parse(selectedDivision);
-  //   }
-  // }
+
   Future<void> _registration() async {
     if (_formKey.currentState!.validate()) {
-      _signUpInProgress = true;
+      final response = await _signUpController.registration(
+          _usernameTEController.text.trim(),
+          _mobileNumberTEController.text.trim(),
+          _emailTEController.text.trim(),
+          _donationController.text,
+          selectedBloodGroup,
+          _weightOver50Controller.toString(),
+          _donationController.text,
+          _passwordTEController.text);
       if (mounted) {
-        setState(() {});
-      }
-
-      // Format date values
-      String dob = _dobController.text;
-      String lastDonation = _donationController.text;
-
-      final NetworkResponse response =
-          await NetworkCaller().postRequest(Urls.registration, body: {
-        "name": _usernameTEController.text.trim(),
-        "mobile": _mobileNumberTEController.text.trim(),
-        "email": _emailTEController.text.trim(),
-        "dob": dob,
-        "blood_group": selectedBloodGroup,
-        "is_weight_50kg": _weightOver50Controller.toString(),
-        "last_donation": lastDonation,
-        // "address": {
-        //   "division_id": parseDivisionId(selectedDivision), // Convert to int
-        //   "district_id": int.parse(selectedDistrict),  // Convert to int
-        //   "area_id": int.parse(selectedThana),  // Convert to int
-        //   "post_office": _postOfficeTEController.text.trim(),
-        // },
-            "address": {
-              "division_id": 1,
-              "district_id": 1,
-              "area_id": 1,
-              "post_office": 1,
-            },
-        "password": _passwordTEController.text
-      });
-
-      _signUpInProgress = false;
-      if (mounted) {
-        setState(() {});
-      }
-
-      if (response.isSuccess) {
         _clearTextFields();
-        if (mounted) {
-          showSnackMessage(context, 'Account has been created! Please login.');
-        }
-      } else {
-        if (mounted) {
-          showSnackMessage(
-            context,
-            'Account creation failed! Please try again.',
-            true,
-          );
-        }
+        showSnackMessage(context, _signUpController.failureMessage);
       }
     }
   }

@@ -95,7 +95,7 @@ class _LocationState extends State<Location> {
           ),
           validator: (String? value) {
             if (value?.trim().isEmpty ?? true) {
-              return 'Enter your password';
+              return 'Select your division';
             }
             return null;
           },
@@ -120,7 +120,7 @@ class _LocationState extends State<Location> {
           ),
           validator: (String? value) {
             if (value?.trim().isEmpty ?? true) {
-              return 'Enter your password';
+              return 'Select your District';
             }
             return null;
           },
@@ -141,8 +141,14 @@ class _LocationState extends State<Location> {
             );
           }).toList(),
           decoration: const InputDecoration(
-            labelText: 'Select Thana/ Upazila',
+            labelText: 'Select Upazila',
           ),
+          validator: (String? value) {
+            if (value?.trim().isEmpty ?? true) {
+              return 'Select your Upazila';
+            }
+            return null;
+          },
         ),
         const SizedBox(height: 16.0),
       ],
