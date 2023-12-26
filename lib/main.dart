@@ -1,3 +1,5 @@
+import 'package:blood/controller/login_controller.dart';
+import 'package:blood/controller/sign_up_controller.dart';
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +14,6 @@ class BloodApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
-    //double h = MediaQuery.of(context).size.height;
     return GetMaterialApp(
       title: 'Blood Donor App',
       themeMode: ThemeMode.system,
@@ -65,6 +66,7 @@ class BloodApp extends StatelessWidget {
 class ControllerBinder extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
+    Get.put(LoginController());
+    Get.put(SignUpController());
   }
 }

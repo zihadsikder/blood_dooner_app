@@ -9,16 +9,17 @@ class NetworkCaller {
     try {
       log(url);
       log(body.toString());
-      final Response response =
-      await post(Uri.parse(url), body: jsonEncode(body), headers: {
-        'Content-type': 'Application/json',
-      });
+      final Response response = await post(
+        Uri.parse(url),
+        body: jsonEncode(body),
+        headers: {'Content-Type': 'application/json'}
+      );
       log(response.statusCode.toString());
       log(response.body.toString());
       if (response.statusCode == 200) {
         return NetworkResponse(
           isSuccess: true,
-          jsonResponse: jsonDecode(response.body),
+          jsonResponse: response.body,
           statusCode: 200,
         );
       } else {

@@ -1,10 +1,7 @@
 import 'package:blood/Widget/snack_message.dart';
-import 'package:blood/controller/auth_controller.dart';
-import 'package:blood/data/network_caller/network_caller.dart';
-import 'package:blood/data/network_caller/network_response.dart';
-import 'package:blood/data/utility/urls.dart';
-import 'package:blood/model/user_model.dart';
+import 'package:blood/controller/login_controller.dart';
 import 'package:blood/screens/main_page.dart';
+import 'package:get/get.dart';
 import 'forget_pass_screen/forgot_password_screen.dart';
 import 'sign_up_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _numberTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _loginInProgress = false;
+  final LoginController _loginController = Get.find<LoginController>();
   bool _obscureText = true;
 
   @override
@@ -115,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         border: InputBorder.none),
                                     validator: (String? value) {
                                       if (value?.trim().isEmpty ?? true) {
-                                        return 'Enter valid email';
+                                        return 'Enter value';
                                       }
                                       return null;
                                     },
@@ -153,13 +150,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                     ),
-                                    keyboardType: TextInputType.visiblePassword,
                                     validator: (String? value) {
                                       if (value?.trim().isEmpty ?? true) {
                                         return 'Enter your password';
                                       }
                                       return null;
                                     },
+                                    keyboardType: TextInputType.visiblePassword,
                                   ),
                                 ),
                               ],
@@ -177,21 +174,25 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.red.shade800),
-                              child: Visibility(
-                                visible: _loginInProgress == false,
-                                replacement: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Login",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                              child: GetBuilder<LoginController>(
+                                  builder: (loginController) {
+                                return Visibility(
+                                  visible:
+                                      loginController.loginInProgress == false,
+                                  replacement: const Center(
+                                    child: CircularProgressIndicator(),
                                   ),
-                                ),
-                              ),
+                                  child: const Center(
+                                    child: Text(
+                                      "Login",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                );
+                              }),
                             ),
                           ),
                           const SizedBox(
@@ -326,36 +327,16 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-    _loginInProgress = true;
-    if (mounted) {
-      setState(() {});
+
+    final isLoggedIn = await _loginController.login(
+        _numberTEController.text.trim(), _passwordTEController.text);
+
+    if (isLoggedIn) {
+      Get.offAll(const MainPage());
     }
-    NetworkResponse response =
-        await NetworkCaller().postRequest(Urls.login, body: {
-      "mobile": _numberTEController.text.trim(),
-      'password': _passwordTEController.text,
-    });
-    _loginInProgress = false;
+
     if (mounted) {
-      setState(() {});
-    }
-    if (response.isSuccess) {
-      if (mounted) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const MainPage()));
-      }
-      await AuthController.saveUserInformation(response.jsonResponse?['token'],
-          UserModel.fromJson(response.jsonResponse?['data']));
-    } else {
-      if (response.statusCode == 401) {
-        if (mounted) {
-          showSnackMessage(context, 'Please check email/password');
-        }
-      } else {
-        if (mounted) {
-          showSnackMessage(context, 'Login failed. Try again');
-        }
-      }
+      showSnackMessage(context, _loginController.failureMessage);
     }
   }
 
