@@ -4,6 +4,8 @@ import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'controller/location_controller.dart';
+
 void main() {
   runApp(const BloodApp());
 }
@@ -29,33 +31,35 @@ class BloodApp extends StatelessWidget {
             foregroundColor: Colors.white,
             elevation: 5,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), // Adjust the value as needed
+              borderRadius:
+                  BorderRadius.circular(10), // Adjust the value as needed
             ),
           ),
         ),
         appBarTheme: AppBarTheme(
-          titleTextStyle: const TextStyle(fontWeight: FontWeight.bold,
+          titleTextStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
             fontSize: 18,
-            color: Colors.white,),
+            color: Colors.white,
+          ),
           backgroundColor: Colors.red.shade900,
           foregroundColor: Colors.white,
           elevation: 5,
         ),
-         listTileTheme: ListTileThemeData(
-           shape: RoundedRectangleBorder(
-             side: BorderSide(width: 2,color: Colors.red.shade200),
-             borderRadius: BorderRadius.circular(20),
-           ),
-           tileColor: Colors.white70,
-         ),
+        listTileTheme: ListTileThemeData(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 2, color: Colors.red.shade200),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          tileColor: Colors.white70,
+        ),
         cardTheme: CardTheme(
           //elevation: 0.5,
           //shadowColor: Colors.red.shade700,
           color: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            side: BorderSide(color: Colors.red.shade100)
-          ),
+              borderRadius: BorderRadius.circular(8.0),
+              side: BorderSide(color: Colors.red.shade100)),
         ),
       ),
       initialBinding: ControllerBinder(),
@@ -68,5 +72,6 @@ class ControllerBinder extends Bindings {
   void dependencies() {
     Get.put(LoginController());
     Get.put(SignUpController());
+    Get.lazyPut<LocationControler>(() => LocationControler());
   }
 }

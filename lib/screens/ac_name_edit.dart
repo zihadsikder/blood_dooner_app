@@ -1,4 +1,6 @@
 import 'package:blood/Widget/location_from.dart';
+import 'package:blood/controller/location_controller.dart';
+import 'package:blood/controller/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 
 class AcName extends StatefulWidget {
@@ -29,6 +31,7 @@ class _AcNameState extends State<AcName> {
             ),
             //SizedBox(height: 8.0),
             Location(
+              // locationControler: LocationControler(),
             selectedBloodGroup: selectedBloodGroup,
             selectedDivision: selectedDivision,
             selectedDistrict: selectedDistrict,

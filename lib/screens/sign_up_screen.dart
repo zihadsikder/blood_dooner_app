@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 import '../Widget/snack_message.dart';
+import '../controller/location_controller.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -31,6 +32,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String selectedDistrict = '';
   String selectedThana = '';
   bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 16.0),
                         Location(
+                          // locationControler: LocationControler(),
                           selectedBloodGroup: selectedBloodGroup,
                           selectedDivision: selectedDivision,
                           selectedDistrict: selectedDistrict,
