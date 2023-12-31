@@ -4,7 +4,6 @@ import '../Widget/location_from.dart';
 
 import 'package:flutter/material.dart';
 
-import '../controller/location_controller.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -79,7 +78,6 @@ class _SearchState extends State<Search> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Location(
-                // locationControler: LocationControler(),
                 selectedBloodGroup: selectedBloodGroup,
                 selectedDivision: selectedDivision,
                 selectedDistrict: selectedDistrict,
