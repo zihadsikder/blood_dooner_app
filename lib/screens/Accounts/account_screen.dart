@@ -1,4 +1,5 @@
 import 'package:blood/controller/auth_controller.dart';
+import 'package:blood/screens/main_page.dart';
 import 'package:blood/screens/search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,12 @@ class _AccountScreenState extends State<AccountScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Search a Blood Donor"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.offAll(const MainPage());
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
