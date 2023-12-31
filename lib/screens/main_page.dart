@@ -2,7 +2,7 @@ import 'package:blood/screens/Accounts/account_screen.dart';
 import 'package:blood/screens/dashboard_screen.dart';
 import 'package:blood/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'setting_screen.dart';
+import 'sittings/setting_screen.dart';
 class MainPage extends StatefulWidget {
   const MainPage({Key? key});
   @override

@@ -1,4 +1,4 @@
-import 'package:blood/screens/setting_screen.dart';
+import 'package:blood/screens/sittings/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 class Support extends StatefulWidget {

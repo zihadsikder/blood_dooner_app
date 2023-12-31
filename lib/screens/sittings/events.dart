@@ -1,4 +1,4 @@
-import 'package:blood/screens/setting_screen.dart';
+import 'package:blood/screens/sittings/setting_screen.dart';
 import 'package:flutter/material.dart';
 
 class Events extends StatelessWidget {

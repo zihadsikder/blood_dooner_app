@@ -1,4 +1,6 @@
+import 'package:blood/screens/Accounts/account_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Donation extends StatefulWidget {
   const Donation({super.key});
@@ -19,6 +21,12 @@ class _DonationState extends State<Donation> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Donation History'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.offAll(const AccountScreen());
+          },
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

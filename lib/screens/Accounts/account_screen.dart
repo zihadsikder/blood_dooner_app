@@ -166,10 +166,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     color: Colors.red.shade700,
                   )),
             ),
-            Container(
-              height: 1,
-              color: Colors.red.shade400,
-            ),
+            Container(height: 1,color: Colors.grey.shade100),
             ListTile(
               shape: RoundedRectangleBorder(
                 side: const BorderSide(width: 2, color: Colors.white),
@@ -198,10 +195,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     color: Colors.red.shade800,
                   )),
             ),
-            Container(
-              height: 1,
-              color: Colors.red.shade400,
-            ),
+            Container(height: 1,color: Colors.grey.shade100),
             ListTile(
               shape: RoundedRectangleBorder(
                 side: const BorderSide(width: 2, color: Colors.white),
@@ -227,10 +221,7 @@ class _AccountScreenState extends State<AccountScreen> {
               subtitle: Text("${AuthController.user?.data.address??'' }"),
 
             ),
-            Container(
-              height: 1,
-              color: Colors.red.shade400,
-            ),
+            Container(height: 1,color: Colors.grey.shade100),
             const SizedBox(
               height: 16,
             ),
