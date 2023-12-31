@@ -1,9 +1,7 @@
 import 'package:blood/controller/location_controller.dart';
-import 'package:blood/model/division_response.dart';
+import 'package:blood/model/address_response/division_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/sign_up_controller.dart';
 
 class Location extends StatefulWidget {
   final List<String> bloodGroups = [
@@ -22,21 +20,24 @@ class Location extends StatefulWidget {
   ];
   String selectedBloodGroup = 'A+';
 
-  final List<String> divisions = ['.....'];
+  final List<String> divisions = [''];
 
-  final List<String> district = ['', 'Coxs Bazar', 'Chittagong'];
-  final List<String> Thana = ['', 'Kutubdia'];
+  final List<String> district = [''];
+  final List<String> upzila = [''];
+  final List<String> union = [''];
 
-  String selectedDivision = 'Select Division';
-  String selectedDistrict = 'Select District';
-  String selectedThana = 'Select Thana';
+  String selectedDivision = '';
+  String selectedDistrict = '';
+  String selectedUpzila = '';
+  String selectedUnion = '';
 
   Location({
     super.key,
     required this.selectedBloodGroup,
     required this.selectedDivision,
     required this.selectedDistrict,
-    required this.selectedThana,
+    required this.selectedUpzila,
+    required this.selectedUnion,
   });
 
   @override
@@ -44,11 +45,11 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+  final LocationController locationController = Get.find<LocationController>();
   @override
   void initState() {
     super.initState();
-
-    Get.find<LocationControler>().getDivision();
+    locationController.getDivision();
   }
 
   @override
@@ -63,8 +64,7 @@ class _LocationState extends State<Location> {
               widget.selectedBloodGroup = newValue!;
             });
           },
-          items:
-              widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
+          items: widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
@@ -75,27 +75,26 @@ class _LocationState extends State<Location> {
           ),
           validator: (String? value) {
             if (value?.trim().isEmpty ?? true) {
-              return 'Enter your password';
+              return 'Enter your blood group';
             }
             return null;
           },
         ),
-        const SizedBox(height: 16.0),
-        GetBuilder<LocationControler>(
-          builder: (LocationControler controller) {
-           if(controller.divisionList.isNotEmpty) {
+        const SizedBox(height: 8.0),
+        GetBuilder<LocationController>(
+          builder: (locationController) {
+            if (locationController.divisionList.isNotEmpty) {
               return DropdownButtonFormField<Datum>(
-                value:
-                    controller.divisionList[controller.selectedDivision.value],
+                value: locationController.divisionList[locationController.selectedDivision.value],
                 onChanged: (newValue) {
-                  controller.selectedDivision.value =
+                  locationController.selectedDivision.value =
                       int.tryParse(newValue!.divisionId) ?? 0;
                   //widget.onDivisionChanged(newValue!);
                 },
-                items: controller.divisionList
+                items: locationController.divisionList
                     .map<DropdownMenuItem<Datum>>((Datum value) {
                   return DropdownMenuItem<Datum>(
-                    value: value,
+                    value: value, // Use the Datum object itself as the value
                     child: Text(value.name),
                   );
                 }).toList(),
@@ -103,19 +102,18 @@ class _LocationState extends State<Location> {
                   labelText: 'Select Division',
                 ),
                 validator: (Datum? value) {
-                  if (controller.selectedDivision == 0) {
+                  if (locationController.selectedDivision == 0) {
                     return 'Select your division';
                   }
                   return null;
                 },
               );
+            } else {
+              return SizedBox();
             }
-           else{
-             return SizedBox();
-           }
           },
         ),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 8.0),
         DropdownButtonFormField<String>(
           value: widget.selectedDistrict,
           onChanged: (newValue) {
@@ -139,15 +137,15 @@ class _LocationState extends State<Location> {
             return null;
           },
         ),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 8.0),
         DropdownButtonFormField<String>(
-          value: widget.selectedThana,
+          value: widget.selectedUpzila,
           onChanged: (newValue) {
             setState(() {
-              widget.selectedThana = newValue!;
+              widget.selectedUpzila = newValue!;
             });
           },
-          items: widget.Thana.map<DropdownMenuItem<String>>((String value) {
+          items: widget.upzila.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
@@ -164,6 +162,30 @@ class _LocationState extends State<Location> {
           },
         ),
         const SizedBox(height: 16.0),
+        DropdownButtonFormField<String>(
+          value: widget.selectedUnion,
+          onChanged: (newValue) {
+            setState(() {
+              widget.selectedUnion = newValue!;
+            });
+          },
+          items: widget.union.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          decoration: const InputDecoration(
+            labelText: 'Select Union',
+          ),
+          validator: (String? value) {
+            if (value?.trim().isEmpty ?? true) {
+              return 'Select your Union';
+            }
+            return null;
+          },
+        ),
+        const SizedBox(height: 8.0),
       ],
     );
   }

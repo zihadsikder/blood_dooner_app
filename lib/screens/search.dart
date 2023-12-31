@@ -16,7 +16,8 @@ class _SearchState extends State<Search> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = '';
-  String selectedThana ='';
+  String selectedUpzila ='';
+  String selectedUnion ='';
 
   List<Map<String, String>> searchResults = [
     {
@@ -81,7 +82,8 @@ class _SearchState extends State<Search> {
                 selectedBloodGroup: selectedBloodGroup,
                 selectedDivision: selectedDivision,
                 selectedDistrict: selectedDistrict,
-                selectedThana: selectedThana,
+                selectedUpzila: selectedUpzila,
+                selectedUnion: selectedUnion,
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(

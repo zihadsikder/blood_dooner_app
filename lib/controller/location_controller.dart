@@ -1,61 +1,32 @@
+import 'package:blood/data/network_caller/network_caller.dart';
+import 'package:blood/data/network_caller/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
+import 'package:blood/model/address_response/division_response.dart';
 import 'package:get/get.dart';
 
-import '../data/network_caller/network_caller.dart';
-import '../data/network_caller/network_response.dart';
-import '../model/division_response.dart';
+class LocationController extends GetxController {
+  final RxBool isLoading = true.obs;
+  final RxList<Datum> divisionList = <Datum>[].obs;
 
-class LocationControler extends GetxController {
-  final divisionList = <Datum>[].obs;
-
-  String _failMessage = '';
-
-  String get failureMessage => _failMessage;
-
-  final _locationProgress = false.obs;
-
-  bool get getLocationInProgress => _locationProgress.value;
-
-  final selectedDivision = 0.obs;
+  get selectedDivision => null;
 
   @override
   void onInit() {
     super.onInit();
+    getDivision();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  Future<void> getDivision() async {
+    isLoading.value = true;
+    final NetworkResponse response = await NetworkCaller().getRequest(Urls.getDivisionData);
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  Future<bool> getDivision() async {
-    _locationProgress.value = true;
-    update();
-    final NetworkResponse response = await NetworkCaller().getRequest(
-      Urls.getDivisionData,
-    );
-
-    _locationProgress.value = false;
-    update();
     if (response.isSuccess) {
-      DivisionResponse divisionResponse =
-          divisionFromJson(response.jsonResponse.toString());
-
-      // for (Datum data in divisionResponse.data) {
-      //   divisionList.add(data.name);
-      // }
-
-      divisionList.value = divisionResponse.data;
-
-      update();
+      final DivisionResponse divisionResponse = DivisionResponse.fromJson(response.jsonResponse as Map<String, dynamic>);
+      divisionList.assignAll(divisionResponse.data);
     } else {
-      _failMessage = ('Account creation failed! Please try again.');
+      // Handle error here
     }
-    return false;
+
+    isLoading.value = false;
   }
 }

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final division = divisionFromJson(jsonString);
-
 import 'dart:convert';
 
 DivisionResponse divisionFromJson(String str) => DivisionResponse.fromJson(json.decode(str));

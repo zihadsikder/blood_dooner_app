@@ -30,7 +30,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = '';
-  String selectedThana = '';
+  String selectedUpzila = '';
+  String selectedUnion = '';
+
   bool _obscureText = true;
 
   @override
@@ -107,21 +109,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           selectedBloodGroup: selectedBloodGroup,
                           selectedDivision: selectedDivision,
                           selectedDistrict: selectedDistrict,
-                          selectedThana: selectedThana,
-                        ),
-                        const SizedBox(height: 8.0),
-                        TextFormField(
-                          controller: _postOfficeTEController,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: 'Post Office',
-                          ),
-                          validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your post office';
-                            }
-                            return null;
-                          },
+                          selectedUpzila: selectedUpzila,
+                          selectedUnion: selectedUnion,
                         ),
                         const SizedBox(height: 8.0),
                         TextFormField(
@@ -284,10 +273,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             replacement: const Center(
                               child: CircularProgressIndicator(),
                             ),
-                            child: ElevatedButton(
-                              onPressed: _registration,
-                              child: const Text(
-                                'Submit'
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: _registration,
+                                child: const Text(
+                                  'Submit'
+                                ),
                               ),
                             ),
                           );

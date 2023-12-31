@@ -14,7 +14,8 @@ class _AcNameState extends State<AcName> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = ' ';
-  String selectedThana =' ';
+  String selectedUpzila =' ';
+  String selectedUnion =' ';
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,8 @@ class _AcNameState extends State<AcName> {
             selectedBloodGroup: selectedBloodGroup,
             selectedDivision: selectedDivision,
             selectedDistrict: selectedDistrict,
-              selectedThana: selectedThana,
+              selectedUpzila: selectedUpzila,
+              selectedUnion: selectedUnion,
             ),
           ],
         ),

@@ -27,6 +27,6 @@ class ControllerBinder extends Bindings {
   void dependencies() {
     Get.put(LoginController());
     Get.put(SignUpController());
-    Get.lazyPut<LocationControler>(() => LocationControler());
+    Get.put(LocationController());
   }
 }

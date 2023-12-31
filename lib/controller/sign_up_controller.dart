@@ -1,10 +1,8 @@
-import 'package:blood/controller/location_controller.dart';
 import 'package:blood/data/network_caller/network_caller.dart';
 import 'package:blood/data/network_caller/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 
-import '../model/division_response.dart';
 
 class SignUpController extends GetxController {
   final _signUpInProgress = false.obs;
@@ -35,7 +33,7 @@ class SignUpController extends GetxController {
       "is_weight_50kg": weight,
       "last_donation": donation,
       "address": {
-        "division_id": 1,
+        "division_id":1,
         "district_id": 1,
         "area_id": 1,
         "post_office": 1,
