@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 import '../Widget/snack_message.dart';
-import '../controller/location_controller.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -104,7 +104,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 16.0),
                         Location(
-                          // locationControler: LocationControler(),
                           selectedBloodGroup: selectedBloodGroup,
                           selectedDivision: selectedDivision,
                           selectedDistrict: selectedDistrict,
@@ -132,10 +131,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             labelText: "Email",
                           ),
                           validator: (String? value) {
-                            // if (value?.trim().isEmpty ?? true) {
-                            //   return 'Enter a valid email';
-                            // }
-                            // Email validation with '@' and '.'
                             bool isValidEmail = RegExp(
                                     r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
                                 .hasMatch(value!);
@@ -161,11 +156,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   lastDate: DateTime(2050),
                                 );
 
-                                if (pickedDate != null &&
-                                    pickedDate != _dobController.text) {
+                                if (pickedDate != null && pickedDate != _dobController.text) {
                                   setState(() {
-                                    _dobController.text =
-                                        "${pickedDate.toLocal()}".split(' ')[0];
+                                    _dobController.text = "${pickedDate.toLocal()}".split(' ')[0];
                                   });
                                 }
                               },
@@ -189,17 +182,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           keyboardType: TextInputType.phone,
                           validator: (String? value) {
-                            // if (value?.trim().isEmpty ?? true) {
-                            //   return 'Enter a valid mobile number';
-                            // }
-                            // Phone number validation
+
                             bool isValidPhoneNumber =
                                 RegExp(r"^0[0-9]{10}$").hasMatch(value!);
-
                             if (!isValidPhoneNumber) {
                               return 'Enter a valid 11-digit mobile number starting with 0';
                             }
-
                             return null;
                           },
                         ),
@@ -207,7 +195,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: _passwordTEController,
                           obscureText: _obscureText,
-                          // Use a boolean variable to toggle password visibility
                           decoration: InputDecoration(
                             labelText: 'Enter Password',
                             suffixIcon: IconButton(
@@ -248,7 +235,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   firstDate: DateTime(1950),
                                   lastDate: DateTime(2050),
                                 );
-
                                 if (pickedDate != null &&
                                     pickedDate != _donationController.text) {
                                   setState(() {
@@ -301,12 +287,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             child: ElevatedButton(
                               onPressed: _registration,
                               child: const Text(
-                                'Submit',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                'Submit'
                               ),
                             ),
                           );
@@ -317,21 +298,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               "Have an account?",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54),
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                             TextButton(
                               onPressed: () {
                                 Get.offAll(const LoginScreen());
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             const LoginScreen()));
                               },
                               child: const Text(
                                 'Sign In',

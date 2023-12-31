@@ -1,3 +1,4 @@
+import 'package:blood/Widget/app_logo.dart';
 import 'package:blood/screens/forget_pass_screen/pin_varification_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +24,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 80,),
+                  const Center(child: AppLogo()),
                   const SizedBox(
-                    height: 80,
+                    height: 16,
                   ),
                   Text(
                     'Your Email Address',
@@ -33,12 +36,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   const SizedBox(
                     height: 8,
                   ),
-                  const Text(
+                  Text(
                     'A 6 digit OTP will be sent to your email address',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w600
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall
                   ),
                   const SizedBox(
                     height: 24,
@@ -102,16 +102,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 48,
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Have an account?", style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54
-                      ),),
+                      Text("Have an account?", style:Theme.of(context).textTheme.bodySmall ),
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);

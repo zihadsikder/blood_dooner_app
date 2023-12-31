@@ -1,3 +1,4 @@
+import 'package:blood/Widget/app_logo.dart';
 import 'package:flutter/material.dart';
 
 import '../../Widget/body_background.dart';
@@ -25,6 +26,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   const SizedBox(
                     height: 80,
                   ),
+                  const Center(child: AppLogo()),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Text(
                     'Set Password',
                     style: Theme.of(context).textTheme.titleLarge,
@@ -48,7 +53,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                       hintText: 'Password',
                     ),
@@ -84,7 +89,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 48,
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

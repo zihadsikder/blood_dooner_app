@@ -1,5 +1,5 @@
 import 'package:blood/controller/auth_controller.dart';
-import 'package:blood/screens/account_screen.dart';
+import 'package:blood/screens/Accounts/account_screen.dart';
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +19,6 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
 
   @override
   Widget build(BuildContext context) {
-    print('name: ${AuthController.user?.data.name}');
-
     return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0),

@@ -1,11 +1,13 @@
+import 'package:blood/controller/auth_controller.dart';
 import 'package:blood/screens/search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'ac_email_edit.dart';
-import 'ac_mobile_edit.dart';
-import 'ac_name_edit.dart';
-import 'donation_history.dart';
-import 'login.dart';
+import 'package:intl/intl.dart';
+import 'AC_Edit/ac_email_edit.dart';
+import 'AC_Edit/ac_mobile_edit.dart';
+import 'AC_Edit/ac_name_edit.dart';
+import '../donation_history.dart';
+import '../login.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -55,9 +57,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     leading: const CircleAvatar(
                       backgroundImage: AssetImage('assets/blood.png'),
                     ),
-                    title: const Row(
+                    title: Row(
                       children: [
-                        Text('User Name'),
+                        Text(AuthController.user?.data.name?? 'name',),
                       ],
                     ),
                     subtitle: const Text('Blood : Available'),
@@ -87,11 +89,6 @@ class _AccountScreenState extends State<AccountScreen> {
                             const SizedBox(
                               height: 5,
                             ),
-                            // Image.asset(
-                            //   'assets/map.png',
-                            //   height: 24,
-                            //   width: 24,
-                            // ),
                             const Text('1'),
                             GestureDetector(
                                 onTap: () {
@@ -112,7 +109,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             const SizedBox(
                               height: 5,
                             ),
-                            const Text('A+'),
+                            Text(AuthController.user?.data.bloodGroup?? 'blood group',),
                             const Text('Blood Group'),
                           ],
                         ),
@@ -128,7 +125,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             const SizedBox(
                               height: 5,
                             ),
-                            const Text('21.12.2023'),
+                            Text(DateFormat.yMd().format(AuthController.user?.data.lastDonation ?? DateTime.now())),
                             const Text('Last Donation'),
                           ],
                         ),
@@ -156,7 +153,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   Text('Mobile'),
                 ],
               ),
-              subtitle: const Text('018000000000'),
+              subtitle: Text(AuthController.user?.data.name?? '',),
               trailing: GestureDetector(
                   onTap: () {
                     showDialog(
@@ -188,7 +185,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   Text('Email'),
                 ],
               ),
-              subtitle: const Text('norplay@gmail.com'),
+              subtitle: Text(AuthController.user?.data.email?? '',),
               trailing: GestureDetector(
                   onTap: () {
                     showDialog(
@@ -227,18 +224,8 @@ class _AccountScreenState extends State<AccountScreen> {
                   Text('Address'),
                 ],
               ),
-              subtitle: const Text('Chattogram'),
-              // trailing: GestureDetector(
-              //     onTap: () {
-              //       showDialog(
-              //           barrierDismissible: false,
-              //           context: context,
-              //           builder: (context) => AcAddress());
-              //     },
-              //     child: Icon(
-              //       Icons.edit,
-              //       color: Colors.red.shade800,
-              //     )),
+              subtitle: Text("${AuthController.user?.data.address??'' }"),
+
             ),
             Container(
               height: 1,

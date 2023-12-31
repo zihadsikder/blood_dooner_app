@@ -10,9 +10,9 @@ class _AcEmailState extends State<AcEmail> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Edit Email Address"),
+      title: const Text("Edit Email Address"),
       content:TextFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Type Your Email',
         ),
       ),

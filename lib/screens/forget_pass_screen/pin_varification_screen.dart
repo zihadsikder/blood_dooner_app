@@ -1,7 +1,7 @@
+import 'package:blood/Widget/app_logo.dart';
 import 'package:blood/screens/forget_pass_screen/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../../Widget/body_background.dart';
 import '../login.dart';
 
@@ -26,6 +26,10 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                 children: [
                   const SizedBox(
                     height: 80,
+                  ),
+                  const Center(child: AppLogo()),
+                  const SizedBox(
+                    height: 16,
                   ),
                   Text(
                     'Pin Verification',
@@ -58,9 +62,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                     ),
                     animationDuration: const Duration(milliseconds: 300),
                     enableActiveFill: true,
-                    onCompleted: (v) {
-                      print("Completed");
-                    },
+                    onCompleted: (v) {},
                     onChanged: (value) {},
                     beforeTextPaste: (text) {
                       return true;
@@ -85,7 +87,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 48,
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:blood/Widget/app_logo.dart';
 import 'package:blood/screens/home_screen.dart';
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
@@ -35,13 +36,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: BodyBackground(
           child: Center(
-            child: Image.asset(
-              'assets/bloodbd.png',
-              width: 120,
-            ),
+            child: AppLogo(),
           ),
         )
     );
