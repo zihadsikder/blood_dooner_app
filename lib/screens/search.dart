@@ -60,8 +60,6 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    // double w = MediaQuery.of(context).size.width;
-    // double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Find A Blood Donor"),
@@ -78,7 +76,7 @@ class _SearchState extends State<Search> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Location(
+              LocationForm(
                 selectedBloodGroup: selectedBloodGroup,
                 selectedDivision: selectedDivision,
                 selectedDistrict: selectedDistrict,

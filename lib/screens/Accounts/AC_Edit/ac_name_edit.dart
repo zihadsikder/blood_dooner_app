@@ -30,8 +30,8 @@ class _AcNameState extends State<AcName> {
                 hintText: 'Type Your Name',
               ),
             ),
-            //SizedBox(height: 8.0),
-            Location(
+            const SizedBox(height: 8.0),
+            LocationForm(
               // locationControler: LocationControler(),
             selectedBloodGroup: selectedBloodGroup,
             selectedDivision: selectedDivision,

@@ -50,7 +50,7 @@ class NetworkCaller {
       if (response.statusCode == 200) {
         return NetworkResponse(
           isSuccess: true,
-          jsonResponse: jsonDecode(response.body),
+          jsonResponse: response.body,
           statusCode: 200,
         );
       } else if (response.statusCode == 401) {

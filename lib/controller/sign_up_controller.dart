@@ -3,13 +3,12 @@ import 'package:blood/data/network_caller/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 
-
 class SignUpController extends GetxController {
   final _signUpInProgress = false.obs;
 
   bool get signUpInProgress => _signUpInProgress.value;
-  String _failMessage = '';
 
+  String _failMessage = '';
   String get failureMessage => _failMessage;
 
   Future<bool> registration(
@@ -33,7 +32,7 @@ class SignUpController extends GetxController {
       "is_weight_50kg": weight,
       "last_donation": donation,
       "address": {
-        "division_id":1,
+        "division_id": 1,
         "district_id": 1,
         "area_id": 1,
         "post_office": 1,

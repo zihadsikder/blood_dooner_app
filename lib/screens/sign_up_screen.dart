@@ -5,7 +5,6 @@ import '../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 import '../Widget/snack_message.dart';
 
-
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -26,7 +25,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final SignUpController _signUpController = Get.find<SignUpController>();
 
   bool _weightOver50Controller = false;
-  bool areFieldsValid = false;
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = '';
@@ -105,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 16.0),
-                        Location(
+                        LocationForm(
                           selectedBloodGroup: selectedBloodGroup,
                           selectedDivision: selectedDivision,
                           selectedDistrict: selectedDistrict,
@@ -145,9 +143,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   lastDate: DateTime(2050),
                                 );
 
-                                if (pickedDate != null && pickedDate != _dobController.text) {
+                                if (pickedDate != null &&
+                                    pickedDate != _dobController.text) {
                                   setState(() {
-                                    _dobController.text = "${pickedDate.toLocal()}".split(' ')[0];
+                                    _dobController.text =
+                                        "${pickedDate.toLocal()}".split(' ')[0];
                                   });
                                 }
                               },
@@ -171,7 +171,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           keyboardType: TextInputType.phone,
                           validator: (String? value) {
-
                             bool isValidPhoneNumber =
                                 RegExp(r"^0[0-9]{10}$").hasMatch(value!);
                             if (!isValidPhoneNumber) {
@@ -277,9 +276,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: _registration,
-                                child: const Text(
-                                  'Submit'
-                                ),
+                                child: const Text('Submit'),
                               ),
                             ),
                           );

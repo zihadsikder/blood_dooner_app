@@ -1,10 +1,13 @@
 import 'package:blood/controller/location_controller.dart';
+import 'package:blood/model/address_response/District_responce.dart';
 import 'package:blood/model/address_response/division_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Location extends StatefulWidget {
+class LocationForm extends StatefulWidget {
+
   final List<String> bloodGroups = [
+    '',
     'A+',
     'A-',
     'A',
@@ -18,20 +21,19 @@ class Location extends StatefulWidget {
     'O+',
     'O-'
   ];
-  String selectedBloodGroup = 'A+';
-
-  final List<String> divisions = [''];
-
+  //final List<String> divisions = ['Select Division'];
   final List<String> district = [''];
   final List<String> upzila = [''];
   final List<String> union = [''];
 
+  String selectedBloodGroup = 'A+';
   String selectedDivision = '';
   String selectedDistrict = '';
   String selectedUpzila = '';
   String selectedUnion = '';
 
-  Location({
+
+  LocationForm({
     super.key,
     required this.selectedBloodGroup,
     required this.selectedDivision,
@@ -41,10 +43,10 @@ class Location extends StatefulWidget {
   });
 
   @override
-  _LocationState createState() => _LocationState();
+  _LocationFormState createState() => _LocationFormState();
 }
 
-class _LocationState extends State<Location> {
+class _LocationFormState extends State<LocationForm> {
   final LocationController locationController = Get.find<LocationController>();
   @override
   void initState() {
@@ -83,59 +85,57 @@ class _LocationState extends State<Location> {
         const SizedBox(height: 8.0),
         GetBuilder<LocationController>(
           builder: (locationController) {
-            if (locationController.divisionList.isNotEmpty) {
-              return DropdownButtonFormField<Datum>(
-                value: locationController.divisionList[locationController.selectedDivision.value],
-                onChanged: (newValue) {
-                  locationController.selectedDivision.value =
-                      int.tryParse(newValue!.divisionId) ?? 0;
-                  //widget.onDivisionChanged(newValue!);
-                },
-                items: locationController.divisionList
-                    .map<DropdownMenuItem<Datum>>((Datum value) {
-                  return DropdownMenuItem<Datum>(
-                    value: value, // Use the Datum object itself as the value
-                    child: Text(value.name),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  labelText: 'Select Division',
-                ),
-                validator: (Datum? value) {
-                  if (locationController.selectedDivision == 0) {
-                    return 'Select your division';
-                  }
-                  return null;
-                },
-              );
-            } else {
-              return SizedBox();
-            }
-          },
+            return DropdownButtonFormField<String>(
+              value: locationController.selectedDivisionName,
+              onChanged: (newValue) {
+                  locationController.selectedDivisionName = newValue;
+                  locationController.getDistrict(id: newValue!);
+                  //locationController.update();
+              },
+              items: locationController.divisionList?.data?.map<DropdownMenuItem<String>>((Datum value) {
+                return DropdownMenuItem<String>(
+                  value: value.divisionId,
+                  child: Text(value.name),
+                );
+              }).toList(),
+              decoration: const InputDecoration(
+                labelText: 'Select Division',
+              ),
+              validator: (String? value) {
+                if (value?.trim().isEmpty ?? true) {
+                  return 'Select your Division';
+                }
+                return null;
+              },
+            );
+          }
         ),
         const SizedBox(height: 8.0),
-        DropdownButtonFormField<String>(
-          value: widget.selectedDistrict,
-          onChanged: (newValue) {
-            setState(() {
-              widget.selectedDistrict = newValue!;
-            });
-          },
-          items: widget.district.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
+        GetBuilder<LocationController>(
+          builder: (locationController) {
+            return DropdownButtonFormField<String>(
+              value: locationController.selectedDistrictName,
+              onChanged: (newValue) {
+                locationController.selectedDistrictName = newValue!;
+                locationController.update();
+              },
+              items: locationController.districtList?.data?.map<DropdownMenuItem<String>>((DistrictDatum value) {
+                return DropdownMenuItem<String>(
+                  value: value.districtId,
+                  child: Text(value.name!),
+                );
+              }).toList(),
+              decoration: const InputDecoration(
+                labelText: 'Select District',
+              ),
+              validator: (String? value) {
+                if (value?.trim().isEmpty ?? true) {
+                  return 'Select your District';
+                }
+                return null;
+              },
             );
-          }).toList(),
-          decoration: const InputDecoration(
-            labelText: 'Select District',
-          ),
-          validator: (String? value) {
-            if (value?.trim().isEmpty ?? true) {
-              return 'Select your District';
-            }
-            return null;
-          },
+          }
         ),
         const SizedBox(height: 8.0),
         DropdownButtonFormField<String>(
