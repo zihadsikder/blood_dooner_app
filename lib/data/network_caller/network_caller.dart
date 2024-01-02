@@ -53,18 +53,20 @@ class NetworkCaller {
           jsonResponse: response.body,
           statusCode: 200,
         );
-      } else if (response.statusCode == 401) {
+      }
+      else if (response.statusCode == 401) {
         //backToLogin();
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
           jsonResponse: jsonDecode(response.body),
         );
-      } else {
+      }
+      else {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
-          jsonResponse: jsonDecode(response.body),
+          jsonResponse: response.body,
         );
       }
     } catch (e) {

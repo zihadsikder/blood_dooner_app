@@ -7,7 +7,7 @@ String upzilaResponseToJson(UpzilaResponse data) => json.encode(data.toJson());
 class UpzilaResponse {
   int status;
   String message;
-  List<Datum> data;
+  List<UpzilaDatum> data;
 
   UpzilaResponse({
     required this.status,
@@ -18,7 +18,7 @@ class UpzilaResponse {
   factory UpzilaResponse.fromJson(Map<String, dynamic> json) => UpzilaResponse(
     status: json["status"],
     message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<UpzilaDatum>.from(json["data"].map((x) => UpzilaDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,7 +28,7 @@ class UpzilaResponse {
   };
 }
 
-class Datum {
+class UpzilaDatum {
   String id;
   String upzilaId;
   String districtId;
@@ -38,7 +38,7 @@ class Datum {
   DateTime createdAt;
   DateTime updatedAt;
 
-  Datum({
+  UpzilaDatum({
     required this.id,
     required this.upzilaId,
     required this.districtId,
@@ -49,7 +49,7 @@ class Datum {
     required this.updatedAt,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory UpzilaDatum.fromJson(Map<String, dynamic> json) => UpzilaDatum(
     id: json["_id"],
     upzilaId: json["upzila_id"],
     districtId: json["district_id"],
@@ -71,3 +71,4 @@ class Datum {
     "updatedAt": updatedAt.toIso8601String(),
   };
 }
+

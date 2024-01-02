@@ -7,7 +7,7 @@ String mUnionResponseToJson(MUnionResponse data) => json.encode(data.toJson());
 class MUnionResponse {
   int status;
   String message;
-  List<Datum> data;
+  List<UnionDatum> data;
 
   MUnionResponse({
     required this.status,
@@ -18,7 +18,7 @@ class MUnionResponse {
   factory MUnionResponse.fromJson(Map<String, dynamic> json) => MUnionResponse(
     status: json["status"],
     message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<UnionDatum>.from(json["data"].map((x) => UnionDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,7 +28,7 @@ class MUnionResponse {
   };
 }
 
-class Datum {
+class UnionDatum {
   String id;
   String unionId;
   String upzilaId;
@@ -38,7 +38,7 @@ class Datum {
   DateTime createdAt;
   DateTime updatedAt;
 
-  Datum({
+  UnionDatum({
     required this.id,
     required this.unionId,
     required this.upzilaId,
@@ -49,7 +49,7 @@ class Datum {
     required this.updatedAt,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory UnionDatum.fromJson(Map<String, dynamic> json) => UnionDatum(
     id: json["_id"],
     unionId: json["union_id"],
     upzilaId: json["upzila_id"],

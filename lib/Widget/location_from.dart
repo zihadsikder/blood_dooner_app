@@ -1,6 +1,8 @@
 import 'package:blood/controller/location_controller.dart';
 import 'package:blood/model/address_response/District_responce.dart';
 import 'package:blood/model/address_response/division_response.dart';
+import 'package:blood/model/address_response/union_response.dart';
+import 'package:blood/model/address_response/upzila_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,11 +24,11 @@ class LocationForm extends StatefulWidget {
     'O-'
   ];
   //final List<String> divisions = ['Select Division'];
-  final List<String> district = [''];
-  final List<String> upzila = [''];
+  // final List<String> district = [''];
+  // final List<String> upzila = [''];
   final List<String> union = [''];
 
-  String selectedBloodGroup = 'A+';
+  String selectedBloodGroup = '';
   String selectedDivision = '';
   String selectedDistrict = '';
   String selectedUpzila = '';
@@ -56,6 +58,7 @@ class _LocationFormState extends State<LocationForm> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -85,12 +88,13 @@ class _LocationFormState extends State<LocationForm> {
         const SizedBox(height: 8.0),
         GetBuilder<LocationController>(
           builder: (locationController) {
+            print("=========== updated districts ${locationController.districtList?.data?.length}");
             return DropdownButtonFormField<String>(
               value: locationController.selectedDivisionName,
               onChanged: (newValue) {
                   locationController.selectedDivisionName = newValue;
                   locationController.getDistrict(id: newValue!);
-                  //locationController.update();
+                  locationController.update();
               },
               items: locationController.divisionList?.data?.map<DropdownMenuItem<String>>((Datum value) {
                 return DropdownMenuItem<String>(
@@ -113,10 +117,12 @@ class _LocationFormState extends State<LocationForm> {
         const SizedBox(height: 8.0),
         GetBuilder<LocationController>(
           builder: (locationController) {
+            print("ui updated ${locationController.districtList?.data?.length}");
             return DropdownButtonFormField<String>(
               value: locationController.selectedDistrictName,
               onChanged: (newValue) {
                 locationController.selectedDistrictName = newValue!;
+                locationController.getUpzila(id: newValue!);
                 locationController.update();
               },
               items: locationController.districtList?.data?.map<DropdownMenuItem<String>>((DistrictDatum value) {
@@ -138,30 +144,85 @@ class _LocationFormState extends State<LocationForm> {
           }
         ),
         const SizedBox(height: 8.0),
-        DropdownButtonFormField<String>(
-          value: widget.selectedUpzila,
-          onChanged: (newValue) {
-            setState(() {
-              widget.selectedUpzila = newValue!;
-            });
-          },
-          items: widget.upzila.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          decoration: const InputDecoration(
-            labelText: 'Select Upazila',
-          ),
-          validator: (String? value) {
-            if (value?.trim().isEmpty ?? true) {
-              return 'Select your Upazila';
+        GetBuilder<LocationController>(
+            builder: (locationController) {
+              //print("ui updated ${locationController.districtList?.data?.length}");
+              return DropdownButtonFormField<String>(
+                value: locationController.selectedUpzilaName,
+                onChanged: (newValue) {
+                  locationController.selectedUpzilaName = newValue!;
+                  //locationController.getUnion(id: newValue!);
+                  //locationController.update();
+                },
+                items: locationController.upzilaList?.data?.map<DropdownMenuItem<String>>((UpzilaDatum value) {
+                  return DropdownMenuItem<String>(
+                    value: value.upzilaId,
+                    child: Text(value.name!),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Select Upzila',
+                ),
+                validator: (String? value) {
+                  if (value?.trim().isEmpty ?? true) {
+                    return 'Select your Upzila';
+                  }
+                  return null;
+                },
+              );
             }
-            return null;
-          },
         ),
+        // DropdownButtonFormField<String>(
+        //   value: widget.selectedUpzila,
+        //   onChanged: (newValue) {
+        //     setState(() {
+        //       widget.selectedUpzila = newValue!;
+        //     });
+        //   },
+        //   items: widget.upzila.map<DropdownMenuItem<String>>((String value) {
+        //     return DropdownMenuItem<String>(
+        //       value: value,
+        //       child: Text(value),
+        //     );
+        //   }).toList(),
+        //   decoration: const InputDecoration(
+        //     labelText: 'Select Upazila',
+        //   ),
+        //   validator: (String? value) {
+        //     if (value?.trim().isEmpty ?? true) {
+        //       return 'Select your Upazila';
+        //     }
+        //     return null;
+        //   },
+        // ),
         const SizedBox(height: 16.0),
+        // GetBuilder<LocationController>(
+        //     builder: (locationController) {
+        //       //print("ui updated ${locationController.districtList?.data?.length}");
+        //       return DropdownButtonFormField<String>(
+        //         value: locationController.selectedUnionName,
+        //         onChanged: (newValue) {
+        //           locationController.selectedUnionName = newValue!;
+        //           locationController.update();
+        //         },
+        //         items: locationController.unionList?.data?.map<DropdownMenuItem<String>>((UnionDatum value) {
+        //           return DropdownMenuItem<String>(
+        //             value: value.unionId,
+        //             child: Text(value.name!),
+        //           );
+        //         }).toList(),
+        //         decoration: const InputDecoration(
+        //           labelText: 'Select Union',
+        //         ),
+        //         validator: (String? value) {
+        //           if (value?.trim().isEmpty ?? true) {
+        //             return 'Select your Union';
+        //           }
+        //           return null;
+        //         },
+        //       );
+        //     }
+        // ),
         DropdownButtonFormField<String>(
           value: widget.selectedUnion,
           onChanged: (newValue) {

@@ -2,7 +2,6 @@ import 'package:blood/Widget/app_logo.dart';
 import 'package:blood/screens/home_screen.dart';
 import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
-import '../Widget/body_background.dart';
 import '../controller/auth_controller.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -37,11 +36,25 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: BodyBackground(
-          child: Center(
-            child: AppLogo(),
-          ),
-        )
+        // body: BodyBackground(
+        //   child: Center(
+        //     child: AppLogo(),
+        //
+        //   ),
+        // )
+      body: Center(
+        child: Column(
+          children: [
+            Spacer(),
+            AppLogo(),
+            Spacer(),
+            CircularProgressIndicator(),
+            SizedBox(height: 8.0,),
+            Text('Version 1.0'),
+            SizedBox(height: 8.0),
+          ],
+        ),
+      ),
     );
   }
 }
