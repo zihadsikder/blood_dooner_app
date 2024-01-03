@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final upzilaResponse = upzilaResponseFromJson(jsonString);
+
 import 'dart:convert';
 
 UpzilaResponse upzilaResponseFromJson(String str) => UpzilaResponse.fromJson(json.decode(str));
@@ -5,59 +9,55 @@ UpzilaResponse upzilaResponseFromJson(String str) => UpzilaResponse.fromJson(jso
 String upzilaResponseToJson(UpzilaResponse data) => json.encode(data.toJson());
 
 class UpzilaResponse {
-  int status;
-  String message;
-  List<UpzilaDatum> data;
+  List<Upzila>? data;
+  String? message;
 
   UpzilaResponse({
-    required this.status,
-    required this.message,
-    required this.data,
+    this.data,
+    this.message,
   });
 
   factory UpzilaResponse.fromJson(Map<String, dynamic> json) => UpzilaResponse(
-    status: json["status"],
+    data: json["data"] == null ? [] : List<Upzila>.from(json["data"]!.map((x) => Upzila.fromJson(x))),
     message: json["message"],
-    data: List<UpzilaDatum>.from(json["data"].map((x) => UpzilaDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
+    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
     "message": message,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
   };
 }
 
-class UpzilaDatum {
-  String id;
-  String upzilaId;
-  String districtId;
-  String name;
-  String bnName;
-  String url;
-  DateTime createdAt;
-  DateTime updatedAt;
+class Upzila {
+  String? id;
+  String? upzilaId;
+  String? districtId;
+  String? name;
+  String? bnName;
+  String? url;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  UpzilaDatum({
-    required this.id,
-    required this.upzilaId,
-    required this.districtId,
-    required this.name,
-    required this.bnName,
-    required this.url,
-    required this.createdAt,
-    required this.updatedAt,
+  Upzila({
+    this.id,
+    this.upzilaId,
+    this.districtId,
+    this.name,
+    this.bnName,
+    this.url,
+    this.createdAt,
+    this.updatedAt,
   });
 
-  factory UpzilaDatum.fromJson(Map<String, dynamic> json) => UpzilaDatum(
+  factory Upzila.fromJson(Map<String, dynamic> json) => Upzila(
     id: json["_id"],
     upzilaId: json["upzila_id"],
     districtId: json["district_id"],
     name: json["name"],
     bnName: json["bn_name"],
     url: json["url"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -67,8 +67,7 @@ class UpzilaDatum {
     "name": name,
     "bn_name": bnName,
     "url": url,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
   };
 }
-

@@ -307,9 +307,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+  // Future<void> _registration() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     // Validate the selected values
+  //     if (selectedDivision == 'Select Division' ||
+  //         selectedDistrict.isEmpty ||
+  //         selectedUpzila.isEmpty ||
+  //         selectedUnion.isEmpty) {
+  //       showSnackMessage(context, 'Please select valid location details.');
+  //       return;
+  //     }
+  //
+  //     // Convert selected values to integers
+  //     int divisionId = int.parse(selectedDivision);
+  //     int districtId = int.parse(selectedDistrict);
+  //     int upzilaId = int.parse(selectedUpzila);
+  //     int unionId = int.parse(selectedUnion);
+  //
+  //     // Perform registration
+  //     final response = await _signUpController.registration(
+  //       _usernameTEController.text.trim(),
+  //       _mobileNumberTEController.text.trim(),
+  //       _emailTEController.text.trim(),
+  //       _donationController.text,
+  //       selectedBloodGroup,
+  //       _weightOver50Controller.toString(),
+  //       _donationController.text,
+  //       divisionId.toString(),
+  //       districtId.toString(),
+  //       upzilaId.toString(),
+  //       unionId.toString(),
+  //       _passwordTEController.text,
+  //     );
+  //
+  //     if (mounted) {
+  //       _clearTextFields();
+  //       showSnackMessage(context, _signUpController.failureMessage);
+  //     }
+  //   }
+  // }
+
 
   Future<void> _registration() async {
     if (_formKey.currentState!.validate()) {
+
       final response = await _signUpController.registration(
           _usernameTEController.text.trim(),
           _mobileNumberTEController.text.trim(),
@@ -334,6 +375,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _mobileNumberTEController.clear();
     _passwordTEController.clear();
     _donationController.clear();
+
+
   }
 
   @override

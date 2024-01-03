@@ -9,7 +9,7 @@ MDistrictResponse mDistrictResponseFromJson(String str) => MDistrictResponse.fro
 String mDistrictResponseToJson(MDistrictResponse data) => json.encode(data.toJson());
 
 class MDistrictResponse {
-  List<DistrictDatum>? data;
+  List<District>? data;
   String? message;
 
   MDistrictResponse({
@@ -18,7 +18,7 @@ class MDistrictResponse {
   });
 
   factory MDistrictResponse.fromJson(Map<String, dynamic> json) => MDistrictResponse(
-    data: json["data"] == null ? [] : List<DistrictDatum>.from(json["data"]!.map((x) => DistrictDatum.fromJson(x))),
+    data: json["data"] == null ? [] : List<District>.from(json["data"]!.map((x) => District.fromJson(x))),
     message: json["message"],
   );
 
@@ -28,7 +28,7 @@ class MDistrictResponse {
   };
 }
 
-class DistrictDatum {
+class District {
   String? id;
   String? districtId;
   String? divisionId;
@@ -40,7 +40,7 @@ class DistrictDatum {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  DistrictDatum({
+  District({
     this.id,
     this.districtId,
     this.divisionId,
@@ -53,7 +53,7 @@ class DistrictDatum {
     this.updatedAt,
   });
 
-  factory DistrictDatum.fromJson(Map<String, dynamic> json) => DistrictDatum(
+  factory District.fromJson(Map<String, dynamic> json) => District(
     id: json["_id"],
     districtId: json["district_id"],
     divisionId: json["division_id"],

@@ -35,8 +35,8 @@ class LoginController extends GetxController {
 
       return true;
     } else {
-      if (response.statusCode == 401) {
-        _failMessage = ('Please check email/password');
+      if (response.isSuccess) {
+        _failMessage = ('Login Successful');
       } else {
         _failMessage = ('Login failed. Try again');
       }

@@ -7,7 +7,7 @@ String divisionToJson(DivisionResponse data) => json.encode(data.toJson());
 class DivisionResponse {
   int status;
   String message;
-  List<Datum> data;
+  List<Division> data;
 
   DivisionResponse({
     required this.status,
@@ -18,7 +18,7 @@ class DivisionResponse {
   factory DivisionResponse.fromJson(Map<String, dynamic> json) => DivisionResponse(
     status: json["status"],
     message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<Division>.from(json["data"].map((x) => Division.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,7 +28,7 @@ class DivisionResponse {
   };
 }
 
-class Datum {
+class Division {
   String id;
   String divisionId;
   String divisionCode;
@@ -39,7 +39,7 @@ class Datum {
   DateTime createdAt;
   DateTime updatedAt;
 
-  Datum({
+  Division({
     required this.id,
     required this.divisionId,
     required this.divisionCode,
@@ -51,7 +51,7 @@ class Datum {
     required this.updatedAt,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Division.fromJson(Map<String, dynamic> json) => Division(
     id: json["_id"],
     divisionId: json["division_id"],
     divisionCode: json["division_code"],

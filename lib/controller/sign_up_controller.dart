@@ -19,7 +19,12 @@ class SignUpController extends GetxController {
       String blood,
       String weight,
       String donation,
-      String password) async {
+      // String divisionId,
+      // String districtId,
+      // String upzilaId,
+      // String unionId,
+      String password,
+      ) async {
     _signUpInProgress.value = true;
     update();
     final NetworkResponse response =
@@ -44,7 +49,8 @@ class SignUpController extends GetxController {
     update();
     if (response.isSuccess) {
       _failMessage = ('Account has been created! Please login.');
-    } else {
+    }
+    else {
       _failMessage = ('Account creation failed! Please try again.');
     }
     return false;
