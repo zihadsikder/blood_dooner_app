@@ -48,7 +48,7 @@ class SignUpController extends GetxController {
 
     update();
     if (response.isSuccess) {
-      _failMessage = ('Account has been created! Please login.');
+      _failMessage = ('Account has been created! Please Sign In.');
     }
     else {
       _failMessage = ('Account creation failed! Please try again.');

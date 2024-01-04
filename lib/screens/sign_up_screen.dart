@@ -130,6 +130,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 8.0),
                         TextFormField(
+                          controller: _mobileNumberTEController,
+                          decoration: const InputDecoration(
+                            labelText: 'Mobile',
+                          ),
+                          keyboardType: TextInputType.phone,
+                          validator: (String? value) {
+                            bool isValidPhoneNumber =
+                            RegExp(r"^0[0-9]{10}$").hasMatch(value!);
+                            if (!isValidPhoneNumber) {
+                              return 'Enter a valid 11-digit mobile number starting with 0';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 8.0),
+                        TextFormField(
                           controller: _dobController,
                           readOnly: true,
                           decoration: InputDecoration(
@@ -165,52 +181,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 8.0),
                         TextFormField(
-                          controller: _mobileNumberTEController,
-                          decoration: const InputDecoration(
-                            labelText: 'Mobile',
-                          ),
-                          keyboardType: TextInputType.phone,
-                          validator: (String? value) {
-                            bool isValidPhoneNumber =
-                                RegExp(r"^0[0-9]{10}$").hasMatch(value!);
-                            if (!isValidPhoneNumber) {
-                              return 'Enter a valid 11-digit mobile number starting with 0';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 8.0),
-                        TextFormField(
-                          controller: _passwordTEController,
-                          obscureText: _obscureText,
-                          decoration: InputDecoration(
-                            labelText: 'Enter Password',
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _obscureText =
-                                      !_obscureText; // Toggle the password visibility
-                                });
-                              },
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors
-                                    .grey, // Customize the icon color as needed
-                              ),
-                            ),
-                          ),
-                          keyboardType: TextInputType.visiblePassword,
-                          validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your password';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 8.0),
-                        TextFormField(
                           controller: _donationController,
                           readOnly: true,
                           decoration: InputDecoration(
@@ -236,6 +206,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           keyboardType: TextInputType.datetime,
+                        ),
+                        const SizedBox(height: 8.0),
+                        TextFormField(
+                          controller: _passwordTEController,
+                          obscureText: _obscureText,
+                          decoration: InputDecoration(
+                            labelText: 'Enter Password',
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _obscureText =
+                                  !_obscureText; // Toggle the password visibility
+                                });
+                              },
+                              icon: Icon(
+                                _obscureText
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors
+                                    .grey, // Customize the icon color as needed
+                              ),
+                            ),
+                          ),
+                          keyboardType: TextInputType.visiblePassword,
+                          validator: (String? value) {
+                            if (value?.trim().isEmpty ?? true) {
+                              return 'Enter your password';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 8.0),
                         Column(
