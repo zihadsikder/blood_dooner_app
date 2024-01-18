@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:blood/controller/auth_controller.dart';
+import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
 import 'package:http/http.dart';
 import 'network_response.dart';
 

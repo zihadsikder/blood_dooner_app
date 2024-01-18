@@ -1,4 +1,4 @@
-import 'package:blood/screens/login_screen.dart';
+import 'package:blood/presentation/ui/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controller_binder.dart';
