@@ -1,9 +1,7 @@
-import 'package:blood/screens/login.dart';
+import 'package:blood/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'controller/location_controller.dart';
-import 'controller/login_controller.dart';
-import 'controller/sign_up_controller.dart';
+import 'controller_binder.dart';
 import 'data/utility/app_theme_data.dart';
 
 class BloodApp extends StatelessWidget {
@@ -22,11 +20,3 @@ class BloodApp extends StatelessWidget {
   }
 }
 
-class ControllerBinder extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(LoginController());
-    Get.put(SignUpController());
-    Get.put(LocationController());
-  }
-}

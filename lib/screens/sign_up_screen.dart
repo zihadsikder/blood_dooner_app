@@ -1,9 +1,9 @@
 import 'package:blood/controller/sign_up_controller.dart';
-import 'package:blood/screens/login.dart';
 import 'package:get/get.dart';
 import '../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 import '../Widget/snack_message.dart';
+import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -145,68 +145,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 8.0),
-                        TextFormField(
-                          controller: _dobController,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            labelText: 'Date of Birth',
-                            suffixIcon: IconButton(
-                              onPressed: () async {
-                                DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1950),
-                                  lastDate: DateTime(2050),
-                                );
-
-                                if (pickedDate != null &&
-                                    pickedDate != _dobController.text) {
-                                  setState(() {
-                                    _dobController.text =
-                                        "${pickedDate.toLocal()}".split(' ')[0];
-                                  });
-                                }
-                              },
-                              icon: const Icon(Icons.calendar_today,
-                                  color: Colors.grey),
-                            ),
-                          ),
-                          keyboardType: TextInputType.datetime,
-                          validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your Date of Birth';
-                            }
-                            return null;
-                          },
-                        ),
+                        builddobFormField(context),
                         const SizedBox(height: 8.0),
-                        TextFormField(
-                          controller: _donationController,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            labelText: 'Enter Your Last Donation',
-                            suffixIcon: IconButton(
-                              onPressed: () async {
-                                DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1950),
-                                  lastDate: DateTime(2050),
-                                );
-                                if (pickedDate != null &&
-                                    pickedDate != _donationController.text) {
-                                  setState(() {
-                                    _donationController.text =
-                                        "${pickedDate.toLocal()}".split(' ')[0];
-                                  });
-                                }
-                              },
-                              icon: const Icon(Icons.calendar_today,
-                                  color: Colors.grey),
-                            ),
-                          ),
-                          keyboardType: TextInputType.datetime,
-                        ),
+                        buildDonationformField(context),
                         const SizedBox(height: 8.0),
                         TextFormField(
                           controller: _passwordTEController,
@@ -306,6 +247,73 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ))),
       ),
     );
+  }
+
+  TextFormField builddobFormField(BuildContext context) {
+    return TextFormField(
+                        controller: _dobController,
+                        readOnly: true,
+                        decoration: InputDecoration(
+                          labelText: 'Date of Birth',
+                          suffixIcon: IconButton(
+                            onPressed: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1950),
+                                lastDate: DateTime(2050),
+                              );
+
+                              if (pickedDate != null &&
+                                  pickedDate != _dobController.text) {
+                                setState(() {
+                                  _dobController.text =
+                                      "${pickedDate.toLocal()}".split(' ')[0];
+                                });
+                              }
+                            },
+                            icon: const Icon(Icons.calendar_today,
+                                color: Colors.grey),
+                          ),
+                        ),
+                        keyboardType: TextInputType.datetime,
+                        validator: (String? value) {
+                          if (value?.trim().isEmpty ?? true) {
+                            return 'Enter your Date of Birth';
+                          }
+                          return null;
+                        },
+                      );
+  }
+
+  TextFormField buildDonationformField(BuildContext context) {
+    return TextFormField(
+                        controller: _donationController,
+                        readOnly: true,
+                        decoration: InputDecoration(
+                          labelText: 'Enter Your Last Donation',
+                          suffixIcon: IconButton(
+                            onPressed: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1950),
+                                lastDate: DateTime(2050),
+                              );
+                              if (pickedDate != null &&
+                                  pickedDate != _donationController.text) {
+                                setState(() {
+                                  _donationController.text =
+                                      "${pickedDate.toLocal()}".split(' ')[0];
+                                });
+                              }
+                            },
+                            icon: const Icon(Icons.calendar_today,
+                                color: Colors.grey),
+                          ),
+                        ),
+                        keyboardType: TextInputType.datetime,
+                      );
   }
   // Future<void> _registration() async {
   //   if (_formKey.currentState!.validate()) {

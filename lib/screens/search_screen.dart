@@ -5,14 +5,14 @@ import '../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 
 
-class Search extends StatefulWidget {
-  const Search({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  State<Search> createState() => _SearchState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchScreenState extends State<SearchScreen> {
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = '';
@@ -61,15 +61,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Find A Blood Donor"),
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: Colors.red.shade900,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-        ),
-      ),
+      appBar: buildAppBar,
       body:  SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -84,19 +76,13 @@ class _SearchState extends State<Search> {
                 selectedUnion: selectedUnion,
               ),
               const SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  // Simulate a search, you can replace this with your search logic
-                  setState(() {
-                    // Update searchResults with actual search results
-                    // Here, we are using sample data
-                  });
-                },
-                child: const Text(
-                  'Search',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                  },
+                  child: const Text(
+                    'Search',
                   ),
                 ),
               ),
@@ -120,6 +106,16 @@ class _SearchState extends State<Search> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  AppBar get buildAppBar {
+    return AppBar(
+      title: const Text("Find A Blood Donor"),
+      centerTitle: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
       ),
     );
   }

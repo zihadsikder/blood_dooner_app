@@ -1,6 +1,6 @@
 import 'package:blood/controller/auth_controller.dart';
 import 'package:blood/screens/Accounts/account_screen.dart';
-import 'package:blood/screens/login.dart';
+import 'package:blood/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSummaryCard extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:blood/Widget/app_logo.dart';
 import 'package:blood/screens/home_screen.dart';
-import 'package:blood/screens/login.dart';
 import 'package:flutter/material.dart';
 import '../controller/auth_controller.dart';
+import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

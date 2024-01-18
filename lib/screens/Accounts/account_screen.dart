@@ -37,7 +37,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        const Search()), // Use the correct search page
+                        const SearchScreen()), // Use the correct search page
               );
             },
           ),

@@ -94,73 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       blurRadius: 20,
                                       offset: Offset(0, 10))
                                 ]),
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.grey.shade200))),
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    controller: _numberTEController,
-                                    decoration: const InputDecoration(
-                                        hintText: "Email",
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey),
-                                        border: InputBorder.none),
-                                    validator: (String? value) {
-                                      if (value?.trim().isEmpty ?? true) {
-                                        return 'Enter value';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                                //SizedBox(height: 20),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.grey.shade200))),
-                                  child: TextFormField(
-                                    controller: _passwordTEController,
-                                    obscureText: _obscureText,
-                                    // Use a boolean variable to toggle password visibility
-                                    decoration: InputDecoration(
-                                      hintText: 'Password',
-                                      hintStyle:
-                                          const TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _obscureText =
-                                                !_obscureText; // Toggle the password visibility
-                                          });
-                                        },
-                                        icon: Icon(
-                                          _obscureText
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
-                                          color: Colors
-                                              .grey, // Customize the icon color as needed
-                                        ),
-                                      ),
-                                    ),
-                                    validator: (String? value) {
-                                      if (value?.trim().isEmpty ?? true) {
-                                        return 'Enter your password';
-                                      }
-                                      return null;
-                                    },
-                                    keyboardType: TextInputType.visiblePassword,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: textField,
                           ),
                           const SizedBox(
                             height: 30,
@@ -323,23 +257,81 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Column get textField {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.grey.shade200))),
+          child: TextFormField(
+            keyboardType: TextInputType.number,
+            controller: _numberTEController,
+            decoration: const InputDecoration(
+                hintText: "Email",
+                hintStyle: TextStyle(color: Colors.grey),
+                border: InputBorder.none),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter value';
+              }
+              return null;
+            },
+          ),
+        ),
+        //SizedBox(height: 20),
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.grey.shade200))),
+          child: TextFormField(
+            controller: _passwordTEController,
+            obscureText: _obscureText,
+            // Use a boolean variable to toggle password visibility
+            decoration: InputDecoration(
+              hintText: 'Password',
+              hintStyle: const TextStyle(color: Colors.grey),
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _obscureText =
+                        !_obscureText; // Toggle the password visibility
+                  });
+                },
+                icon: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.grey, // Customize the icon color as needed
+                ),
+              ),
+            ),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter your password';
+              }
+              return null;
+            },
+            keyboardType: TextInputType.visiblePassword,
+          ),
+        ),
+      ],
+    );
+  }
+
   Future<void> login() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-
     final isLoggedIn = await _loginController.login(
         _numberTEController.text.trim(), _passwordTEController.text);
 
     if (isLoggedIn) {
       Get.offAll(const MainPage());
     }
-
     if (mounted) {
       showSnackMessage(context, _loginController.failureMessage);
     }
   }
-
   @override
   void dispose() {
     _numberTEController.dispose();

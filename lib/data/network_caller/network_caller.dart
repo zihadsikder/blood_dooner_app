@@ -23,6 +23,7 @@ class NetworkCaller {
           isSuccess: true,
           jsonResponse: response.body,
           statusCode: 200,
+
         );
       } else {
         return NetworkResponse(

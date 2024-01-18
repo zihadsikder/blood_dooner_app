@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:blood/controller/auth_controller.dart';
 import 'package:blood/data/network_caller/network_caller.dart';
 import 'package:blood/data/network_caller/network_response.dart';
@@ -7,7 +5,6 @@ import 'package:blood/data/utility/urls.dart';
 import 'package:blood/model/user_model.dart';
 import 'package:get/get.dart';
 
-import 'package:http/http.dart' as http;
 
 class LoginController extends GetxController {
   final _loginInProgress = false.obs;
@@ -28,11 +25,8 @@ class LoginController extends GetxController {
     update();
     if (response.isSuccess && response.jsonResponse != null) {
       UserModel user = userModelFromJson(response.jsonResponse!);
-
-      print("saved token ::: ${user.data.accessToken}");
-
+      // print("saved token ::: ${user.data.accessToken}");
       AuthController.saveUserInformation(user.data.accessToken, user);
-
       return true;
     } else {
       if (response.isSuccess) {

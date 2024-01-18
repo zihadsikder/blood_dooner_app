@@ -2,7 +2,7 @@ class NetworkResponse {
   final int? statusCode;
   final bool isSuccess;
   String? jsonResponse;
-  final String? errorMessage;
+  final String errorMessage;
 
   NetworkResponse(
       {this.statusCode = -1,
