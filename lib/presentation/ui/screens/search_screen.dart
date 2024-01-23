@@ -1,4 +1,4 @@
-import 'package:blood/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:blood/presentation/state_holders/controller/search_blood_donor_controller.dart';
 import 'package:blood/presentation/ui/Widget/location_from.dart';
 import 'package:blood/presentation/ui/screens/search_result_item.dart';
 import 'package:flutter/material.dart';
@@ -12,63 +12,29 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  String selectedBloodGroup = 'A+';
-  String selectedDivision = 'Select Division';
+  final SearchBloodDonorController userController =
+      Get.find<SearchBloodDonorController>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String selectedBloodGroup = '';
+  String selectedDivision = '';
   String selectedDistrict = '';
-  String selectedUpzila ='';
-  String selectedUnion ='';
+  String selectedUpzila = '';
+  String selectedUnion = '';
 
-  List<Map<String, String>> searchResults = [
-    {
-      'name': 'Zihad',
-      'bloodGroup': 'A+',
-      'lastDonation': '2023-09-01',
-      'totalDonations': '5',
-      'address' : 'kutubdia, CoxsBazar'
-    },
-    {
-      'name': 'Anik',
-      'bloodGroup': 'B-',
-      'lastDonation': '2023-08-25',
-      'totalDonations': '3',
-      'address' : 'Sersha, Chattogram'
-    },
-    {
-      'name': 'Anik',
-      'bloodGroup': 'B-',
-      'lastDonation': '2023-08-25',
-      'totalDonations': '3',
-      'address' : 'Sersha, Chattogram'
-    },
-    {
-      'name': 'Anik',
-      'bloodGroup': 'B-',
-      'lastDonation': '2023-08-25',
-      'totalDonations': '3',
-      'address' : 'Sersha, Chattogram'
-    },
-    {
-      'name': 'Anik',
-      'bloodGroup': 'B-',
-      'lastDonation': '2023-08-25',
-      'totalDonations': '3',
-      'address' : 'Sersha, Chattogram'
-    },
-    // Add more search results as needed
-  ];
+  // late final String selectedDivision;
+  // late final String selectedDistrict;
+  // late final String selectedUpzila;
+  // late final String selectedUnion;
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Get.find<MainBottomNavController>().backToHome();
-        return false;
-      },
-      child: Scaffold(
-        appBar: buildAppBar,
-        body:  SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+    return Scaffold(
+      appBar: buildAppBar,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -78,35 +44,74 @@ class _SearchScreenState extends State<SearchScreen> {
                   selectedDistrict: selectedDistrict,
                   selectedUpzila: selectedUpzila,
                   selectedUnion: selectedUnion,
+                  onBloodGroupSelected: (bloodGroup) {
+                    setState(() {
+                      selectedBloodGroup = bloodGroup;
+                    });
+                  },
                 ),
                 const SizedBox(height: 16.0),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                    },
-                    child: const Text(
-                      'Search',
-                    ),
-                  ),
+                  child: GetBuilder<SearchBloodDonorController>(
+                      builder: (donorController) {
+                    return Visibility(
+                      visible: donorController.inProgress == false,
+                        replacement: const Center(
+                        child: CircularProgressIndicator()),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final bool result =
+                                await donorController.searchDonor(
+                                    selectedUnion,
+                                    selectedBloodGroup,
+                                    selectedDivision,
+                                    selectedDistrict,
+                                    selectedUpzila);
+                            if (result) {
+
+                            } else {
+                              Get.showSnackbar(const GetSnackBar(
+                                title: 'Search Donor Fail',
+                                duration: Duration(seconds: 2),
+                                isDismissible: true,
+                                message: 'Try Again',
+                              ));
+                            }
+                          }
+                        },
+                        child: const Text(
+                          'Search',
+                        ),
+                      ),
+                    );
+                  }),
                 ),
                 const SizedBox(height: 16.0),
                 // Display search results as a ListView
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: searchResults.length,
-                  itemBuilder: (context, index) {
-                    return SearchResultItem(
-                      name: searchResults[index]['name'] ?? '',
-                      bloodGroup: searchResults[index]['bloodGroup'] ?? '',
-                      lastDonation: searchResults[index]['lastDonation'] ?? '',
-                      totalDonations: searchResults[index]['totalDonations'] ?? '',
-                      address: searchResults[index]['address'] ?? '',
-                      // You can also include call and SMS functionality here
-                    );
-                  },
-                ),
+                GetBuilder<SearchBloodDonorController>(builder: (context) {
+                  if (userController.user == null || userController.user!.data == null) {
+                    return const Text('No search results');
+                  }
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: userController.user!.data!.length,
+                    itemBuilder: (context, index) {
+                      return SearchResultItem(
+                        name: userController.user!.data![index].name ?? '',
+                        bloodGroup: userController.user!.data![index].bloodGroup ?? '',
+                        lastDonation: userController.user!.data![index].lastDonation?.timeZoneName?.toString() ?? '',
+                        totalDonations: userController.user!.data![index].mobile?.toString() ?? '',
+                        mobile: userController.user!.data![index].mobile?.toString() ?? '',
+                        address: userController.user!.data![index].address?.postOffice ?? '',
+                        // You can also include call and SMS functionality here
+                      );
+                    },
+                  );
+                }),
               ],
             ),
           ),
@@ -125,5 +130,3 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 }
-
-

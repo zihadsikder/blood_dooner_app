@@ -2,6 +2,7 @@ import 'package:blood/data/model/address_response/District_responce.dart';
 import 'package:blood/data/model/address_response/division_response.dart';
 import 'package:blood/data/model/address_response/union_response.dart';
 import 'package:blood/data/model/address_response/upzila_response.dart';
+import 'package:blood/data/model/registration_params.dart';
 import 'package:blood/presentation/state_holders/controller/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,23 +13,25 @@ class LocationFormScreen extends StatefulWidget {
     '',
     'A+',
     'A-',
-    'A',
-    'AB',
     'AB+',
     'AB-',
-    'B',
     'B-',
     'B+',
-    'O',
     'O+',
     'O-'
   ];
 
-  String selectedBloodGroup = '';
-  String selectedDivision = '';
-  String selectedDistrict = '';
-  String selectedUpzila = '';
-  String selectedUnion = '';
+
+  final String selectedBloodGroup;
+  final String selectedDivision;
+  final String selectedDistrict;
+  final String selectedUpzila;
+  final String selectedUnion;
+  // String selectedDivision = '';
+  // String selectedDistrict= '';
+  // String selectedUpzila= '';
+  // String selectedUnion= '';
+  final Function(String) onBloodGroupSelected;
 
   LocationFormScreen({
     super.key,
@@ -37,7 +40,16 @@ class LocationFormScreen extends StatefulWidget {
     required this.selectedDistrict,
     required this.selectedUpzila,
     required this.selectedUnion,
+    required this.onBloodGroupSelected,
   });
+  Address getSelectedAddress() {
+    return Address(
+      divisionId: selectedDivision,
+      districtId: selectedDistrict,
+      areaId: selectedUpzila,
+      postOffice: selectedUnion,
+    );
+  }
 
   @override
   State<LocationFormScreen> createState() => _LocationFormScreenState();
@@ -62,7 +74,8 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
           value: widget.selectedBloodGroup,
           onChanged: (newValue) {
             setState(() {
-              widget.selectedBloodGroup = newValue!;
+              //widget.selectedBloodGroup = newValue!;
+              widget.onBloodGroupSelected(newValue!);
             });
           },
           items: widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
@@ -83,33 +96,33 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
         ),
         const SizedBox(height: 8.0),
         GetBuilder<LocationController>(
-          builder: (locationController) {
+            builder: (locationController) {
 
-            return DropdownButtonFormField<String>(
-              value: locationController.selectedDivisionName,
-              onChanged: (newValue) {
+              return DropdownButtonFormField<String>(
+                value: locationController.selectedDivisionName,
+                onChanged: (newValue) {
                   locationController.selectedDivisionName = newValue;
                   locationController.getDistrict(id: newValue!);
-                  print("=========== updated districts ${locationController.districtList?.length}");
+                  //print("=========== updated districts ${locationController.districtList?.length}");
                   locationController.update();
-              },
-              items: locationController.divisionList?.map<DropdownMenuItem<String>>((Division value) {
-                return DropdownMenuItem<String>(
-                  value: value.divisionId,
-                  child: Text(value.name),
-                );
-              }).toList(),
-              decoration: const InputDecoration(
-                labelText: 'Select Division',
-              ),
-              validator: (String? value) {
-                if (value?.trim().isEmpty ?? true) {
-                  return 'Select your Division';
-                }
-                return null;
-              },
-            );
-          }
+                },
+                items: locationController.divisionList?.map<DropdownMenuItem<String>>((Division value) {
+                  return DropdownMenuItem<String>(
+                    value: value.divisionId,
+                    child: Text(value.name),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Select Division',
+                ),
+                validator: (String? value) {
+                  if (value?.trim().isEmpty ?? true) {
+                    return 'Select your Division';
+                  }
+                  return null;
+                },
+              );
+            }
         ),
         const SizedBox(height: 8.0),
         GetBuilder<LocationController>(
@@ -121,8 +134,7 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                   locationController.selectedDistrictName = newValue;
                   locationController.getUpzila(id: newValue!);
                   //locationController.update();
-
-                  print("ui updated DISTRICT ${locationController.districtList?.length}");
+                  //print("ui updated DISTRICT ${locationController.districtList?.length}");
                 },
                 items: locationController.districtList?.map<DropdownMenuItem<String>>((District value) {
                   return DropdownMenuItem<String>(
@@ -149,8 +161,8 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                 value: locationController.selectedUpzilaName,
                 onChanged: (newValue) {
                   locationController.selectedUpzilaName = newValue!;
-                  print("ui updated from upzila ::: ${locationController.upzilaList}");
-                  locationController.getUnion(id: newValue!);
+                  //print("ui updated from upzila ::: ${locationController.upzilaList}");
+                  locationController.getUnion(id: newValue);
 
                 },
                 items: locationController.upzilaList?.map<DropdownMenuItem<String>>((Upzila value) {

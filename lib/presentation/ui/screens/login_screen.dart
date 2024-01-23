@@ -27,10 +27,10 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.red.shade900,
-          Colors.red.shade800,
-          Colors.red.shade500,
-        ])),
+              Colors.red.shade900,
+              Colors.red.shade800,
+              Colors.red.shade500,
+            ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -104,29 +104,28 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Container(
                               height: 50,
                               margin:
-                                  const EdgeInsets.symmetric(horizontal: 50),
+                              const EdgeInsets.symmetric(horizontal: 50),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.red.shade800),
                               child: GetBuilder<LoginController>(
                                   builder: (loginController) {
-                                return Visibility(
-                                  visible:
+                                    return Visibility(
+                                      visible:
                                       loginController.loginInProgress == false,
-                                  replacement: const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  child: const Center(
-                                    child: Text(
-                                      "Login",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16),
-                                    ),
-                                  ),
-                                );
-                              }),
+                                      replacement: const Center(
+                                        child: CircularProgressIndicator()),
+                                      child: const Center(
+                                        child: Text(
+                                          "Login",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16),
+                                        ),
+                                      ),
+                                    );
+                                  }),
                             ),
                           ),
                           const SizedBox(
@@ -138,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (context) =>
-                                      const ForgotPasswordScreen());
+                                  const ForgotPasswordScreen());
                             },
                             child: const Text(
                               "Forgot Password?",
@@ -166,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const SignUpScreen()));
+                                          const SignUpScreen()));
                                 },
                               )
                             ],
@@ -195,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     child: const Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.facebook,
@@ -296,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   setState(() {
                     _obscureText =
-                        !_obscureText; // Toggle the password visibility
+                    !_obscureText; // Toggle the password visibility
                   });
                 },
                 icon: Icon(
@@ -326,9 +325,9 @@ class _LoginScreenState extends State<LoginScreen> {
         _numberTEController.text.trim(), _passwordTEController.text);
 
     if (isLoggedIn) {
-      Get.offAll(const MainBottomNavScreen());
+      Get.to(const MainBottomNavScreen());
     }
-    if (mounted) {
+    else{
       showSnackMessage(context, _loginController.failureMessage);
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SearchResultItem extends StatelessWidget {
   final String name;
@@ -6,6 +7,7 @@ class SearchResultItem extends StatelessWidget {
   final String lastDonation;
   final String totalDonations;
   final String address;
+  final String mobile;
 
   const SearchResultItem({super.key,
     required this.name,
@@ -13,6 +15,7 @@ class SearchResultItem extends StatelessWidget {
     required this.lastDonation,
     required this.totalDonations,
     required this.address,
+    required this.mobile,
   });
 
   @override
@@ -67,7 +70,7 @@ class SearchResultItem extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.phone, color: Colors.red.shade800),
                 onPressed: () {
-                  // Implement call functionality here
+                    _launchPhoneDialer(mobile);
                 },
               ),
               IconButton(
@@ -84,5 +87,13 @@ class SearchResultItem extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+_launchPhoneDialer(String phoneNumber) async {
+  final url = 'tel:$phoneNumber';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

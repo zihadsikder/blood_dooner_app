@@ -7,5 +7,9 @@ class Urls {
   static const String getDistrictData = '$_baseUrl/district/';
   static const String getUpzilaData = '$_baseUrl/upzila/';
   static const String getUnionData = '$_baseUrl/union/';
+  static const String storeDonationHistory = '$_baseUrl/store-donation';
+  static const String getDonorList = '$_baseUrl/donation-list?';
+  static const String getSearchDonor= '$_baseUrl/search-donar?';
+
 
 }

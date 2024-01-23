@@ -1,7 +1,5 @@
 import 'package:blood/data/model/service_data.dart';
-import 'package:blood/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Widget/profile_summary_card.dart';
 
@@ -35,23 +33,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Get.find<MainBottomNavController>().backToHome();
-        return false;
-      },
-      child: SafeArea(
-        child: Scaffold(
-            body: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const ProfileSummaryCard(),
-                  serviceData,
-                ],
-              ),
-            )),
-      ),
+    return SafeArea(
+      child: Scaffold(
+          body: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const ProfileSummaryCard(),
+                serviceData,
+              ],
+            ),
+          )),
     );
   }
 

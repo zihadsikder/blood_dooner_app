@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/5.png',
   ];
 
-  int _selecteIndex = 0;
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   viewportFraction: 0.8,
                   onPageChanged: (index, reason) {
                     setState(() {
-                      _selecteIndex = index;
+                      _selectedIndex = index;
                     });
                   },
                 ),
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 12,
                           height: 12,
                           decoration: BoxDecoration(
-                            color: _selecteIndex == i
+                            color: _selectedIndex == i
                                 ? Colors.red
                                 : Colors.grey,
                             shape: BoxShape.circle,

@@ -2,6 +2,7 @@ import 'package:blood/presentation/state_holders/controller/auth_controller.dart
 import 'package:blood/presentation/ui/screens/Accounts/account_screen.dart';
 import 'package:blood/presentation/ui/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileSummaryCard extends StatefulWidget {
   const ProfileSummaryCard({
@@ -37,20 +38,17 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
         child: Icon(Icons.person),
       ),
       title: Text(
-        AuthController.user?.data.name?? 'name',
+        Get.find<AuthController>().model?.data.name?? 'name',
         style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
       ),
       subtitle: Text(
-        AuthController.user?.data.email ?? 'email',
+        Get.find<AuthController>().model?.data.email ?? 'email',
         style: const TextStyle(color: Colors.white),
       ),
       trailing: IconButton(
         onPressed: () async {
-          await AuthController.clearAuthData();
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (route) => false);
+          await Get.find<AuthController>().clearAuthData();
+          Get.to(()=> const LoginScreen());
         },
         icon: const Icon(Icons.logout, color: Colors.white),
       ),

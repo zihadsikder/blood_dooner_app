@@ -19,21 +19,21 @@ class LoginController extends GetxController {
     update();
 
     NetworkResponse response = await NetworkCaller().postRequest(Urls.login,
-        body: {"mobile": mobile, "password": password});
+        body: {"mobile": mobile, "password": password},);
     _loginInProgress.value = false;
-    update();
+
     if (response.isSuccess && response.jsonResponse != null) {
+      print("${response.isSuccess} ${response.jsonResponse} =================");
       UserModel user = userModelFromJson(response.jsonResponse!);
       // print("saved token ::: ${user.data.accessToken}");
-      AuthController.saveUserInformation(user.data.accessToken, user);
+      Get.find<AuthController>().saveUserInformation(user.data.accessToken, user);
+      _failMessage = ('Login Successfully');
+      update();
       return true;
     } else {
-      if (response.isSuccess) {
-        _failMessage = ('Login Successful');
-      } else {
         _failMessage = ('Login failed. Try again');
-      }
+        update();
+        return false;
     }
-    return false;
   }
 }

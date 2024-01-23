@@ -1,8 +1,10 @@
+import 'package:blood/data/model/registration_params.dart';
+import 'package:blood/presentation/state_holders/controller/location_controller.dart';
 import 'package:blood/presentation/state_holders/controller/sign_up_controller.dart';
+import 'package:blood/presentation/ui/Widget/snack_message.dart';
 import 'package:get/get.dart';
 import '../Widget/location_from.dart';
 import 'package:flutter/material.dart';
-import '../Widget/snack_message.dart';
 import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -14,24 +16,28 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _usernameTEController = TextEditingController();
-  final TextEditingController _mobileNumberTEController =
-      TextEditingController();
+  final TextEditingController _mobileNumberTEController = TextEditingController();
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
-  final TextEditingController _postOfficeTEController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _donationController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final SignUpController _signUpController = Get.find<SignUpController>();
+
+  final LocationController locationController = Get.find<LocationController>();
+
 
   bool _weightOver50Controller = false;
-  String selectedBloodGroup = 'A+';
-  String selectedDivision = 'Select Division';
-  String selectedDistrict = '';
-  String selectedUpzila = '';
-  String selectedUnion = '';
-
   bool _obscureText = true;
+
+  String selectedBloodGroup = '';
+  String selectedDivision = '';
+  String selectedDistrict= '';
+  String selectedUpzila= '';
+  String selectedUnion= '';
+
+  // late final String selectedDivision;
+  // late final String selectedDistrict;
+  // late final String selectedUpzila;
+  // late final String selectedUnion;
 
   @override
   void initState() {
@@ -40,8 +46,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double h = MediaQuery
+        .of(context)
+        .size
+        .height;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account Registration'),
@@ -50,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: SingleChildScrollView(
             child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -96,7 +108,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             labelText: 'Username',
                           ),
                           validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
+                            if (value
+                                ?.trim()
+                                .isEmpty ?? true) {
                               return 'Enter your name';
                             }
                             return null;
@@ -105,10 +119,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 16.0),
                         LocationFormScreen(
                           selectedBloodGroup: selectedBloodGroup,
-                          selectedDivision: selectedDivision,
-                          selectedDistrict: selectedDistrict,
-                          selectedUpzila: selectedUpzila,
-                          selectedUnion: selectedUnion,
+                          selectedDivision: locationController.selectedDivisionName ?? '',
+                          selectedDistrict: locationController.selectedDistrictName ?? '',
+                          selectedUpzila: locationController.selectedUpzilaName ?? '',
+                          selectedUnion: locationController.selectedUnionName ?? '',
+                          onBloodGroupSelected: (bloodGroup) {
+                            setState(() {
+                              selectedBloodGroup = bloodGroup;
+                            });
+                          },
                         ),
                         const SizedBox(height: 8.0),
                         TextFormField(
@@ -119,7 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           validator: (String? value) {
                             bool isValidEmail = RegExp(
-                                    r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
                                 .hasMatch(value!);
 
                             if (!isValidEmail) {
@@ -145,7 +164,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 8.0),
-                        builddobFormField(context),
+                        TextFormField(
+                          controller: _dobController,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            labelText: 'Date of Birth',
+                            suffixIcon: IconButton(
+                              onPressed: () async {
+                                DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1950),
+                                  lastDate: DateTime(2050),
+                                );
+                                if (pickedDate != null &&
+                                    pickedDate != _dobController.text) {
+                                  setState(() {
+                                    _dobController.text =
+                                    "${pickedDate.toLocal()}".split(' ')[0];
+                                  });
+                                }
+                              },
+                              icon: const Icon(Icons.calendar_today,
+                                  color: Colors.grey),
+                            ),
+                          ),
+                          keyboardType: TextInputType.datetime,
+                          validator: (String? value) {
+                            if (value
+                                ?.trim()
+                                .isEmpty ?? true) {
+                              return 'Enter your Date of Birth';
+                            }
+                            return null;
+                          },
+                        ),
                         const SizedBox(height: 8.0),
                         TextFormField(
                           controller: _passwordTEController,
@@ -170,7 +223,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           keyboardType: TextInputType.visiblePassword,
                           validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
+                            if (value
+                                ?.trim()
+                                .isEmpty ?? true) {
                               return 'Enter your password';
                             }
                             return null;
@@ -206,20 +261,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 8.0),
                         GetBuilder<SignUpController>(
                             builder: (signUpController) {
-                          return Visibility(
-                            visible: signUpController.signUpInProgress == false,
-                            replacement: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: _registration,
-                                child: const Text('Submit'),
-                              ),
-                            ),
-                          );
-                        }),
+                              return Visibility(
+                                visible: signUpController.signUpInProgress == false,
+                                replacement: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        final registrationParams = RegistrationParams(
+                                          name: _usernameTEController.text.trim(),
+                                          mobile: _mobileNumberTEController.text.trim(),
+                                          email: _emailTEController.text.trim(),
+                                          dob: _dobController.text,
+                                          blood: selectedBloodGroup,
+                                          weight: _weightOver50Controller.toString(),
+                                          password: _passwordTEController.text,
+                                          address: Address(
+                                            divisionId: locationController.selectedDivisionName ?? '',
+                                            districtId: locationController.selectedDistrictName?? '',
+                                            areaId: locationController.selectedUpzilaName ?? '',
+                                            postOffice: locationController.selectedUnionName ?? '',
+                                          ),
+                                        );
+                                        final bool result =
+                                        await signUpController.registration (
+                                            registrationParams);
+                                        if (result) {
+                                           showSnackMessage(context, signUpController.failureMessage);
+                                          _clearTextFields();
+                                          Get.to(() => const LoginScreen());
+                                        } else {
+                                          Get.showSnackbar(GetSnackBar(
+                                            title: 'Complete profile failed',
+                                            message: signUpController.failureMessage,
+                                            duration: const Duration(seconds: 2),
+                                            isDismissible: true,
+                                          ));
+                                        }
+                                      }
+                                    },
+                                    child: const Text('Submit'),
+                                  ),
+                                ),
+                              );
+                            }),
                         const SizedBox(
                           height: 18,
                         ),
@@ -228,7 +316,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           children: [
                             Text(
                               "Have an account?",
-                              style: Theme.of(context).textTheme.bodySmall,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .bodySmall,
                             ),
                             TextButton(
                               onPressed: () {
@@ -247,124 +338,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  TextFormField builddobFormField(BuildContext context) {
-    return TextFormField(
-                        controller: _dobController,
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          labelText: 'Date of Birth',
-                          suffixIcon: IconButton(
-                            onPressed: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1950),
-                                lastDate: DateTime(2050),
-                              );
-
-                              if (pickedDate != null &&
-                                  pickedDate != _dobController.text) {
-                                setState(() {
-                                  _dobController.text =
-                                      "${pickedDate.toLocal()}".split(' ')[0];
-                                });
-                              }
-                            },
-                            icon: const Icon(Icons.calendar_today,
-                                color: Colors.grey),
-                          ),
-                        ),
-                        keyboardType: TextInputType.datetime,
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return 'Enter your Date of Birth';
-                          }
-                          return null;
-                        },
-                      );
-  }
-
-  // Future<void> _registration() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     // Validate the selected values
-  //     if (selectedDivision == 'Select Division' ||
-  //         selectedDistrict.isEmpty ||
-  //         selectedUpzila.isEmpty ||
-  //         selectedUnion.isEmpty) {
-  //       showSnackMessage(context, 'Please select valid location details.');
-  //       return;
-  //     }
-  //
-  //     // Convert selected values to integers
-  //     int divisionId = int.parse(selectedDivision);
-  //     int districtId = int.parse(selectedDistrict);
-  //     int upzilaId = int.parse(selectedUpzila);
-  //     int unionId = int.parse(selectedUnion);
-  //
-  //     // Perform registration
-  //     final response = await _signUpController.registration(
-  //       _usernameTEController.text.trim(),
-  //       _mobileNumberTEController.text.trim(),
-  //       _emailTEController.text.trim(),
-  //       _donationController.text,
-  //       selectedBloodGroup,
-  //       _weightOver50Controller.toString(),
-  //       _donationController.text,
-  //       divisionId.toString(),
-  //       districtId.toString(),
-  //       upzilaId.toString(),
-  //       unionId.toString(),
-  //       _passwordTEController.text,
-  //     );
-  //
-  //     if (mounted) {
-  //       _clearTextFields();
-  //       showSnackMessage(context, _signUpController.failureMessage);
-  //     }
-  //   }
-  // }
-
-
-  Future<void> _registration() async {
-    if (_formKey.currentState!.validate()) {
-
-      final response = await _signUpController.registration(
-          _usernameTEController.text.trim(),
-          _mobileNumberTEController.text.trim(),
-          _emailTEController.text.trim(),
-          _donationController.text,
-          selectedBloodGroup,
-          _weightOver50Controller.toString(),
-          _donationController.text,
-          _passwordTEController.text);
-      if (mounted) {
-        _clearTextFields();
-        showSnackMessage(context, _signUpController.failureMessage);
-      }
-    }
-  }
-
   void _clearTextFields() {
     _usernameTEController.clear();
-    _postOfficeTEController.clear();
     _emailTEController.clear();
     _dobController.clear();
     _mobileNumberTEController.clear();
     _passwordTEController.clear();
-    _donationController.clear();
-
 
   }
 
   @override
   void dispose() {
     _usernameTEController.dispose();
-    _postOfficeTEController.dispose();
     _emailTEController.dispose();
     _dobController.dispose();
     _mobileNumberTEController.dispose();
     _passwordTEController.dispose();
-    _donationController.dispose();
     super.dispose();
   }
 }

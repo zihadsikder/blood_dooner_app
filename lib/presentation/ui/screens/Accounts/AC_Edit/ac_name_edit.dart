@@ -35,6 +35,11 @@ class _AcNameState extends State<AcName> {
             selectedDistrict: selectedDistrict,
               selectedUpzila: selectedUpzila,
               selectedUnion: selectedUnion,
+              onBloodGroupSelected: (bloodGroup) {
+                setState(() {
+                  selectedBloodGroup = bloodGroup;
+                });
+              },
             ),
           ],
         ),

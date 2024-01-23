@@ -1,3 +1,4 @@
+import 'package:blood/data/model/registration_params.dart';
 import 'package:blood/data/network_caller/network_caller.dart';
 import 'package:blood/data/network_caller/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
@@ -11,48 +12,26 @@ class SignUpController extends GetxController {
   String _failMessage = '';
   String get failureMessage => _failMessage;
 
-  Future<bool> registration(
-      String name,
-      String mobile,
-      String email,
-      String dob,
-      String blood,
-      String weight,
-      String donation,
-      // String divisionId,
-      // String districtId,
-      // String upzilaId,
-      // String unionId,
-      String password,
-      ) async {
+  Future<bool> registration(RegistrationParams params) async {
     _signUpInProgress.value = true;
     update();
-    final NetworkResponse response =
-        await NetworkCaller().postRequest(Urls.registration, body: {
-      "name": name,
-      "mobile": mobile,
-      "email": email,
-      "dob": dob,
-      "blood_group": blood,
-      "is_weight_50kg": weight,
-      "last_donation": donation,
-      "address": {
-        "division_id": 1,
-        "district_id": 1,
-        "area_id": 1,
-        "post_office": 1,
-      },
-      "password": password,
-    });
+
+    final NetworkResponse response = await NetworkCaller().postRequest(
+      Urls.registration,
+      body: params.toJson(),
+    );
+
     _signUpInProgress.value = false;
 
-    update();
     if (response.isSuccess) {
       _failMessage = ('Account has been created! Please Sign In.');
+      update();
+      return true;
     }
     else {
       _failMessage = ('Account creation failed! Please try again.');
+      update();
+      return false;
     }
-    return false;
   }
 }

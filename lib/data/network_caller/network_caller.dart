@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'network_response.dart';
 
@@ -11,10 +12,10 @@ class NetworkCaller {
     try {
       log(url);
       log(body.toString());
-      final Response response = await post(
-        Uri.parse(url),
-        body: jsonEncode(body),
-        headers: {'Content-Type': 'application/json'}
+      final response = await post(
+          Uri.parse(url),
+          body: jsonEncode(body),
+          headers: {'Content-Type': 'application/json'}
       );
       log(response.statusCode.toString());
       log(response.body.toString());
@@ -40,10 +41,10 @@ class NetworkCaller {
   Future<NetworkResponse> getRequest(String url) async {
     try {
       log(url);
-      final Response response =
+      final response =
       await get(Uri.parse(url), headers: {
         'Content-type': 'Application/json',
-        'token' : AuthController.token.toString(),
+        'token' : Get.find<AuthController>().token.toString(),
       });
       log(response.headers.toString());
       log(response.statusCode.toString());
@@ -75,11 +76,11 @@ class NetworkCaller {
     }
   }
 
-  // Future<void> backToLogin() async {
-  //   await AuthController.clearAuthData();
-  //   Navigator.pushAndRemoveUntil(
-  //       TaskManagerApp.navigationKey.currentContext!,
-  //       MaterialPageRoute(builder: (context) => const LoginScreen()),
-  //           (route) => false);
-  // }
+// Future<void> backToLogin() async {
+//   await AuthController.clearAuthData();
+//   Navigator.pushAndRemoveUntil(
+//       TaskManagerApp.navigationKey.currentContext!,
+//       MaterialPageRoute(builder: (context) => const LoginScreen()),
+//           (route) => false);
+// }
 }
