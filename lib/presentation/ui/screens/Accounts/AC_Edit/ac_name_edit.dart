@@ -18,7 +18,15 @@ class _AcNameState extends State<AcName> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Edit Profile"),
+      title: Row(
+        children: [
+          const Text("Edit Your Profile", style: TextStyle(fontSize: 16)),
+          const Spacer(),
+          IconButton(onPressed: (){
+            Navigator.pop(context);
+          }, icon: const Icon(Icons.highlight_remove_outlined))
+        ],
+      ),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -45,27 +53,17 @@ class _AcNameState extends State<AcName> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text(
-            'Cancel',
-            style: TextStyle(
-              color: Colors.red.shade400,
-              fontWeight: FontWeight.bold,
-            ),
+        TextButton(onPressed: (){
+          Navigator.pop(context);
+        },
+          style: TextButton.styleFrom(
+              backgroundColor: Colors.grey.shade400
+          ), child: const Text('Cancel',),),
+        TextButton(onPressed: (){},
+          style: TextButton.styleFrom(
+              backgroundColor: Colors.red.shade800
           ),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            'Save',
-            style: TextStyle(
-              color: Colors.red.shade400,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: const Text('Save', style: TextStyle(color: Colors.white)),
         ),
       ],
     );

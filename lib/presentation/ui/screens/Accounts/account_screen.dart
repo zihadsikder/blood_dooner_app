@@ -44,7 +44,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     ),
                     title: Row(
                       children: [
-                        Text(Get.find<AuthController>().model?.data.name?? 'name',),
+                        Text(
+                          Get.find<AuthController>().model?.data.name ?? 'name',
+                        ),
                       ],
                     ),
                     subtitle: const Text('Blood : Available'),
@@ -94,7 +96,13 @@ class _AccountScreenState extends State<AccountScreen> {
                             const SizedBox(
                               height: 5,
                             ),
-                            Text(Get.find<AuthController>().model?.data.bloodGroup?? 'blood group',),
+                            Text(
+                              Get.find<AuthController>()
+                                      .model
+                                      ?.data
+                                      .bloodGroup ??
+                                  'blood group',
+                            ),
                             const Text('Blood Group'),
                           ],
                         ),
@@ -110,7 +118,12 @@ class _AccountScreenState extends State<AccountScreen> {
                             const SizedBox(
                               height: 5,
                             ),
-                            Text(DateFormat.yMd().format(Get.find<AuthController>().model?.data.lastDonation ?? DateTime.now())),
+                            Text(DateFormat.yMd().format(
+                                Get.find<AuthController>()
+                                        .model
+                                        ?.data
+                                        .lastDonation ??
+                                    DateTime.now())),
                             const Text('Last Donation'),
                           ],
                         ),
@@ -138,7 +151,9 @@ class _AccountScreenState extends State<AccountScreen> {
                   Text('Mobile'),
                 ],
               ),
-              subtitle: Text(Get.find<AuthController>().model?.data.name?? '',),
+              subtitle: Text(
+                Get.find<AuthController>().model?.data.name ?? '',
+              ),
               trailing: GestureDetector(
                   onTap: () {
                     showDialog(
@@ -151,7 +166,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     color: Colors.red.shade700,
                   )),
             ),
-            Container(height: 1,color: Colors.grey.shade100),
+            Container(height: 1, color: Colors.grey.shade100),
             ListTile(
               shape: RoundedRectangleBorder(
                 side: const BorderSide(width: 2, color: Colors.white),
@@ -167,7 +182,9 @@ class _AccountScreenState extends State<AccountScreen> {
                   Text('Email'),
                 ],
               ),
-              subtitle: Text(Get.find<AuthController>().model?.data.email?? '',),
+              subtitle: Text(
+                Get.find<AuthController>().model?.data.email ?? '',
+              ),
               trailing: GestureDetector(
                   onTap: () {
                     showDialog(
@@ -180,7 +197,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     color: Colors.red.shade800,
                   )),
             ),
-            Container(height: 1,color: Colors.grey.shade100),
+            Container(height: 1, color: Colors.grey.shade100),
             ListTile(
               shape: RoundedRectangleBorder(
                 side: const BorderSide(width: 2, color: Colors.white),
@@ -203,10 +220,11 @@ class _AccountScreenState extends State<AccountScreen> {
                   Text('Address'),
                 ],
               ),
-              subtitle: Text("${Get.find<AuthController>().model?.data.address??'' }"),
-
+              subtitle: Text(
+                  Get.find<AuthController>().model?.data.address.postOffice ??
+                      ''),
             ),
-            Container(height: 1,color: Colors.grey.shade100),
+            Container(height: 1, color: Colors.grey.shade100),
             const SizedBox(
               height: 16,
             ),
@@ -239,11 +257,11 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  showDialog(context: context, builder: (BuildContext context){
-                    return aleartDailog(context);
-
-                  } );
-
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return aleartDailog(context);
+                      });
                 },
                 child: const Text('Logout')),
           ],
@@ -254,7 +272,6 @@ class _AccountScreenState extends State<AccountScreen> {
           Get.offAll(const Donation());
         },
         child: const Icon(Icons.add),
-
       ),
     );
   }
@@ -287,16 +304,26 @@ class _AccountScreenState extends State<AccountScreen> {
 
   AlertDialog aleartDailog(BuildContext context) {
     return AlertDialog(
-                    title: const Text('Alert!'),
-                    content: const Text('Are You Sure!'),
-                    actions: [
-                      TextButton(onPressed: (){
-                        Navigator.pop(context);
-                      }, child: const Text('No', style: TextStyle(color: Colors.red),)),
-                      TextButton(onPressed: (){
-                        Get.offAll(const LoginScreen());
-                      }, child: const Text('Yes', style: TextStyle(color: Colors.red),)),
-                    ],
-                  );
+      title: const Text('Alert!'),
+      content: const Text('Are You Sure!'),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'No',
+              style: TextStyle(color: Colors.red),
+            )),
+        TextButton(
+            onPressed: () {
+              Get.offAll(const LoginScreen());
+            },
+            child: const Text(
+              'Yes',
+              style: TextStyle(color: Colors.red),
+            )),
+      ],
+    );
   }
 }

@@ -76,7 +76,7 @@ class SearchResultItem extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.sms, color: Colors.red.shade800),
                 onPressed: () {
-                  // Implement SMS functionality here
+                  _launchSmsApp(mobile);
                 },
               ),
             ],
@@ -89,11 +89,29 @@ class SearchResultItem extends StatelessWidget {
     );
   }
 }
+// String formatPhoneNumber(String phoneNumber) {
+//   final number = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
+//   return '+88${number.substring(0, 2)} ${number.substring(2, 5)}-${number.substring(5, 8)}-${number.substring(8)}';
+// }
+
+_launchSmsApp(String phoneNumber) async {
+  final smsUri =  Uri.parse('sms:$phoneNumber');
+
+  if (await canLaunchUrl(smsUri)) {
+    await launchUrl(smsUri);
+  } else {
+    // Handle error, for example, show an error message
+    throw 'Could not launch';
+  }
+}
+
 _launchPhoneDialer(String phoneNumber) async {
-  final url = 'tel:$phoneNumber';
-  if (await canLaunch(url)) {
-    await launch(url);
+  final url = Uri.parse('tel:$phoneNumber');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
   } else {
     throw 'Could not launch $url';
   }
 }
+
+

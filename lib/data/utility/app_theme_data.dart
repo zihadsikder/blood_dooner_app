@@ -47,6 +47,20 @@ class AppThemeData{
           borderRadius: BorderRadius.circular(8.0),
           side: BorderSide(color: Colors.red.shade100)),
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+          const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        // Add other styles as needed
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 16,

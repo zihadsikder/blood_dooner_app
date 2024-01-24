@@ -27,7 +27,7 @@ class LocationFormScreen extends StatefulWidget {
   final String selectedDistrict;
   final String selectedUpzila;
   final String selectedUnion;
-  // String selectedDivision = '';
+  // String selectedDivision = 'select division';
   // String selectedDistrict= '';
   // String selectedUpzila= '';
   // String selectedUnion= '';
@@ -74,7 +74,6 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
           value: widget.selectedBloodGroup,
           onChanged: (newValue) {
             setState(() {
-              //widget.selectedBloodGroup = newValue!;
               widget.onBloodGroupSelected(newValue!);
             });
           },
@@ -97,31 +96,30 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
         const SizedBox(height: 8.0),
         GetBuilder<LocationController>(
             builder: (locationController) {
-
               return DropdownButtonFormField<String>(
-                value: locationController.selectedDivisionName,
-                onChanged: (newValue) {
-                  locationController.selectedDivisionName = newValue;
-                  locationController.getDistrict(id: newValue!);
-                  //print("=========== updated districts ${locationController.districtList?.length}");
-                  locationController.update();
-                },
-                items: locationController.divisionList?.map<DropdownMenuItem<String>>((Division value) {
-                  return DropdownMenuItem<String>(
-                    value: value.divisionId,
-                    child: Text(value.name),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  labelText: 'Select Division',
-                ),
-                validator: (String? value) {
-                  if (value?.trim().isEmpty ?? true) {
-                    return 'Select your Division';
-                  }
-                  return null;
-                },
-              );
+                  value: locationController.selectedDivisionName,
+                  onChanged: (newValue) {
+                    locationController.selectedDivisionName = newValue;
+                    locationController.getDistrict(id: newValue!);
+                    locationController.update();
+                  },
+                  items: locationController.divisionList?.map<DropdownMenuItem<String>>((Division value) {
+                    return DropdownMenuItem<String>(
+                      value: value.divisionId, // Assuming divisionId is the unique identifier
+                      child: Text(value.name),
+                    );
+                  }).toList(),
+                  decoration: const InputDecoration(
+                    labelText: 'Select Division',
+                  ),
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return 'Select your Division';
+                    }
+                    return null;
+                  },
+                );
+
             }
         ),
         const SizedBox(height: 8.0),
@@ -131,7 +129,7 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
               return DropdownButtonFormField<String>(
                 value: locationController.selectedDistrictName,
                 onChanged: (newValue) {
-                  locationController.selectedDistrictName = newValue;
+                  locationController.selectedDistrictName = newValue??'';
                   locationController.getUpzila(id: newValue!);
                   //locationController.update();
                   //print("ui updated DISTRICT ${locationController.districtList?.length}");
@@ -160,9 +158,9 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
               return DropdownButtonFormField<String>(
                 value: locationController.selectedUpzilaName,
                 onChanged: (newValue) {
-                  locationController.selectedUpzilaName = newValue!;
+                  locationController.selectedUpzilaName = newValue??'';
                   //print("ui updated from upzila ::: ${locationController.upzilaList}");
-                  locationController.getUnion(id: newValue);
+                  locationController.getUnion(id: newValue!);
 
                 },
                 items: locationController.upzilaList?.map<DropdownMenuItem<String>>((Upzila value) {

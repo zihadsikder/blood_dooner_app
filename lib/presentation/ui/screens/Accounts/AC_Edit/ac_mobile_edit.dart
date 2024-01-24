@@ -7,27 +7,39 @@ class AcMobile extends StatefulWidget {
 }
 
 class _AcMobileState extends State<AcMobile> {
+  final TextEditingController _mobileTEController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Edit Your Number"),
+      title: Row(
+        children: [
+          const Text("Edit Your Number", style: TextStyle(fontSize: 16)),
+          const Spacer(),
+          IconButton(onPressed: (){
+            Navigator.pop(context);
+          }, icon: const Icon(Icons.highlight_remove_outlined))
+        ],
+      ),
+
       content:TextFormField(
+        controller: _mobileTEController,
         decoration: const InputDecoration(
-          hintText: 'Enter Your Number',
+          hintText: ('value'),
         ),
       ),
       actions:[
         TextButton(onPressed: (){
           Navigator.pop(context);
-        }, child: Text('Cancel',style: TextStyle(
-          color: Colors.red.shade400,
-          fontWeight: FontWeight.bold,
-        ),)),
+        },
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.grey.shade400
+        ), child: const Text('Cancel'),),
         TextButton(onPressed: (){},
-            child: Text('Save',style: TextStyle(
-              color: Colors.red.shade400,
-              fontWeight: FontWeight.bold,
-            ),)),
+          style: TextButton.styleFrom(
+              backgroundColor: Colors.red.shade800
+          ),
+            child: const Text('Save'),
+        ),
       ],
     );
   }

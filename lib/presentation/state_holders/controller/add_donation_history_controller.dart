@@ -34,6 +34,7 @@
 //
 // }
 import 'package:blood/data/network_caller/network_caller.dart';
+import 'package:blood/data/network_caller/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 
@@ -44,27 +45,25 @@ class DonationHistoryController extends GetxController {
   String _errorMessage = '';
   String get errorMessage => _errorMessage;
 
-  List<Donation> _donationList = [];
-  List<Donation> get donationList => _donationList;
-
-  Future<bool> addDonation(String date, String place) async {
+  Future<bool> addDonation( String place, String date) async {
     _inProgress = true;
     update();
-
-    final response = await NetworkCaller().postRequest(
+    final NetworkResponse response = await NetworkCaller().postRequest(
       Urls.storeDonationHistory,
       body: {
-        "donation_date": date,
         "donation_place": place,
+        "donation_date": date,
       },
     );
-
     _inProgress = false;
 
     if (response.isSuccess) {
-      _donationList.add(Donation(place: place, date: date));
-      update();
+       // place;
+       // date;
+       _errorMessage = ('New History added!');
+       update();
       return true;
+
     } else {
       _errorMessage = 'Add Donation Fail!';
       update();
@@ -73,12 +72,3 @@ class DonationHistoryController extends GetxController {
   }
 }
 
-class Donation {
-  String place;
-  String date;
-
-  Donation({
-    required this.place,
-    required this.date,
-  });
-}

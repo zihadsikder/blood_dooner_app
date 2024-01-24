@@ -3,6 +3,7 @@ import 'package:blood/presentation/ui/Widget/location_from.dart';
 import 'package:blood/presentation/ui/screens/search_result_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -29,7 +30,13 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar,
+      appBar: AppBar(
+        title: const Text("Find A Blood Donor"),
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -64,11 +71,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           if (_formKey.currentState!.validate()) {
                             final bool result =
                                 await donorController.searchDonor(
-                                    selectedUnion,
                                     selectedBloodGroup,
                                     selectedDivision,
                                     selectedDistrict,
-                                    selectedUpzila);
+                                    selectedUpzila,
+                                    selectedUnion,);
                             if (result) {
 
                             } else {
@@ -100,10 +107,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: userController.user!.data!.length,
                     itemBuilder: (context, index) {
+                      String formattedLastDonation = DateFormat('dd-mm-yyyy').format(
+                        userController.user!.data![index].lastDonation!.toLocal(),
+                      );
                       return SearchResultItem(
                         name: userController.user!.data![index].name ?? '',
                         bloodGroup: userController.user!.data![index].bloodGroup ?? '',
-                        lastDonation: userController.user!.data![index].lastDonation?.timeZoneName?.toString() ?? '',
+                        lastDonation: formattedLastDonation,
                         totalDonations: userController.user!.data![index].mobile?.toString() ?? '',
                         mobile: userController.user!.data![index].mobile?.toString() ?? '',
                         address: userController.user!.data![index].address?.postOffice ?? '',
@@ -116,16 +126,6 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  AppBar get buildAppBar {
-    return AppBar(
-      title: const Text("Find A Blood Donor"),
-      centerTitle: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
       ),
     );
   }

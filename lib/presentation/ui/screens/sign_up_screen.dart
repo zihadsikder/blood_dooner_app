@@ -28,11 +28,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _weightOver50Controller = false;
   bool _obscureText = true;
 
-  String selectedBloodGroup = '';
-  String selectedDivision = '';
-  String selectedDistrict= '';
-  String selectedUpzila= '';
-  String selectedUnion= '';
+  late String selectedBloodGroup ;
+  // String selectedDivision = '';
+  // String selectedDistrict= '';
+  // String selectedUpzila= '';
+  // String selectedUnion= '';
 
   // late final String selectedDivision;
   // late final String selectedDistrict;
