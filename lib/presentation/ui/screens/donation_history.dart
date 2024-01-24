@@ -1,5 +1,6 @@
 import 'package:blood/presentation/state_holders/controller/add_donation_history_controller.dart';
 import 'package:blood/presentation/state_holders/controller/get_donation_history_controller.dart';
+import 'package:blood/presentation/ui/Widget/alert_cancel_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -101,10 +102,9 @@ class _DonationState extends State<Donation> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              final bool result =
-                                  await donationHistoryController.addDonation(
-                                      _paceTEController.text.trim(),
-                                      _dateTEController.text.trim());
+                              final String place = _paceTEController.text.trim();
+                              final String date = _dateTEController.text.trim();
+                              final bool result = await donationHistoryController.addDonation(place, date);
                               if(result){
                                 _paceTEController.clear();
                                 _dateTEController.clear();
@@ -148,7 +148,6 @@ class _DonationState extends State<Donation> {
                   return ListView.builder(
                       itemCount: getDonationHistoryController.donorHistoryList.data?.length ?? 0,
                       itemBuilder: (context, index) {
-                        // Assuming Donation is a class with place and date properties
                         final donation = getDonationHistoryController.donorHistoryList.data![index];
 
                         return Padding(
@@ -179,14 +178,7 @@ class _DonationState extends State<Donation> {
                                     content: const Text(
                                         'Are You Sure! Want to delete your donation history?'),
                                     actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text(
-                                            'Cancel',
-                                            style: TextStyle(color: Colors.red),
-                                          )),
+                                      const AlertCancelButton(),
                                       TextButton(
                                           onPressed: () {},
                                           child: const Text(

@@ -1,4 +1,5 @@
 import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
+import 'package:blood/presentation/ui/Widget/logout_Alert.dart';
 import 'package:blood/presentation/ui/screens/donation_history.dart';
 import 'package:blood/presentation/ui/screens/login_screen.dart';
 import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
@@ -9,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'AC_Edit/ac_email_edit.dart';
 import 'AC_Edit/ac_mobile_edit.dart';
 import 'AC_Edit/ac_name_edit.dart';
+
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -52,6 +54,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     subtitle: const Text('Blood : Available'),
                     trailing: GestureDetector(
                         onTap: () {
+                          //Get.to(EditProfileScreen());
                           showDialog(
                               barrierDismissible: false,
                               context: context,
@@ -260,7 +263,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return aleartDailog(context);
+                        return const LogoutAlert();
                       });
                 },
                 child: const Text('Logout')),
@@ -302,28 +305,6 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  AlertDialog aleartDailog(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Alert!'),
-      content: const Text('Are You Sure!'),
-      actions: [
-        TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text(
-              'No',
-              style: TextStyle(color: Colors.red),
-            )),
-        TextButton(
-            onPressed: () {
-              Get.offAll(const LoginScreen());
-            },
-            child: const Text(
-              'Yes',
-              style: TextStyle(color: Colors.red),
-            )),
-      ],
-    );
-  }
 }
+
+

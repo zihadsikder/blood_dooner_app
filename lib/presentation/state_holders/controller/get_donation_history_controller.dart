@@ -14,23 +14,18 @@ class GetDonationHistoryController extends GetxController{
 
   bool get inProgress => _inProgress;
 
-
   Future<bool> getDonationList() async {
-    bool isSuccess = false;
     _inProgress = true;
     update();
-
     final NetworkResponse response = await NetworkCaller().getRequest(Urls.getDonorList);
     _inProgress = false;
-
     if (response.isSuccess) {
       _donorHistoryList = donorHistoryListFromJson(response.jsonResponse!);
-      isSuccess = true;
       update();
+      return true;
     } else {
       update();
+      return false;
     }
-    return isSuccess;
   }
-
 }
