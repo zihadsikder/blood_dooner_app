@@ -1,6 +1,6 @@
 import 'package:blood/data/model/registration_params.dart';
-import 'package:blood/data/network_caller/network_caller.dart';
-import 'package:blood/data/network_caller/network_response.dart';
+import 'package:blood/data/network/network_caller.dart';
+import 'package:blood/data/network/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 

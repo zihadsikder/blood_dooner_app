@@ -1,6 +1,7 @@
 import 'package:blood/presentation/state_holders/controller/add_donation_history_controller.dart';
 import 'package:blood/presentation/state_holders/controller/get_donation_history_controller.dart';
 import 'package:blood/presentation/ui/Widget/alert_cancel_button.dart';
+import 'package:blood/presentation/ui/Widget/snack_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -102,12 +103,15 @@ class _DonationState extends State<Donation> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              final String place = _paceTEController.text.trim();
-                              final String date = _dateTEController.text.trim();
-                              final bool result = await donationHistoryController.addDonation(place, date);
+                              final bool result = await donationHistoryController.addDonation(
+                                _paceTEController.text.trim(),
+                                _dateTEController.text.trim(),
+                              );
                               if(result){
-                                _paceTEController.clear();
-                                _dateTEController.clear();
+
+                                if (mounted) {
+                                  showSnackMessage(context, 'New History added!');
+                                }
                               }else{
                                 Get.showSnackbar(GetSnackBar(
                                   title: 'Add Donation Fail',

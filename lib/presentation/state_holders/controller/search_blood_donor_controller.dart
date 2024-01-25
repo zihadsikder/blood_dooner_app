@@ -1,5 +1,5 @@
 import 'package:blood/data/model/search_user_model.dart';
-import 'package:blood/data/network_caller/network_caller.dart';
+import 'package:blood/data/network/network_caller.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +12,8 @@ class SearchBloodDonorController extends GetxController {
   Future<bool> searchDonor(String bloodGroup, String upzila, String division, String district, String postOffice) async {
     _inProgress = true;
     update();
+
+    // print('blood: $bloodGroup, upzla: $upzila, ')
 
     final response = await NetworkCaller().getRequest(
         "${Urls.getSearchDonor}?"

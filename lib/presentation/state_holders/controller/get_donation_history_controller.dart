@@ -1,6 +1,6 @@
-import 'package:blood/data/model/donor_lhistory_list_model.dart';
-import 'package:blood/data/network_caller/network_caller.dart';
-import 'package:blood/data/network_caller/network_response.dart';
+import 'package:blood/data/model/donor_history_list_model.dart';
+import 'package:blood/data/network/network_caller.dart';
+import 'package:blood/data/network/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 

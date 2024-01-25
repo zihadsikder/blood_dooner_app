@@ -14,9 +14,10 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final SearchBloodDonorController userController =
-      Get.find<SearchBloodDonorController>();
+  Get.find<SearchBloodDonorController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String selectedBloodGroup = '';
+
+  String selectedBloodGroup = '' ;
   String selectedDivision = '';
   String selectedDistrict = '';
   String selectedUpzila = '';
@@ -52,8 +53,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   selectedUpzila: selectedUpzila,
                   selectedUnion: selectedUnion,
                   onBloodGroupSelected: (bloodGroup) {
+                    print('on blood select : $bloodGroup');
                     setState(() {
                       selectedBloodGroup = bloodGroup;
+                    });
+                  },
+                  onDivisionSelected: (data){
+                    setState(() {
+                      selectedDivision = data;
                     });
                   },
                 ),
@@ -62,38 +69,38 @@ class _SearchScreenState extends State<SearchScreen> {
                   width: double.infinity,
                   child: GetBuilder<SearchBloodDonorController>(
                       builder: (donorController) {
-                    return Visibility(
-                      visible: donorController.inProgress == false,
-                        replacement: const Center(
-                        child: CircularProgressIndicator()),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final bool result =
+                        return Visibility(
+                          visible: donorController.inProgress == false,
+                          replacement: const Center(
+                              child: CircularProgressIndicator()),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                final bool result =
                                 await donorController.searchDonor(
-                                    selectedBloodGroup,
-                                    selectedDivision,
-                                    selectedDistrict,
-                                    selectedUpzila,
-                                    selectedUnion,);
-                            if (result) {
+                                  selectedBloodGroup,
+                                  selectedDivision,
+                                  selectedDistrict,
+                                  selectedUpzila,
+                                  selectedUnion,);
+                                if (result) {
 
-                            } else {
-                              Get.showSnackbar(const GetSnackBar(
-                                title: 'Search Donor Fail',
-                                duration: Duration(seconds: 2),
-                                isDismissible: true,
-                                message: 'Try Again',
-                              ));
-                            }
-                          }
-                        },
-                        child: const Text(
-                          'Search',
-                        ),
-                      ),
-                    );
-                  }),
+                                } else {
+                                  Get.showSnackbar(const GetSnackBar(
+                                    title: 'Search Donor Fail',
+                                    duration: Duration(seconds: 2),
+                                    isDismissible: true,
+                                    message: 'Try Again',
+                                  ));
+                                }
+                              }
+                            },
+                            child: const Text(
+                              'Search',
+                            ),
+                          ),
+                        );
+                      }),
                 ),
                 const SizedBox(height: 16.0),
                 // Display search results as a ListView

@@ -2,8 +2,8 @@ import 'package:blood/data/model/address_response/District_responce.dart';
 import 'package:blood/data/model/address_response/division_response.dart';
 import 'package:blood/data/model/address_response/union_response.dart';
 import 'package:blood/data/model/address_response/upzila_response.dart';
-import 'package:blood/data/network_caller/network_caller.dart';
-import 'package:blood/data/network_caller/network_response.dart';
+import 'package:blood/data/network/network_caller.dart';
+import 'package:blood/data/network/network_response.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +30,12 @@ class LocationController extends GetxController {
     super.onInit();
     getDivision();
   }
+
+  onSelectDiv(int id ){
+    selectedDivisionName = divisionList![id].name;
+  }
+
+
   Future<void> getDivision() async {
     isLoading = true;
     final NetworkResponse response = await NetworkCaller().getRequest(Urls.getDivisionData);
@@ -86,4 +92,6 @@ Future<void> getUnion({required String id}) async {
     isLoading = false;
     update(); // Trigger a rebuild
 }
+
+
 }

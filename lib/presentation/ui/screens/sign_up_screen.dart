@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _weightOver50Controller = false;
   bool _obscureText = true;
 
-  late String selectedBloodGroup ;
+  String selectedBloodGroup = '' ;
 
   // late final String selectedDivision;
   // late final String selectedDistrict;
@@ -286,7 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         await signUpController.registration (
                                             registrationParams);
                                         if (result) {
-                                           showSnackMessage(context, signUpController.failureMessage);
+                                          showSnackMessage(context, signUpController.failureMessage);
                                           _clearTextFields();
                                           Get.to(() => const LoginScreen());
                                         } else {

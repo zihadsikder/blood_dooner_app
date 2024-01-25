@@ -1,5 +1,4 @@
-import 'package:blood/data/network_caller/network_caller.dart';
-import 'package:blood/data/network_caller/network_response.dart';
+import 'package:blood/data/network/network_caller.dart';
 import 'package:blood/data/utility/urls.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +12,9 @@ class DonationHistoryController extends GetxController {
   Future<bool> addDonation( String place, String date) async {
     _inProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller().postRequest(
+
+
+    final response = await NetworkCaller().postRequest(
       Urls.storeDonationHistory,
       body: {
         "donation_place": place,
@@ -22,6 +23,8 @@ class DonationHistoryController extends GetxController {
     );
     _inProgress = false;
     if (response.isSuccess) {
+      place;
+      date;
       update();
        _errorMessage = ('New History added!');
       return true;
