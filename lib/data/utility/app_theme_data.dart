@@ -44,13 +44,13 @@ class AppThemeData{
       //shadowColor: Colors.red.shade700,
       color: Colors.white,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(4.0),
           side: BorderSide(color: Colors.red.shade100)),
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         ),
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         textStyle: MaterialStateProperty.all<TextStyle>(
@@ -61,13 +61,21 @@ class AppThemeData{
         // Add other styles as needed
       ),
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
+    inputDecorationTheme: const InputDecorationTheme(
+      // contentPadding: const EdgeInsets.symmetric(
+      //   horizontal: 16,
+      //   vertical: 8,
+      // ),
+      fillColor: Colors.white,
+      filled: true,
+      border: OutlineInputBorder(
+        borderSide: BorderSide.none
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide.none,
       ),
       hintStyle: TextStyle(
-        color: Colors.grey.shade400,
+        color: Colors.grey,
       ),
 
     ),

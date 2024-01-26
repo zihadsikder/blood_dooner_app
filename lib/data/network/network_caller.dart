@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:get/get.dart';
 import 'package:http/http.dart';
+import '../../presentation/state_holders/controller/auth_controller.dart';
 import 'network_response.dart';
 
 class NetworkCaller {
-
+  AuthController auth = Get.find<AuthController>();
   Future<NetworkResponse> postRequest(String url,
       {Map<String, dynamic>? body, String? token}) async {
     try {
@@ -14,7 +16,7 @@ class NetworkCaller {
           Uri.parse(url),
           body: jsonEncode(body),
           headers: {
-            'token' : token.toString(),
+            'Authorization' : auth.model?.data != null ? "Bearer ${auth.model!.data.accessToken}" : "",
             'Content-Type': 'application/json'}
       );
       log(response.statusCode.toString());
@@ -45,7 +47,7 @@ class NetworkCaller {
       final response =
       await get(Uri.parse(url), headers: {
         'Content-type': 'Application/json',
-        'token' :token.toString(),
+        'Authorization' : auth.model?.data != null ? "Bearer ${auth.model!.data.accessToken}" : "",
       });
       log(response.headers.toString());
       log(response.statusCode.toString());

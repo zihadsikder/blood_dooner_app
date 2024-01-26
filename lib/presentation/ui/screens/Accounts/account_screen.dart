@@ -1,4 +1,5 @@
 import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
+import 'package:blood/presentation/state_holders/controller/get_donation_history_controller.dart';
 import 'package:blood/presentation/ui/Widget/logout_Alert.dart';
 import 'package:blood/presentation/ui/screens/donation_history.dart';
 import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
@@ -19,6 +20,9 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+
+  final getDonationHistoryController = Get.find<GetDonationHistoryController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +82,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             const SizedBox(
                               height: 5,
                             ),
-                            const Text('1'),
+                            Text('${getDonationHistoryController.donorHistoryList.data?.length ?? 0}'),
                             GestureDetector(
                                 onTap: () {
                                   Get.offAll(const Donation());

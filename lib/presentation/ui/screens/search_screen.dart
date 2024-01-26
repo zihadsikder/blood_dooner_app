@@ -1,3 +1,5 @@
+import 'package:blood/data/model/search_user_model.dart';
+import 'package:blood/presentation/state_holders/controller/location_controller.dart';
 import 'package:blood/presentation/state_holders/controller/search_blood_donor_controller.dart';
 import 'package:blood/presentation/ui/Widget/location_from.dart';
 import 'package:blood/presentation/ui/screens/search_result_item.dart';
@@ -15,18 +17,15 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final SearchBloodDonorController userController =
   Get.find<SearchBloodDonorController>();
+  final LocationController locationController = Get.find<LocationController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String selectedBloodGroup = '' ;
-  String selectedDivision = '';
-  String selectedDistrict = '';
-  String selectedUpzila = '';
-  String selectedUnion = '';
 
-  // late final String selectedDivision;
-  // late final String selectedDistrict;
-  // late final String selectedUpzila;
-  // late final String selectedUnion;
+  String get selectedDivision => locationController.selectedDivisionName?? '';
+  String get selectedDistrict => locationController.selectedDistrictName?? '';
+  String get selectedUpzila => locationController.selectedUpzilaName?? '';
+  String get selectedUnion => locationController.selectedUnionName?? '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: Form(
             key: _formKey,
             child: Column(
@@ -48,19 +47,14 @@ class _SearchScreenState extends State<SearchScreen> {
               children: [
                 LocationFormScreen(
                   selectedBloodGroup: selectedBloodGroup,
-                  selectedDivision: selectedDivision,
-                  selectedDistrict: selectedDistrict,
-                  selectedUpzila: selectedUpzila,
-                  selectedUnion: selectedUnion,
+                  selectedDivision: locationController.selectedDivisionName ?? '',
+                  selectedDistrict: locationController.selectedDistrictName ?? '',
+                  selectedUpzila: locationController.selectedUpzilaName ?? '',
+                  selectedUnion: locationController.selectedUnionName ?? '',
                   onBloodGroupSelected: (bloodGroup) {
                     print('on blood select : $bloodGroup');
                     setState(() {
                       selectedBloodGroup = bloodGroup;
-                    });
-                  },
-                  onDivisionSelected: (data){
-                    setState(() {
-                      selectedDivision = data;
                     });
                   },
                 ),
@@ -82,7 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   selectedDivision,
                                   selectedDistrict,
                                   selectedUpzila,
-                                  selectedUnion,);
+                                  selectedUnion);
                                 if (result) {
 
                                 } else {
@@ -124,6 +118,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         totalDonations: userController.user!.data![index].mobile?.toString() ?? '',
                         mobile: userController.user!.data![index].mobile?.toString() ?? '',
                         address: userController.user!.data![index].address?.postOffice ?? '',
+
                         // You can also include call and SMS functionality here
                       );
                     },

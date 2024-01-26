@@ -31,10 +31,6 @@ class LocationFormScreen extends StatefulWidget {
   // String selectedUpzila= '';
   // String selectedUnion= '';
   final Function(String)? onBloodGroupSelected;
-  final Function(String)? onDivisionSelected;
-  final Function(String)? onDistrictSelected;
-  final Function(String)? onUpozlaSelected;
-
   LocationFormScreen({
     super.key,
     required this.selectedBloodGroup,
@@ -43,9 +39,6 @@ class LocationFormScreen extends StatefulWidget {
     required this.selectedUpzila,
     required this.selectedUnion,
     required this.onBloodGroupSelected,
-    this.onDivisionSelected,
-    this.onDistrictSelected,
-    this.onUpozlaSelected,
   });
 
   Address getSelectedAddress() {
@@ -90,22 +83,23 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
             );
           }).toList(),
           decoration: const InputDecoration(
-            labelText: 'Blood Group',
+              labelText: 'Blood Group',
+            labelStyle: TextStyle(fontSize: 18)
           ),
-          validator: (String? value) {
-            if (value?.trim().isEmpty ?? true) {
-              return 'Enter your blood group';
-            }
-            return null;
-          },
+          // validator: (String? value) {
+          //   if (value?.trim().isEmpty ?? true) {
+          //     return 'Enter your blood group';
+          //   }
+          //   return null;
+          // },
         ),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 4.0),
         GetBuilder<LocationController>(builder: (locationController) {
           return DropdownButtonFormField<String>(
             value: locationController.selectedDivisionName,
             onChanged: (newValue) {
-              locationController.onSelectDiv(int.parse(newValue!));
-              locationController.getDistrict(id: newValue);
+              locationController.selectedDivisionName = newValue ?? '';
+              locationController.getDistrict(id: newValue!);
               locationController.update();
             },
             items: locationController.divisionList
@@ -119,15 +113,15 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
             decoration: const InputDecoration(
               labelText: 'Select Division',
             ),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Select your Division';
-              }
-              return null;
-            },
+            // validator: (String? value) {
+            //   if (value?.trim().isEmpty ?? true) {
+            //     return 'Select your Division';
+            //   }
+            //   return null;
+            // },
           );
         }),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 4.0),
         GetBuilder<LocationController>(builder: (locationController) {
           return DropdownButtonFormField<String>(
             value: locationController.selectedDistrictName,
@@ -147,15 +141,15 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
             decoration: const InputDecoration(
               labelText: 'Select District',
             ),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Select your District';
-              }
-              return null;
-            },
+            // validator: (String? value) {
+            //   if (value?.trim().isEmpty ?? true) {
+            //     return 'Select your District';
+            //   }
+            //   return null;
+            // },
           );
         }),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 4.0),
         GetBuilder<LocationController>(builder: (locationController) {
           return DropdownButtonFormField<String>(
             value: locationController.selectedUpzilaName,
@@ -174,15 +168,15 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
             decoration: const InputDecoration(
               labelText: 'Select Upzila',
             ),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Select your Upzila';
-              }
-              return null;
-            },
+            // validator: (String? value) {
+            //   if (value?.trim().isEmpty ?? true) {
+            //     return 'Select your Upzila';
+            //   }
+            //   return null;
+            // },
           );
         }),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 4.0),
         GetBuilder<LocationController>(builder: (locationController) {
           return DropdownButtonFormField<String>(
             value: locationController.selectedUnionName,
@@ -200,15 +194,15 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
             decoration: const InputDecoration(
               labelText: 'Select Union',
             ),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Select your Union';
-              }
-              return null;
-            },
+            // validator: (String? value) {
+            //   if (value?.trim().isEmpty ?? true) {
+            //     return 'Select your Union';
+            //   }
+            //   return null;
+            // },
           );
         }),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 4.0),
       ],
     );
   }

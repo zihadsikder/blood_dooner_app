@@ -16,7 +16,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _usernameTEController = TextEditingController();
-  final TextEditingController _mobileNumberTEController = TextEditingController();
+  final TextEditingController _mobileNumberTEController =
+      TextEditingController();
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
@@ -24,11 +25,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final LocationController locationController = Get.find<LocationController>();
 
-
   bool _weightOver50Controller = false;
   bool _obscureText = true;
 
-  String selectedBloodGroup = '' ;
+  String selectedBloodGroup = '';
 
   // late final String selectedDivision;
   // late final String selectedDistrict;
@@ -42,14 +42,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double h = MediaQuery
-        .of(context)
-        .size
-        .height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account Registration'),
@@ -58,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: SingleChildScrollView(
             child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -98,34 +92,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ],
                           ),
                         ),
+                        const SizedBox(height: 8),
                         TextFormField(
                           controller: _usernameTEController,
                           decoration: const InputDecoration(
-                            labelText: 'Username',
+                            labelText: 'User Name',
                           ),
                           validator: (String? value) {
-                            if (value
-                                ?.trim()
-                                .isEmpty ?? true) {
+                            if (value?.trim().isEmpty ?? true) {
                               return 'Enter your name';
                             }
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 8.0),
                         LocationFormScreen(
                           selectedBloodGroup: selectedBloodGroup,
-                          selectedDivision: locationController.selectedDivisionName ?? '',
-                          selectedDistrict: locationController.selectedDistrictName ?? '',
-                          selectedUpzila: locationController.selectedUpzilaName ?? '',
-                          selectedUnion: locationController.selectedUnionName ?? '',
+                          selectedDivision:
+                              locationController.selectedDivisionName ?? '',
+                          selectedDistrict:
+                              locationController.selectedDistrictName ?? '',
+                          selectedUpzila:
+                              locationController.selectedUpzilaName ?? '',
+                          selectedUnion:
+                              locationController.selectedUnionName ?? '',
                           onBloodGroupSelected: (bloodGroup) {
                             setState(() {
                               selectedBloodGroup = bloodGroup;
                             });
                           },
+
                         ),
-                        const SizedBox(height: 8.0),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: _emailTEController,
@@ -134,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           validator: (String? value) {
                             bool isValidEmail = RegExp(
-                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                    r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
                                 .hasMatch(value!);
 
                             if (!isValidEmail) {
@@ -143,7 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 8.0),
+                        const SizedBox(height: 4.0),
                         TextFormField(
                           controller: _mobileNumberTEController,
                           decoration: const InputDecoration(
@@ -152,14 +149,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           keyboardType: TextInputType.phone,
                           validator: (String? value) {
                             bool isValidPhoneNumber =
-                            RegExp(r"^0[0-9]{10}$").hasMatch(value!);
+                                RegExp(r"^0[0-9]{10}$").hasMatch(value!);
                             if (!isValidPhoneNumber) {
                               return 'Enter a valid 11-digit mobile number starting with 0';
                             }
                             return null;
                           },
                         ),
-                        const SizedBox(height: 8.0),
+                        const SizedBox(height: 4.0),
                         TextFormField(
                           controller: _dobController,
                           readOnly: true,
@@ -177,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     pickedDate != _dobController.text) {
                                   setState(() {
                                     _dobController.text =
-                                    "${pickedDate.toLocal()}".split(' ')[0];
+                                        "${pickedDate.toLocal()}".split(' ')[0];
                                   });
                                 }
                               },
@@ -187,15 +184,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           keyboardType: TextInputType.datetime,
                           validator: (String? value) {
-                            if (value
-                                ?.trim()
-                                .isEmpty ?? true) {
+                            if (value?.trim().isEmpty ?? true) {
                               return 'Enter your Date of Birth';
                             }
                             return null;
                           },
                         ),
-                        const SizedBox(height: 8.0),
+                        const SizedBox(height: 4.0),
                         TextFormField(
                           controller: _passwordTEController,
                           obscureText: _obscureText,
@@ -205,7 +200,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onPressed: () {
                                 setState(() {
                                   _obscureText =
-                                  !_obscureText; // Toggle the password visibility
+                                      !_obscureText; // Toggle the password visibility
                                 });
                               },
                               icon: Icon(
@@ -219,15 +214,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           keyboardType: TextInputType.visiblePassword,
                           validator: (String? value) {
-                            if (value
-                                ?.trim()
-                                .isEmpty ?? true) {
+                            if (value?.trim().isEmpty ?? true) {
                               return 'Enter your password';
                             }
                             return null;
                           },
                         ),
-                        const SizedBox(height: 8.0),
+                        const SizedBox(height: 4.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -257,65 +250,104 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 8.0),
                         GetBuilder<SignUpController>(
                             builder: (signUpController) {
-                              return Visibility(
-                                visible: signUpController.signUpInProgress == false,
-                                replacement: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        final registrationParams = RegistrationParams(
-                                          name: _usernameTEController.text.trim(),
-                                          mobile: _mobileNumberTEController.text.trim(),
-                                          email: _emailTEController.text.trim(),
-                                          dob: _dobController.text,
-                                          blood: selectedBloodGroup,
-                                          weight: _weightOver50Controller.toString(),
-                                          password: _passwordTEController.text,
-                                          address: Address(
-                                            divisionId: locationController.selectedDivisionName ?? '',
-                                            districtId: locationController.selectedDistrictName?? '',
-                                            areaId: locationController.selectedUpzilaName ?? '',
-                                            postOffice: locationController.selectedUnionName ?? '',
-                                          ),
-                                        );
-                                        final bool result =
-                                        await signUpController.registration (
-                                            registrationParams);
-                                        if (result) {
-                                          showSnackMessage(context, signUpController.failureMessage);
-                                          _clearTextFields();
-                                          Get.to(() => const LoginScreen());
-                                        } else {
-                                          Get.showSnackbar(GetSnackBar(
-                                            title: 'Complete profile failed',
-                                            message: signUpController.failureMessage,
-                                            duration: const Duration(seconds: 2),
-                                            isDismissible: true,
-                                          ));
-                                        }
+                          return Visibility(
+                            visible: signUpController.signUpInProgress == false,
+                            replacement: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    final registrationParams =
+                                        RegistrationParams(
+                                      name: _usernameTEController.text,
+                                      mobile:
+                                          _mobileNumberTEController.text.trim(),
+                                      email: _emailTEController.text.trim(),
+                                      dob: _dobController.text,
+                                      blood: selectedBloodGroup,
+                                      weight:
+                                          _weightOver50Controller.toString(),
+                                      password: _passwordTEController.text,
+                                      address: Address(
+                                        divisionId: locationController
+                                                .selectedDivisionName ??
+                                            '',
+                                        districtId: locationController
+                                                .selectedDistrictName ??
+                                            '',
+                                        areaId: locationController
+                                                .selectedUpzilaName ??
+                                            '',
+                                        postOffice: locationController
+                                                .selectedUnionName ??
+                                            '',
+                                      ),
+                                    );
+                                    if (selectedBloodGroup.isEmpty) {
+                                      showSnackMessage(context, 'Select your blood group');
+                                      return;
+                                    }
+
+                                    if (locationController.selectedDivisionName == null ||
+                                        locationController.selectedDivisionName!.isEmpty) {
+                                      showSnackMessage(context, 'Select your division');
+                                      return;
+                                    }
+
+                                    if (locationController.selectedDistrictName == null ||
+                                        locationController.selectedDistrictName!.isEmpty) {
+                                      showSnackMessage(context, 'Select your district');
+                                      return;
+                                    }
+
+                                    if (locationController.selectedUpzilaName == null ||
+                                        locationController.selectedUpzilaName!.isEmpty) {
+                                      showSnackMessage(context, 'Select your upzila');
+                                      return;
+                                    }
+
+                                    if (locationController.selectedUnionName == null ||
+                                        locationController.selectedUnionName!.isEmpty) {
+                                      showSnackMessage(context, 'Select your union');
+                                      return;
+                                    }
+                                    final bool result = await signUpController
+                                        .registration(registrationParams);
+                                    if (result) {
+                                      if(mounted) {
+                                        showSnackMessage(context,
+                                            signUpController.failureMessage);
+                                        _clearTextFields();
+                                        Get.to(() => const LoginScreen());
                                       }
-                                    },
-                                    child: const Text('Submit'),
-                                  ),
-                                ),
-                              );
-                            }),
+                                    } else {
+                                      Get.showSnackbar(GetSnackBar(
+                                        title: 'Complete profile failed',
+                                        message:
+                                            signUpController.failureMessage,
+                                        duration: const Duration(seconds: 2),
+                                        isDismissible: true,
+                                      ));
+                                    }
+                                  }
+                                },
+                                child: const Text('Submit'),
+                              ),
+                            ),
+                          );
+                        }),
                         const SizedBox(
-                          height: 18,
+                          height: 12,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               "Have an account?",
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .bodySmall,
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                             TextButton(
                               onPressed: () {
@@ -340,7 +372,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _dobController.clear();
     _mobileNumberTEController.clear();
     _passwordTEController.clear();
-
   }
 
   @override

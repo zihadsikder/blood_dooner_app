@@ -267,12 +267,12 @@ class _LoginScreenState extends State<LoginScreen> {
             keyboardType: TextInputType.number,
             controller: _numberTEController,
             decoration: const InputDecoration(
-                hintText: "Email",
+                hintText: "Mobile",
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
-                return 'Enter value';
+                return 'Enter Your Number';
               }
               return null;
             },

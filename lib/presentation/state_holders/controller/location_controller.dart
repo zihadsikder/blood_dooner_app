@@ -31,11 +31,6 @@ class LocationController extends GetxController {
     getDivision();
   }
 
-  onSelectDiv(int id ){
-    selectedDivisionName = divisionList![id].name;
-  }
-
-
   Future<void> getDivision() async {
     isLoading = true;
     final NetworkResponse response = await NetworkCaller().getRequest(Urls.getDivisionData);

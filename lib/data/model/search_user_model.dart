@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final mSearchUserModel = mSearchUserModelFromJson(jsonString);
+
 import 'dart:convert';
 
 MSearchUserModel mSearchUserModelFromJson(String str) => MSearchUserModel.fromJson(json.decode(str));
