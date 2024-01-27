@@ -23,7 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final LocationController locationController = Get.find<LocationController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String selectedBloodGroup = '' ;
+  String selectedBloodGroup = 'A+' ;
 
   String get selectedDivision => locationController.selectedDivisionName?? '';
   String get selectedDistrict => locationController.selectedDistrictName?? '';

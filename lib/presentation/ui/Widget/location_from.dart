@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class LocationFormScreen extends StatefulWidget {
   final List<String> bloodGroups = [
-    '',
+    ' ',
     'A+',
     'A-',
     'AB+',

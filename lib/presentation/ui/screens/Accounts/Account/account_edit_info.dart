@@ -1,3 +1,4 @@
+import 'package:blood/presentation/ui/Widget/alert_cancel_button.dart';
 import 'package:blood/presentation/ui/Widget/location_from.dart';
 import 'package:flutter/material.dart';
 
@@ -35,12 +36,14 @@ class _AcNameState extends State<AcName> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Container(height: 1, color: Colors.grey.shade100),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Mobile',
+                hintText: 'Name',
               ),
             ),
-            const SizedBox(height: 4.0),
+            Container(height: 1, color: Colors.grey.shade100),
+            const SizedBox(height: 8.0),
             LocationFormScreen(
             selectedBloodGroup: selectedBloodGroup,
             selectedDivision: selectedDivision,
@@ -53,29 +56,26 @@ class _AcNameState extends State<AcName> {
                 });
               },
             ),
+            Container(height: 1, color: Colors.grey.shade100),
             TextFormField(
               controller: _mobileTEController,
               decoration: const InputDecoration(
-                hintText: ('Name'),
+                hintText: ('Mobile'),
               ),
             ),
-            const SizedBox(height: 1),
+            Container(height: 1, color: Colors.grey.shade100),
             TextFormField(
               controller: _emailTEController,
               decoration: const InputDecoration(
                 hintText: ('Email'),
               ),
             ),
+            Container(height: 1, color: Colors.grey.shade100),
           ],
         ),
       ),
       actions: [
-        TextButton(onPressed: (){
-          Navigator.pop(context);
-        },
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.grey.shade400
-          ), child: const Text('Cancel',),),
+        const AlertCancelButton(),
         TextButton(onPressed: (){},
           style: TextButton.styleFrom(
               backgroundColor: Colors.red.shade800

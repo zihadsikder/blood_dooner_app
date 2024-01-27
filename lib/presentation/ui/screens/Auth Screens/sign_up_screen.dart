@@ -28,12 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _weightOver50Controller = false;
   bool _obscureText = true;
 
-  String selectedBloodGroup = '';
-
-  // late final String selectedDivision;
-  // late final String selectedDistrict;
-  // late final String selectedUpzila;
-  // late final String selectedUnion;
+  String selectedBloodGroup = ' ';
 
   @override
   void initState() {
@@ -215,7 +210,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           keyboardType: TextInputType.visiblePassword,
                           validator: (String? value) {
                             if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your password';
+                              return 'Enter A Strong password';
+                            } else if (value!.length < 8) {
+                              return 'Password must be at least 8 characters long';
                             }
                             return null;
                           },
