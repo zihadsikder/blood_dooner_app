@@ -244,60 +244,7 @@ class _AccountScreenState extends State<AccountScreen> {
             const SizedBox(
               height: 16,
             ),
-            ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Row(
-                            children: [
-                              const Text("Ready to Leave?",
-                                  style: TextStyle(fontSize: 16)),
-                              const Spacer(),
-                              IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(
-                                      Icons.highlight_remove_outlined))
-                            ],
-                          ),
-                          content: const Text(
-                              'Select "Logout" below if you are ready to end your current session.'),
-                          actions: [
-                            const AlertCancelButton(),
-                            GetBuilder<LogoutController>(
-                                builder: (logoutController) {
-                              return Visibility(
-                                visible:
-                                    logoutController.logoutInProgress == false,
-                                replacement: const Center(
-                                    child: CircularProgressIndicator()),
-                                child: TextButton(
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      final bool result =
-                                          await logoutController.logout();
-                                      if (result) {
-                                        Get.offAll(() => const LoginScreen());
-                                      } else {
-                                        // Handle the case when logout fails
-                                      }
-                                    }
-                                  },
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Colors.red.shade800),
-                                  child: const Text('Logout',
-                                      style: TextStyle(color: Colors.white)),
-                                ),
-                              );
-                            }),
-                          ],
-                        );
-                      });
-                },
-                child: const Text('Logout')),
+            buildLogoutElevatedButton(context),
           ],
         ),
       ),
@@ -312,6 +259,63 @@ class _AccountScreenState extends State<AccountScreen> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  ElevatedButton buildLogoutElevatedButton(BuildContext context) {
+    return ElevatedButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Row(
+                          children: [
+                            const Text("Ready to Leave?",
+                                style: TextStyle(fontSize: 16)),
+                            const Spacer(),
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(
+                                    Icons.highlight_remove_outlined))
+                          ],
+                        ),
+                        content: const Text(
+                            'Select "Logout" below if you are ready to end your current session.'),
+                        actions: [
+                          const AlertCancelButton(),
+                          GetBuilder<LogoutController>(
+                              builder: (logoutController) {
+                            return Visibility(
+                              visible:
+                                  logoutController.logoutInProgress == false,
+                              replacement: const Center(
+                                  child: CircularProgressIndicator()),
+                              child: TextButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    final bool result =
+                                        await logoutController.logout();
+                                    if (result) {
+                                      Get.offAll(() => const LoginScreen());
+                                    } else {
+                                      // Handle the case when logout fails
+                                    }
+                                  }
+                                },
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.red.shade800),
+                                child: const Text('Logout',
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            );
+                          }),
+                        ],
+                      );
+                    });
+              },
+              child: const Text('Logout'));
   }
 
   AppBar buildAppBar(BuildContext context) {

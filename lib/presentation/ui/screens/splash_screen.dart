@@ -63,46 +63,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-// class SplashScreen extends StatefulWidget {
-//   const SplashScreen({Key? key}) : super(key: key);
-//
-//   @override
-//   State<SplashScreen> createState() => _SplashScreenState();
-// }
-//
-// class _SplashScreenState extends State<SplashScreen> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     checkAuthState();
-//   }
-//
-//   Future<void> checkAuthState() async {
-//     final bool isLogin = await Get.find<AuthController>().checkAuthState();
-//     await Future.delayed(const Duration(seconds: 2));
-//     if (isLogin) {
-//       Get.offAll(() => const MainBottomNavScreen());
-//     } else {
-//       Get.offAll(() => const LoginScreen());
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Scaffold(
-//       body: Center(
-//         child: Column(
-//           children: [
-//             Spacer(),
-//             AppLogo(),
-//             Spacer(),
-//             CircularProgressIndicator(),
-//             SizedBox(height: 8.0),
-//             Text('Version 1.0'),
-//             SizedBox(height: 8.0),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+

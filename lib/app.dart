@@ -15,8 +15,8 @@ class BloodApp extends StatelessWidget {
       title: 'Blood Donor App',
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      //home: const SplashScreen(),
-      home: const LoginScreen(),
+      home: const SplashScreen(),
+      //home: const LoginScreen(),
       theme: AppThemeData.lightThemeData,
       initialBinding: ControllerBinder(),
     );
