@@ -21,6 +21,9 @@ class _DonationState extends State<Donation> {
   final TextEditingController _dateTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  // final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+  //     GlobalKey<RefreshIndicatorState>();
+
   @override
   void initState() {
     super.initState();
@@ -64,39 +67,7 @@ class _DonationState extends State<Donation> {
                     },
                   ),
                   Container(height: 2, color: Colors.grey.shade100),
-                  TextFormField(
-                    controller: _dateTEController,
-                    decoration: InputDecoration(
-                      hintText: 'Date of Donation',
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide.none),
-                      suffixIcon: IconButton(
-                        onPressed: () async {
-                          DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1950),
-                            lastDate: DateTime(2050),
-                          );
-                          if (pickedDate != null &&
-                              pickedDate != _dateTEController.text) {
-                            setState(() {
-                              _dateTEController.text =
-                                  "${pickedDate.toLocal()}".split(' ')[0];
-                            });
-                          }
-                        },
-                        icon: const Icon(Icons.calendar_today,
-                            color: Colors.grey),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value?.trim().isEmpty ?? true) {
-                        return 'Enter Donation Date';
-                      }
-                      return null;
-                    },
-                  ),
+                  dateOfDonationField(context),
                   const SizedBox(
                     height: 8,
                   ),
@@ -148,10 +119,52 @@ class _DonationState extends State<Donation> {
           const SizedBox(
             height: 4.0,
           ),
-          getDonorList,
+          getDonorList
+          // RefreshIndicator(
+          //     key: _refreshIndicatorKey,
+          //     onRefresh: () async {
+          //       await _getDonationHistoryController.getDonationList();
+          //     },
+          //     child: getDonorList),
         ],
       ),
     );
+  }
+
+  TextFormField dateOfDonationField(BuildContext context) {
+    return TextFormField(
+                  controller: _dateTEController,
+                  decoration: InputDecoration(
+                    hintText: 'Date of Donation',
+                    border:
+                        const OutlineInputBorder(borderSide: BorderSide.none),
+                    suffixIcon: IconButton(
+                      onPressed: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1950),
+                          lastDate: DateTime(2050),
+                        );
+                        if (pickedDate != null &&
+                            pickedDate != _dateTEController.text) {
+                          setState(() {
+                            _dateTEController.text =
+                                "${pickedDate.toLocal()}".split(' ')[0];
+                          });
+                        }
+                      },
+                      icon: const Icon(Icons.calendar_today,
+                          color: Colors.grey),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return 'Enter Donation Date';
+                    }
+                    return null;
+                  },
+                );
   }
 
   Expanded get getDonorList {

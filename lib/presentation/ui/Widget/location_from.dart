@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 class LocationFormScreen extends StatefulWidget {
   final List<String> bloodGroups = [
-    ' ',
     'A+',
     'A-',
     'AB+',
@@ -64,23 +63,7 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DropdownButtonFormField<String>(
-          value: widget.selectedBloodGroup,
-          onChanged: (newValue) {
-            setState(() {
-              widget.onBloodGroupSelected!(newValue!);
-            });
-          },
-          items:
-              widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          decoration: const InputDecoration(
-              labelText: 'Blood Group', labelStyle: TextStyle(fontSize: 18)),
-        ),
+        bloodDropdownButtonFormField,
         const SizedBox(height: 4.0),
 
         GetBuilder<LocationController>(builder: (locationController) {
@@ -173,5 +156,25 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
         const SizedBox(height: 4.0),
       ],
     );
+  }
+
+  DropdownButtonFormField<String> get bloodDropdownButtonFormField {
+    return DropdownButtonFormField<String>(
+        value: widget.selectedBloodGroup,
+        onChanged: (newValue) {
+          setState(() {
+            widget.onBloodGroupSelected!(newValue!);
+          });
+        },
+        items:
+            widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        decoration: const InputDecoration(
+            labelText: 'Blood Group', labelStyle: TextStyle(fontSize: 18)),
+      );
   }
 }

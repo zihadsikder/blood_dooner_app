@@ -1,8 +1,8 @@
 import 'package:blood/presentation/state_holders/controller/login_controller.dart';
 import 'package:blood/presentation/ui/Widget/snack_message.dart';
 import 'package:blood/presentation/ui/screens/Auth%20Screens/forgot_password_screen.dart';
+import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
 import 'package:get/get.dart';
-import '../main_bottom_nav_screens.dart';
 import 'sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final LoginController _loginController = Get.find<LoginController>();
+
   bool _obscureText = true;
 
   @override
@@ -303,25 +304,24 @@ class _LoginScreenState extends State<LoginScreen> {
             obscureText: _obscureText,
             // Use a boolean variable to toggle password visibility
             decoration: InputDecoration(
-              hintText: 'Password',
-              hintStyle: const TextStyle(color: Colors.grey),
-              border: InputBorder.none,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    _obscureText =
-                        !_obscureText; // Toggle the password visibility
-                  });
-                },
-                icon: Icon(
-                  _obscureText ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.grey, // Customize the icon color as needed
-                ),
-              ),
-            ),
+                hintText: 'Password',
+                hintStyle: const TextStyle(color: Colors.grey),
+                border: InputBorder.none,
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _obscureText =
+                          !_obscureText; // Toggle the password visibility
+                    });
+                  },
+                  icon: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.grey, // Customize the icon color as needed
+                  ),
+                )),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
-                return 'Enter your password';
+                return 'Enter Correct Password';
               }
               return null;
             },
@@ -332,20 +332,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Future<void> login() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     return;
-  //   }
-  //   final result = await _loginController.login(
-  //       _numberTEController.text.trim(), _passwordTEController.text);
-  //
-  //   if (result) {
-  //     Get.to(()=>const MainBottomNavScreen());
-  //   }
-  //   else{
-  //     showSnackMessage(context, _loginController.failureMessage);
-  //   }
-  // }
   @override
   void dispose() {
     _numberTEController.dispose();

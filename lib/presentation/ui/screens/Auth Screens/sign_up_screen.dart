@@ -1,9 +1,9 @@
 import 'package:blood/data/model/registration_params.dart';
 import 'package:blood/presentation/state_holders/controller/location_controller.dart';
 import 'package:blood/presentation/state_holders/controller/sign_up_controller.dart';
+import 'package:blood/presentation/ui/Widget/location_from.dart';
 import 'package:blood/presentation/ui/Widget/snack_message.dart';
 import 'package:get/get.dart';
-import '../../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _weightOver50Controller = false;
   bool _obscureText = true;
 
-  String selectedBloodGroup = ' ';
+  String selectedBloodGroup = 'A+';
 
   @override
   void initState() {
@@ -101,23 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 8.0),
-                        LocationFormScreen(
-                          selectedBloodGroup: selectedBloodGroup,
-                          selectedDivision:
-                              locationController.selectedDivisionName ?? '',
-                          selectedDistrict:
-                              locationController.selectedDistrictName ?? '',
-                          selectedUpzila:
-                              locationController.selectedUpzilaName ?? '',
-                          selectedUnion:
-                              locationController.selectedUnionName ?? '',
-                          onBloodGroupSelected: (bloodGroup) {
-                            setState(() {
-                              selectedBloodGroup = bloodGroup;
-                            });
-                          },
-
-                        ),
+                        bloodAndLocation,
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: _emailTEController,
@@ -152,71 +136,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 4.0),
-                        TextFormField(
-                          controller: _dobController,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            labelText: 'Date of Birth',
-                            suffixIcon: IconButton(
-                              onPressed: () async {
-                                DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1950),
-                                  lastDate: DateTime(2050),
-                                );
-                                if (pickedDate != null &&
-                                    pickedDate != _dobController.text) {
-                                  setState(() {
-                                    _dobController.text =
-                                        "${pickedDate.toLocal()}".split(' ')[0];
-                                  });
-                                }
-                              },
-                              icon: const Icon(Icons.calendar_today,
-                                  color: Colors.grey),
-                            ),
-                          ),
-                          keyboardType: TextInputType.datetime,
-                          validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your Date of Birth';
-                            }
-                            return null;
-                          },
-                        ),
+                        dobTextFormField(context),
                         const SizedBox(height: 4.0),
-                        TextFormField(
-                          controller: _passwordTEController,
-                          obscureText: _obscureText,
-                          decoration: InputDecoration(
-                            labelText: 'Enter Password',
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _obscureText =
-                                      !_obscureText; // Toggle the password visibility
-                                });
-                              },
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors
-                                    .grey, // Customize the icon color as needed
-                              ),
-                            ),
-                          ),
-                          keyboardType: TextInputType.visiblePassword,
-                          validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter A Strong password';
-                            } else if (value!.length < 8) {
-                              return 'Password must be at least 8 characters long';
-                            }
-                            return null;
-                          },
-                        ),
+                        passwordTextFormField,
                         const SizedBox(height: 4.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,37 +206,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     );
                                     if (selectedBloodGroup.isEmpty) {
-                                      showSnackMessage(context, 'Select your blood group');
+                                      showSnackMessage(
+                                          context, 'Select your blood group');
                                       return;
                                     }
 
-                                    if (locationController.selectedDivisionName == null ||
-                                        locationController.selectedDivisionName!.isEmpty) {
-                                      showSnackMessage(context, 'Select your division');
+                                    if (locationController
+                                                .selectedDivisionName ==
+                                            null ||
+                                        locationController
+                                            .selectedDivisionName!.isEmpty) {
+                                      showSnackMessage(
+                                          context, 'Select your division');
                                       return;
                                     }
 
-                                    if (locationController.selectedDistrictName == null ||
-                                        locationController.selectedDistrictName!.isEmpty) {
-                                      showSnackMessage(context, 'Select your district');
+                                    if (locationController
+                                                .selectedDistrictName ==
+                                            null ||
+                                        locationController
+                                            .selectedDistrictName!.isEmpty) {
+                                      showSnackMessage(
+                                          context, 'Select your district');
                                       return;
                                     }
 
-                                    if (locationController.selectedUpzilaName == null ||
-                                        locationController.selectedUpzilaName!.isEmpty) {
-                                      showSnackMessage(context, 'Select your upzila');
+                                    if (locationController.selectedUpzilaName ==
+                                            null ||
+                                        locationController
+                                            .selectedUpzilaName!.isEmpty) {
+                                      showSnackMessage(
+                                          context, 'Select your upzila');
                                       return;
                                     }
 
-                                    if (locationController.selectedUnionName == null ||
-                                        locationController.selectedUnionName!.isEmpty) {
-                                      showSnackMessage(context, 'Select your union');
+                                    if (locationController.selectedUnionName ==
+                                            null ||
+                                        locationController
+                                            .selectedUnionName!.isEmpty) {
+                                      showSnackMessage(
+                                          context, 'Select your union');
                                       return;
                                     }
                                     final bool result = await signUpController
                                         .registration(registrationParams);
                                     if (result) {
-                                      if(mounted) {
+                                      if (mounted) {
                                         showSnackMessage(context,
                                             signUpController.failureMessage);
                                         _clearTextFields();
@@ -360,6 +297,84 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ]),
                 ))),
       ),
+    );
+  }
+
+  TextFormField get passwordTextFormField {
+    return TextFormField(
+      controller: _passwordTEController,
+      obscureText: _obscureText,
+      decoration: InputDecoration(
+        labelText: 'Enter Password',
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText; // Toggle the password visibility
+            });
+          },
+          icon: Icon(
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+            color: Colors.grey, // Customize the icon color as needed
+          ),
+        ),
+      ),
+      keyboardType: TextInputType.visiblePassword,
+      validator: (String? value) {
+        if (value?.trim().isEmpty ?? true) {
+          return 'Enter A Strong password';
+        } else if (value!.length < 8) {
+          return 'Password must be at least 8 characters long';
+        }
+        return null;
+      },
+    );
+  }
+
+  TextFormField dobTextFormField(BuildContext context) {
+    return TextFormField(
+      controller: _dobController,
+      readOnly: true,
+      decoration: InputDecoration(
+        labelText: 'Date of Birth',
+        suffixIcon: IconButton(
+          onPressed: () async {
+            DateTime? pickedDate = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1950),
+              lastDate: DateTime(2050),
+            );
+            if (pickedDate != null && pickedDate != _dobController.text) {
+              setState(() {
+                _dobController.text = "${pickedDate.toLocal()}".split(' ')[0];
+              });
+            }
+          },
+          icon: const Icon(Icons.calendar_today, color: Colors.grey),
+        ),
+      ),
+      keyboardType: TextInputType.datetime,
+      validator: (String? value) {
+        if (value?.trim().isEmpty ?? true) {
+          return 'Enter your Date of Birth';
+        }
+        return null;
+      },
+    );
+  }
+
+  LocationFormScreen get bloodAndLocation {
+    return LocationFormScreen(
+      selectedBloodGroup: selectedBloodGroup,
+      selectedDivision: locationController.selectedDivisionName ?? '',
+      selectedDistrict: locationController.selectedDistrictName ?? '',
+      selectedUpzila: locationController.selectedUpzilaName ?? '',
+      selectedUnion: locationController.selectedUnionName ?? '',
+      onBloodGroupSelected: (bloodGroup) {
+        setState(() {
+          selectedBloodGroup = bloodGroup;
+        });
+      },
     );
   }
 
