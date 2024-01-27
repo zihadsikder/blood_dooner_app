@@ -18,7 +18,7 @@ class LoginController extends GetxController {
     _loginInProgress.value = true;
     update();
 
-    NetworkResponse response = await NetworkCaller().postRequest(Urls.login,
+    final NetworkResponse response = await NetworkCaller().postRequest(Urls.login,
         body: {"mobile": mobile, "password": password},);
     _loginInProgress.value = false;
 

@@ -55,6 +55,7 @@ class LocationFormScreen extends StatefulWidget {
 }
 
 class _LocationFormScreenState extends State<LocationFormScreen> {
+
   final LocationController locationController = Get.find<LocationController>();
 
   @override

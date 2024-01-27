@@ -1,3 +1,4 @@
+import 'package:blood/presentation/ui/Widget/profile_summary_card.dart';
 import 'package:blood/presentation/ui/screens/search_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _searchController = TextEditingController();
+  //final TextEditingController _searchController = TextEditingController();
   final List<String> imageUrls = [
     'assets/rltn.png',
     'assets/donation.png',
@@ -26,42 +27,51 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Column(
             children: [
-              carousalSlider,
-              const SizedBox(height: 32),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SearchScreen()));
-                  },
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search,
-                        size: 32,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        'Search A Donor',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ],
-                  )),
-              Image.asset('assets/savelife.png'),
+              const ProfileSummaryCard(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: carousalSlider,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SearchScreen()));
+                        },
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search,
+                              size: 32,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              'Search A Donor',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ],
+                        )),
+                    Image.asset('assets/savelife.png'),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

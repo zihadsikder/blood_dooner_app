@@ -10,6 +10,7 @@ class Urls {
   static const String storeDonationHistory = '$_baseUrl/store-donation';
   static const String getDonorList = '$_baseUrl/donation-list?';
   static const String getSearchDonor= '$_baseUrl/search-donar?';
+  static const String logout= '$_baseUrl/auth/logout';
 
 
 }

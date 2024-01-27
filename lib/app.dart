@@ -1,4 +1,4 @@
-import 'package:blood/presentation/ui/screens/login_screen.dart';
+import 'package:blood/presentation/ui/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controller_binder.dart';
@@ -9,11 +9,12 @@ class BloodApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       title: 'Blood Donor App',
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home: const SplashScreen(),
       theme: AppThemeData.lightThemeData,
       initialBinding: ControllerBinder(),
     );

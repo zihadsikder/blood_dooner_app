@@ -2,11 +2,10 @@ import 'package:blood/presentation/state_holders/controller/add_donation_history
 import 'package:blood/presentation/state_holders/controller/get_donation_history_controller.dart';
 import 'package:blood/presentation/ui/Widget/alert_cancel_button.dart';
 import 'package:blood/presentation/ui/Widget/snack_message.dart';
+import 'package:blood/presentation/ui/screens/Accounts/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
-import 'Accounts/account_screen.dart';
 
 class Donation extends StatefulWidget {
   const Donation({super.key});
@@ -36,7 +35,7 @@ class _DonationState extends State<Donation> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.offAll(const AccountScreen());
+            Get.offAll(()=> const AccountScreen());
           },
         ),
       ),
@@ -69,10 +68,7 @@ class _DonationState extends State<Donation> {
                       return null;
                     },
                   ),
-                  const SizedBox(
-                    height: 4,
-
-                  ),
+                  Container(height:2, color: Colors.grey.shade100),
                   TextFormField(
                     controller: _dateTEController,
                     decoration: InputDecoration(
@@ -159,7 +155,7 @@ class _DonationState extends State<Donation> {
             ),
           ),
           const SizedBox(
-            height: 8.0,
+            height: 4.0,
           ),
           getDonorList,
         ],

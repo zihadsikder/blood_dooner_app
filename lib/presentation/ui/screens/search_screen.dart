@@ -1,4 +1,4 @@
-import 'package:blood/data/model/search_user_model.dart';
+import 'package:blood/presentation/state_holders/controller/get_donation_history_controller.dart';
 import 'package:blood/presentation/state_holders/controller/location_controller.dart';
 import 'package:blood/presentation/state_holders/controller/search_blood_donor_controller.dart';
 import 'package:blood/presentation/ui/Widget/location_from.dart';
@@ -15,6 +15,9 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
+  final getDonationHistoryController = Get.find<GetDonationHistoryController>();
+
   final SearchBloodDonorController userController =
   Get.find<SearchBloodDonorController>();
   final LocationController locationController = Get.find<LocationController>();
@@ -39,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           child: Form(
             key: _formKey,
             child: Column(
@@ -52,7 +55,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   selectedUpzila: locationController.selectedUpzilaName ?? '',
                   selectedUnion: locationController.selectedUnionName ?? '',
                   onBloodGroupSelected: (bloodGroup) {
-                    print('on blood select : $bloodGroup');
                     setState(() {
                       selectedBloodGroup = bloodGroup;
                     });
@@ -115,7 +117,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         name: userController.user!.data![index].name ?? '',
                         bloodGroup: userController.user!.data![index].bloodGroup ?? '',
                         lastDonation: formattedLastDonation,
-                        totalDonations: userController.user!.data![index].mobile?.toString() ?? '',
+                        totalDonations: getDonationHistoryController.donorHistoryList.data?.length.toString() ?? '',
+                        // totalDonations: userController.user!.data![index].mobile?.toString() ?? '',
                         mobile: userController.user!.data![index].mobile?.toString() ?? '',
                         address: userController.user!.data![index].address?.postOffice ?? '',
 

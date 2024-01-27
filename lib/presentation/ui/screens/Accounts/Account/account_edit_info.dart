@@ -9,6 +9,10 @@ class AcName extends StatefulWidget {
 }
 
 class _AcNameState extends State<AcName> {
+
+  final TextEditingController _mobileTEController = TextEditingController();
+  final TextEditingController _emailTEController = TextEditingController();
+
   String selectedBloodGroup = 'A+';
   String selectedDivision = 'Select Division';
   String selectedDistrict = ' ';
@@ -33,10 +37,10 @@ class _AcNameState extends State<AcName> {
           children: [
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Type Your Name',
+                hintText: 'Mobile',
               ),
             ),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 4.0),
             LocationFormScreen(
             selectedBloodGroup: selectedBloodGroup,
             selectedDivision: selectedDivision,
@@ -48,6 +52,19 @@ class _AcNameState extends State<AcName> {
                   selectedBloodGroup = bloodGroup;
                 });
               },
+            ),
+            TextFormField(
+              controller: _mobileTEController,
+              decoration: const InputDecoration(
+                hintText: ('Name'),
+              ),
+            ),
+            const SizedBox(height: 1),
+            TextFormField(
+              controller: _emailTEController,
+              decoration: const InputDecoration(
+                hintText: ('Email'),
+              ),
             ),
           ],
         ),

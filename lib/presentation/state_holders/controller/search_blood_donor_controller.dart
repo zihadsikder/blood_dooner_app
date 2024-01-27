@@ -26,7 +26,6 @@ class SearchBloodDonorController extends GetxController {
 
     if (response.isSuccess) {
       user = mSearchUserModelFromJson(response.jsonResponse!);
-      print("============================$user");
       update();
       return true;
     } else {

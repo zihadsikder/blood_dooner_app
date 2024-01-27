@@ -32,7 +32,9 @@ class AuthController extends GetxController {
 
   Future<UserModel?> _getUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     final String? strUserModel = sharedPreferences.getString('model');
+
     if (strUserModel == null) {
       return null;
     } else {

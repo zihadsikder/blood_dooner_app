@@ -161,11 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.red, fontSize: 20),
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                          const SignUpScreen()));
+                                  Get.to(()=> const SignUpScreen());
                                 },
                               )
                             ],
@@ -318,14 +314,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> login() async {
-    if (!_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       return;
     }
     final isLoggedIn = await _loginController.login(
         _numberTEController.text.trim(), _passwordTEController.text);
 
     if (isLoggedIn) {
-      Get.to(const MainBottomNavScreen());
+      Get.to(()=>const MainBottomNavScreen());
     }
     else{
       showSnackMessage(context, _loginController.failureMessage);

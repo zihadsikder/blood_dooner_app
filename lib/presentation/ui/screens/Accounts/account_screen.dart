@@ -1,16 +1,15 @@
 import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
 import 'package:blood/presentation/state_holders/controller/get_donation_history_controller.dart';
-import 'package:blood/presentation/ui/Widget/logout_Alert.dart';
+import 'package:blood/presentation/state_holders/controller/logout_controller.dart';
+import 'package:blood/presentation/ui/Widget/alert_cancel_button.dart';
 import 'package:blood/presentation/ui/screens/donation_history.dart';
+import 'package:blood/presentation/ui/screens/login_screen.dart';
 import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
 import 'package:blood/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'AC_Edit/ac_email_edit.dart';
-import 'AC_Edit/ac_mobile_edit.dart';
-import 'AC_Edit/ac_name_edit.dart';
-
+import 'Account/account_edit_info.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -22,6 +21,8 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
 
   final getDonationHistoryController = Get.find<GetDonationHistoryController>();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,107 +37,110 @@ class _AccountScreenState extends State<AccountScreen> {
                 side: const BorderSide(width: 0, color: Colors.transparent),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Column(
-                children: [
-                  ListTile(
-                    shape: RoundedRectangleBorder(
-                      side:
-                          const BorderSide(width: 0, color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(8),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    ListTile(
+                      shape: RoundedRectangleBorder(
+                        side:
+                            const BorderSide(width: 0, color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      leading: const CircleAvatar(
+                        backgroundImage: AssetImage('assets/blood.png'),
+                      ),
+                      title: Row(
+                        children: [
+                          Text(
+                            Get.find<AuthController>().model?.data.name ?? 'name',
+                          ),
+                        ],
+                      ),
+                      subtitle: const Text('Blood : Available'),
+                      trailing: GestureDetector(
+                          onTap: () {
+                            //Get.to(EditProfileScreen());
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) => const AcName());
+                          },
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.red.shade800,
+                          )),
                     ),
-                    leading: const CircleAvatar(
-                      backgroundImage: AssetImage('assets/blood.png'),
-                    ),
-                    title: Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          Get.find<AuthController>().model?.data.name ?? 'name',
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.bloodtype_outlined,
+                                color: Colors.red.shade900,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text('${getDonationHistoryController.donorHistoryList.data?.length ?? 0}'),
+                              GestureDetector(
+                                  onTap: () {
+                                    Get.to(()=>const Donation());
+                                  },
+                                  child: const Text('Total Donate')),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                    subtitle: const Text('Blood : Available'),
-                    trailing: GestureDetector(
-                        onTap: () {
-                          //Get.to(EditProfileScreen());
-                          showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) => const AcName());
-                        },
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.red.shade800,
-                        )),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.bloodtype_outlined,
-                              color: Colors.red.shade900,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text('${getDonationHistoryController.donorHistoryList.data?.length ?? 0}'),
-                            GestureDetector(
-                                onTap: () {
-                                  Get.offAll(const Donation());
-                                },
-                                child: const Text('Total Donate')),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.bloodtype_outlined,
-                              color: Colors.red.shade900,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              Get.find<AuthController>()
-                                      .model
-                                      ?.data
-                                      .bloodGroup ??
-                                  'blood group',
-                            ),
-                            const Text('Blood Group'),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.bloodtype_outlined,
-                              color: Colors.red.shade900,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(DateFormat.yMd().format(
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.bloodtype_outlined,
+                                color: Colors.red.shade900,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
                                 Get.find<AuthController>()
                                         .model
                                         ?.data
-                                        .lastDonation ??
-                                    DateTime.now())),
-                            const Text('Last Donation'),
-                          ],
+                                        .bloodGroup ??
+                                    'blood group',
+                              ),
+                              const Text('Blood Group'),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.bloodtype_outlined,
+                                color: Colors.red.shade900,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(DateFormat.yMd().format(
+                                  Get.find<AuthController>()
+                                          .model
+                                          ?.data
+                                          .lastDonation ??
+                                      DateTime.now())),
+                              const Text('Last Donation'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
@@ -160,17 +164,6 @@ class _AccountScreenState extends State<AccountScreen> {
               subtitle: Text(
                 Get.find<AuthController>().model?.data.name ?? '',
               ),
-              trailing: GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) => const AcMobile());
-                  },
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.red.shade700,
-                  )),
             ),
             Container(height: 1, color: Colors.grey.shade100),
             ListTile(
@@ -191,17 +184,6 @@ class _AccountScreenState extends State<AccountScreen> {
               subtitle: Text(
                 Get.find<AuthController>().model?.data.email ?? '',
               ),
-              trailing: GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) => const AcEmail());
-                  },
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.red.shade800,
-                  )),
             ),
             Container(height: 1, color: Colors.grey.shade100),
             ListTile(
@@ -266,7 +248,46 @@ class _AccountScreenState extends State<AccountScreen> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return const LogoutAlert();
+                        return AlertDialog(
+                          title: Row(
+                            children: [
+                              const Text("Ready to Leave?", style: TextStyle(fontSize: 16)),
+                              const Spacer(),
+                              IconButton(onPressed: (){
+                                Navigator.pop(context);
+                              }, icon: const Icon(Icons.highlight_remove_outlined))
+                            ],
+                          ),
+                          content: const Text('Select "Logout" below if you are ready to end your current session.'),
+                          actions: [
+                            const AlertCancelButton(),
+                            GetBuilder<LogoutController>(
+                              builder: (logoutController) {
+                                return Visibility(
+                                  visible: logoutController.logoutInProgress == false,
+                                  replacement: const Center(
+                                      child :CircularProgressIndicator()),
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        final bool result = await logoutController.logout();
+                                        if (result) {
+                                          Get.offAll(() => const LoginScreen());
+                                        } else {
+                                          // Handle the case when logout fails
+                                        }
+                                      }
+                                    },
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: Colors.red.shade800
+                                    ),
+                                    child: const Text('Logout', style: TextStyle(color: Colors.white)),
+                                  ),
+                                );
+                              }
+                            ),
+                          ],
+                        );
                       });
                 },
                 child: const Text('Logout')),
@@ -275,7 +296,11 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.offAll(const Donation());
+          showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) => const Donation());
+          //Get.to(()=>const Donation());
         },
         child: const Icon(Icons.add),
       ),
@@ -295,11 +320,7 @@ class _AccountScreenState extends State<AccountScreen> {
         IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const SearchScreen()), // Use the correct search page
+            Get.offAll(() => const SearchScreen(), // Use the correct search page
             );
           },
         ),

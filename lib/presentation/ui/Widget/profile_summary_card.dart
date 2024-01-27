@@ -1,6 +1,7 @@
 import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
 import 'package:blood/presentation/ui/screens/Accounts/account_screen.dart';
 import 'package:blood/presentation/ui/screens/login_screen.dart';
+import 'package:blood/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,9 +49,9 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
       trailing: IconButton(
         onPressed: () async {
           await Get.find<AuthController>().clearAuthData();
-          Get.to(()=> const LoginScreen());
+          Get.to(()=> const SearchScreen());
         },
-        icon: const Icon(Icons.logout, color: Colors.white),
+        icon: const Icon(Icons.search_outlined, color: Colors.white),
       ),
       tileColor: Colors.red.shade900,
     );
