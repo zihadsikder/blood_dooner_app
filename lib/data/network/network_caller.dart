@@ -7,18 +7,19 @@ import 'network_response.dart';
 
 class NetworkCaller {
   AuthController auth = Get.find<AuthController>();
+
   Future<NetworkResponse> postRequest(String url,
       {Map<String, dynamic>? body, String? token}) async {
     try {
       log(url);
       log(body.toString());
-      final response = await post(
-          Uri.parse(url),
-          body: jsonEncode(body),
-          headers: {
-            'Authorization' : auth.model?.data != null ? "Bearer ${auth.model!.data.accessToken}" : "",
-            'Content-Type': 'application/json'}
-      );
+      final response =
+          await post(Uri.parse(url), body: jsonEncode(body), headers: {
+        'Authorization': auth.model?.data != null
+            ? "Bearer ${auth.model!.data.accessToken}"
+            : "",
+        'Content-Type': 'application/json'
+      });
       log(response.statusCode.toString());
       log(response.body.toString());
       if (response.statusCode == 200) {
@@ -26,7 +27,6 @@ class NetworkCaller {
           isSuccess: true,
           jsonResponse: response.body,
           statusCode: 200,
-
         );
       } else {
         return NetworkResponse(
@@ -40,14 +40,15 @@ class NetworkCaller {
     }
   }
 
-  Future<NetworkResponse> getRequest(String url,{String? token} ) async {
+  Future<NetworkResponse> getRequest(String url, {String? token}) async {
     try {
       log(url);
       log(token.toString());
-      final response =
-      await get(Uri.parse(url), headers: {
+      final response = await get(Uri.parse(url), headers: {
         'Content-type': 'Application/json',
-        'Authorization' : auth.model?.data != null ? "Bearer ${auth.model!.data.accessToken}" : "",
+        'Authorization': auth.model?.data != null
+            ? "Bearer ${auth.model!.data.accessToken}"
+            : "",
       });
       log(response.headers.toString());
       log(response.statusCode.toString());
@@ -58,16 +59,14 @@ class NetworkCaller {
           jsonResponse: response.body,
           statusCode: 200,
         );
-      }
-      else if (response.statusCode == 401) {
+      } else if (response.statusCode == 401) {
         //backToLogin();
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
           jsonResponse: jsonDecode(response.body),
         );
-      }
-      else {
+      } else {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,

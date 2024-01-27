@@ -4,15 +4,16 @@ import 'package:get/get.dart';
 
 class DonationHistoryController extends GetxController {
   bool _inProgress = false;
+
   bool get inProgress => _inProgress;
 
   String _errorMessage = '';
+
   String get errorMessage => _errorMessage;
 
-  Future<bool> addDonation( String place, String date) async {
+  Future<bool> addDonation(String place, String date) async {
     _inProgress = true;
     update();
-
 
     final response = await NetworkCaller().postRequest(
       Urls.storeDonationHistory,
@@ -26,7 +27,7 @@ class DonationHistoryController extends GetxController {
       place;
       date;
       update();
-       _errorMessage = ('New History added!');
+      _errorMessage = ('New History added!');
       return true;
     } else {
       update();
@@ -35,4 +36,3 @@ class DonationHistoryController extends GetxController {
     }
   }
 }
-

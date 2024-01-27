@@ -11,6 +11,7 @@ class LocationController extends GetxController {
   bool isLoading = true;
 
   String _failMessage = '';
+
   String get failureMessage => _failMessage;
 
   List<Division>? divisionList;
@@ -33,7 +34,8 @@ class LocationController extends GetxController {
 
   Future<void> getDivision() async {
     isLoading = true;
-    final NetworkResponse response = await NetworkCaller().getRequest(Urls.getDivisionData);
+    final NetworkResponse response =
+        await NetworkCaller().getRequest(Urls.getDivisionData);
     if (response.isSuccess) {
       divisionList = divisionFromJson(response.jsonResponse!).data;
       update();
@@ -46,7 +48,8 @@ class LocationController extends GetxController {
 
   Future<void> getDistrict({required String id}) async {
     isLoading = true;
-    final NetworkResponse response = await NetworkCaller().getRequest(Urls.getDistrictData + id);
+    final NetworkResponse response =
+        await NetworkCaller().getRequest(Urls.getDistrictData + id);
 
     if (response.isSuccess) {
       districtList = mDistrictResponseFromJson(response.jsonResponse!).data;
@@ -59,24 +62,24 @@ class LocationController extends GetxController {
   }
 
   Future<void> getUpzila({required String id}) async {
-      isLoading = true;
-      final NetworkResponse response = await NetworkCaller().getRequest(Urls.getUpzilaData + id);
-      if (response.isSuccess) {
-        upzilaList = upzilaResponseFromJson(response.jsonResponse!).data;
-        update(); // Trigger a rebuild
-      } else {
-        _failMessage = ('Upzila data fetch failed! Please try again.');
-      }
-      isLoading = false;
+    isLoading = true;
+    final NetworkResponse response =
+        await NetworkCaller().getRequest(Urls.getUpzilaData + id);
+    if (response.isSuccess) {
+      upzilaList = upzilaResponseFromJson(response.jsonResponse!).data;
       update(); // Trigger a rebuild
+    } else {
+      _failMessage = ('Upzila data fetch failed! Please try again.');
     }
+    isLoading = false;
+    update(); // Trigger a rebuild
+  }
 
-
-
-Future<void> getUnion({required String id}) async {
+  Future<void> getUnion({required String id}) async {
     isLoading = true;
     update();
-    final NetworkResponse response = await NetworkCaller().getRequest(Urls.getUnionData + id);
+    final NetworkResponse response =
+        await NetworkCaller().getRequest(Urls.getUnionData + id);
     if (response.isSuccess) {
       unionList = unionResponseFromJson(response.jsonResponse!).data;
       //print('===============: : : ${unionList?.length} from upzila');
@@ -86,7 +89,5 @@ Future<void> getUnion({required String id}) async {
     }
     isLoading = false;
     update(); // Trigger a rebuild
-}
-
-
+  }
 }

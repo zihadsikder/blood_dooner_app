@@ -9,18 +9,17 @@ class SearchBloodDonorController extends GetxController {
 
   bool get inProgress => _inProgress;
 
-  Future<bool> searchDonor(String bloodGroup,String division, String district, String upzila,  String postOffice) async {
+  Future<bool> searchDonor(String bloodGroup, String division, String district,
+      String upzila, String postOffice) async {
     _inProgress = true;
     update();
 
-    final response = await NetworkCaller().getRequest(
-        "${Urls.getSearchDonor}"
-            "blood_group=$bloodGroup"
-            "&division_id=$division"
-            "&district_id=$district"
-            "&area_id=$upzila"
-            "&post_office=$postOffice"
-    );
+    final response = await NetworkCaller().getRequest("${Urls.getSearchDonor}"
+        "blood_group=$bloodGroup"
+        "&division_id=$division"
+        "&district_id=$district"
+        "&area_id=$upzila"
+        "&post_office=$postOffice");
 
     _inProgress = false;
 

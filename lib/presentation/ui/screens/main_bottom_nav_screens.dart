@@ -3,12 +3,14 @@ import 'Accounts/account_screen.dart';
 import 'dashboard_screen.dart';
 import 'home_screen.dart';
 import 'sittings/setting_screen.dart';
+
 class MainBottomNavScreen extends StatefulWidget {
   const MainBottomNavScreen({super.key});
-  @override
+
   @override
   State<MainBottomNavScreen> createState() => _MainBottomNavScreenState();
 }
+
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   List pages = const [
     HomeScreen(),
@@ -17,12 +19,6 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     SettingsScreen(),
   ];
 
-  // List pages = [
-  //    const HomeScreen(),
-  //    const DashboardScreen(),
-  //    const AccountScreen(),
-  //    const SettingsScreen(),
-  // ];
   int currentIndex = 0;
 
   void onTap(int index) {
@@ -35,7 +31,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: pages [currentIndex] ,
+      body: pages[currentIndex],
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30.0),
@@ -54,9 +50,12 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
           showSelectedLabels: true,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(label: ("Home"), icon: Icon(Icons.home)),
-            BottomNavigationBarItem(label: ("Dashboard"), icon: Icon(Icons.dashboard_outlined)),
-            BottomNavigationBarItem(label: ("Account"), icon: Icon(Icons.person)),
-            BottomNavigationBarItem(label: ("Settings"), icon: Icon(Icons.settings)),
+            BottomNavigationBarItem(
+                label: ("Dashboard"), icon: Icon(Icons.dashboard_outlined)),
+            BottomNavigationBarItem(
+                label: ("Account"), icon: Icon(Icons.person)),
+            BottomNavigationBarItem(
+                label: ("Settings"), icon: Icon(Icons.settings)),
           ],
         ),
       ),

@@ -15,8 +15,8 @@ class ControllerBinder extends Bindings {
     Get.put(LoginController());
     Get.put(SignUpController());
     Get.put(LocationController());
-    //Get.put(AuthController());
-    Get.lazyPut(()=>AuthController());
+    Get.put(AuthController());
+    //Get.lazyPut(()=>AuthController());
     Get.put(DonationHistoryController());
     Get.put(SearchBloodDonorController());
     Get.put(GetDonationHistoryController());

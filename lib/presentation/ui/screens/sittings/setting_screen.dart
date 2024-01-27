@@ -7,6 +7,7 @@ import 'privacy.dart';
 import 'support.dart';
 import 'events.dart';
 import 'package:flutter/material.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -17,7 +18,9 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.red.shade800,statusBarIconBrightness: Brightness.light));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.red.shade800,
+        statusBarIconBrightness: Brightness.light));
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -32,54 +35,67 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     shape: const RoundedRectangleBorder(
                       side: BorderSide.none,
                     ),
-                    leading: Icon(Icons.event,color: Colors.red.shade800),
-                    title: const Text ("Events"),
-                    onTap: (){
+                    leading: Icon(Icons.event, color: Colors.red.shade800),
+                    title: const Text("Events"),
+                    onTap: () {
                       Get.offAll(const Events());
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 20),
                   ),
-                  const SizedBox(height: 8,),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   ListTile(
                     shape: const RoundedRectangleBorder(
                       side: BorderSide.none,
                     ),
-                    leading: Icon(Icons.support_agent,color: Colors.red.shade800),
-                    title: const Text ("Support"),
-                    onTap: (){
+                    leading:
+                        Icon(Icons.support_agent, color: Colors.red.shade800),
+                    title: const Text("Support"),
+                    onTap: () {
                       Get.offAll(const Support());
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 20),
                   ),
-                  const SizedBox(height: 8,),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   ListTile(
                     shape: const RoundedRectangleBorder(
                       side: BorderSide.none,
                     ),
-                    leading: Icon(Icons.privacy_tip_outlined, color: Colors.red.shade800),
-                    title: const Text ("Privacy Policy"),
-                    onTap: (){
+                    leading: Icon(Icons.privacy_tip_outlined,
+                        color: Colors.red.shade800),
+                    title: const Text("Privacy Policy"),
+                    onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context)=> const PrivacyScreen())
-                      );
+                          MaterialPageRoute(
+                              builder: (context) => const PrivacyScreen()));
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 20),
                   ),
-                  const SizedBox(height: 8,),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   ListTile(
                     shape: const RoundedRectangleBorder(
                       side: BorderSide.none,
                     ),
-                    leading: Icon(Icons.fitness_center, color: Colors.red.shade800),
+                    leading:
+                        Icon(Icons.fitness_center, color: Colors.red.shade800),
                     title: const Text('Exercise Guidelines'),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Exercises()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Exercises()));
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 20),
                   ),
-                  const SizedBox(height: 8,),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   ListTile(
                     shape: const RoundedRectangleBorder(
                       side: BorderSide.none,
@@ -87,10 +103,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     leading: Icon(Icons.fastfood, color: Colors.red.shade800),
                     title: const Text('Diet Chart'),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const DietChart()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DietChart()));
                     },
-                    trailing: const Icon(Icons.arrow_forward_ios,size: 20),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 20),
                   ),
                 ],
               ),

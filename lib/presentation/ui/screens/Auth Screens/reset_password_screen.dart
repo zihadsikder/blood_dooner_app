@@ -1,17 +1,15 @@
 import 'package:blood/presentation/ui/Widget/app_logo.dart';
-import 'package:blood/presentation/ui/screens/forget_pass_screen/reset_password_screen.dart';
-import 'package:blood/presentation/ui/screens/login_screen.dart';
+import 'package:blood/presentation/ui/screens/Auth%20Screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
-class PinVerificationScreen extends StatefulWidget {
-  const PinVerificationScreen({super.key});
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
-  State<PinVerificationScreen> createState() => _PinVerificationScreenState();
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
-class _PinVerificationScreenState extends State<PinVerificationScreen> {
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,42 +28,45 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                   height: 16,
                 ),
                 Text(
-                  'Pin Verification',
+                  'Set Password',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(
                   height: 8,
                 ),
                 const Text(
-                  'A 6 digit OTP will be sent to your email address',
+                  'Minimum password length should be more than 8 letters',
                   style: TextStyle(
                       color: Colors.grey, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                PinCodeTextField(
-                  length: 6,
-                  obscureText: false,
-                  animationType: AnimationType.fade,
-                  pinTheme: PinTheme(
-                    shape: PinCodeFieldShape.box,
-                    borderRadius: BorderRadius.circular(5),
-                    fieldHeight: 50,
-                    fieldWidth: 40,
-                    activeFillColor: Colors.white,
-                    activeColor: Colors.green,
-                    selectedFillColor: Colors.white,
-                    inactiveFillColor: Colors.white,
+                TextFormField(
+                  decoration: const InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    hintText: 'Password',
                   ),
-                  animationDuration: const Duration(milliseconds: 300),
-                  enableActiveFill: true,
-                  onCompleted: (v) {},
-                  onChanged: (value) {},
-                  beforeTextPaste: (text) {
-                    return true;
-                  },
-                  appContext: context,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'Confirm Password',
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
@@ -74,14 +75,14 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ResetPasswordScreen(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const PinVerificationScreen(),
+                      //   ),
+                      // );
                     },
-                    child: const Text('Verify'),
+                    child: const Text('Confirm'),
                   ),
                 ),
                 const SizedBox(
@@ -103,7 +104,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LoginScreen()),
-                                (route) => false);
+                            (route) => false);
                       },
                       child: const Text(
                         'Sign In',

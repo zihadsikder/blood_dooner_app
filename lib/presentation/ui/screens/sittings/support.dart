@@ -66,16 +66,17 @@ class _SupportState extends State<Support> {
 
   // Function to launch the phone dialer
   _launchPhoneDialer(String phoneNumber) async {
-    final url = 'tel:$phoneNumber';
-    if (await canLaunch(url)) {
-      await launch(url);
+    final url = Uri.parse('tel:$phoneNumber');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
       throw 'Could not launch $url';
     }
   }
 
+
   // Function to launch the email dialer
-  void _launchEmailSubmission(String email) async {
+  _launchEmailSubmission(String email) async {
     final Uri params = Uri(
       scheme: 'mailto',
       path: email,
@@ -88,3 +89,4 @@ class _SupportState extends State<Support> {
     }
   }
 }
+

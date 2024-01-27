@@ -1,8 +1,8 @@
 import 'package:blood/presentation/state_holders/controller/login_controller.dart';
 import 'package:blood/presentation/ui/Widget/snack_message.dart';
+import 'package:blood/presentation/ui/screens/Auth%20Screens/forgot_password_screen.dart';
 import 'package:get/get.dart';
-import 'forget_pass_screen/forgot_password_screen.dart';
-import 'main_bottom_nav_screens.dart';
+import '../main_bottom_nav_screens.dart';
 import 'sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,10 +27,10 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-              Colors.red.shade900,
-              Colors.red.shade800,
-              Colors.red.shade500,
-            ])),
+          Colors.red.shade900,
+          Colors.red.shade800,
+          Colors.red.shade500,
+        ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -100,32 +100,51 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 30,
                           ),
                           GestureDetector(
-                            onTap: login,
+                            onTap: () async {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              final bool result = await _loginController.login(
+                                  _numberTEController.text.trim(),
+                                  _passwordTEController.text);
+                              if (result) {
+                                Get.to(const MainBottomNavScreen());
+                                if (mounted) {
+                                  showSnackMessage(
+                                      context, _loginController.failureMessage);
+                                }
+                              } else {
+                                if (mounted) {
+                                  showSnackMessage(
+                                      context, _loginController.failureMessage);
+                                }
+                              }
+                            },
                             child: Container(
                               height: 50,
                               margin:
-                              const EdgeInsets.symmetric(horizontal: 50),
+                                  const EdgeInsets.symmetric(horizontal: 50),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.red.shade800),
                               child: GetBuilder<LoginController>(
                                   builder: (loginController) {
-                                    return Visibility(
-                                      visible:
+                                return Visibility(
+                                  visible:
                                       loginController.loginInProgress == false,
-                                      replacement: const Center(
-                                        child: CircularProgressIndicator()),
-                                      child: const Center(
-                                        child: Text(
-                                          "Login",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16),
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                                  replacement: const Center(
+                                      child: CircularProgressIndicator()),
+                                  child: const Center(
+                                    child: Text(
+                                      "Login",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                );
+                              }),
                             ),
                           ),
                           const SizedBox(
@@ -137,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (context) =>
-                                  const ForgotPasswordScreen());
+                                      const ForgotPasswordScreen());
                             },
                             child: const Text(
                               "Forgot Password?",
@@ -161,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.red, fontSize: 20),
                                 ),
                                 onPressed: () {
-                                  Get.to(()=> const SignUpScreen());
+                                  Get.to(() => const SignUpScreen());
                                 },
                               )
                             ],
@@ -190,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     child: const Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.facebook,
@@ -291,7 +310,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   setState(() {
                     _obscureText =
-                    !_obscureText; // Toggle the password visibility
+                        !_obscureText; // Toggle the password visibility
                   });
                 },
                 icon: Icon(
@@ -313,20 +332,20 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> login() async {
-    if (_formKey.currentState!.validate()) {
-      return;
-    }
-    final isLoggedIn = await _loginController.login(
-        _numberTEController.text.trim(), _passwordTEController.text);
-
-    if (isLoggedIn) {
-      Get.to(()=>const MainBottomNavScreen());
-    }
-    else{
-      showSnackMessage(context, _loginController.failureMessage);
-    }
-  }
+  // Future<void> login() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     return;
+  //   }
+  //   final result = await _loginController.login(
+  //       _numberTEController.text.trim(), _passwordTEController.text);
+  //
+  //   if (result) {
+  //     Get.to(()=>const MainBottomNavScreen());
+  //   }
+  //   else{
+  //     showSnackMessage(context, _loginController.failureMessage);
+  //   }
+  // }
   @override
   void dispose() {
     _numberTEController.dispose();

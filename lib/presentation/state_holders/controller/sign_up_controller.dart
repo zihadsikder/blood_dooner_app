@@ -10,6 +10,7 @@ class SignUpController extends GetxController {
   bool get signUpInProgress => _signUpInProgress.value;
 
   String _failMessage = '';
+
   String get failureMessage => _failMessage;
 
   Future<bool> registration(RegistrationParams params) async {
@@ -27,8 +28,7 @@ class SignUpController extends GetxController {
       _failMessage = ('Account has been created! Please Sign In.');
       update();
       return true;
-    }
-    else {
+    } else {
       _failMessage = ('Account creation failed! Please try again.');
       update();
       return false;

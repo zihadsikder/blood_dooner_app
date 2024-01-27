@@ -1,5 +1,5 @@
 import 'package:blood/presentation/ui/Widget/app_logo.dart';
-import 'package:blood/presentation/ui/screens/forget_pass_screen/pin_varification_screen.dart';
+import 'package:blood/presentation/ui/screens/Auth%20Screens/pin_varification_screen.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {

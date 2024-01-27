@@ -3,7 +3,7 @@ import 'package:blood/presentation/state_holders/controller/get_donation_history
 import 'package:blood/presentation/state_holders/controller/logout_controller.dart';
 import 'package:blood/presentation/ui/Widget/alert_cancel_button.dart';
 import 'package:blood/presentation/ui/screens/donation_history.dart';
-import 'package:blood/presentation/ui/screens/login_screen.dart';
+import 'package:blood/presentation/ui/screens/Auth%20Screens/login_screen.dart';
 import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
 import 'package:blood/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,6 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-
   final getDonationHistoryController = Get.find<GetDonationHistoryController>();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -43,8 +42,8 @@ class _AccountScreenState extends State<AccountScreen> {
                   children: [
                     ListTile(
                       shape: RoundedRectangleBorder(
-                        side:
-                            const BorderSide(width: 0, color: Colors.transparent),
+                        side: const BorderSide(
+                            width: 0, color: Colors.transparent),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       leading: const CircleAvatar(
@@ -53,7 +52,8 @@ class _AccountScreenState extends State<AccountScreen> {
                       title: Row(
                         children: [
                           Text(
-                            Get.find<AuthController>().model?.data.name ?? 'name',
+                            Get.find<AuthController>().model?.data.name ??
+                                'name',
                           ),
                         ],
                       ),
@@ -85,10 +85,11 @@ class _AccountScreenState extends State<AccountScreen> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Text('${getDonationHistoryController.donorHistoryList.data?.length ?? 0}'),
+                              Text(
+                                  '${getDonationHistoryController.donorHistoryList.data?.length ?? 0}'),
                               GestureDetector(
                                   onTap: () {
-                                    Get.to(()=>const Donation());
+                                    Get.to(() => const Donation());
                                   },
                                   child: const Text('Total Donate')),
                             ],
@@ -251,41 +252,47 @@ class _AccountScreenState extends State<AccountScreen> {
                         return AlertDialog(
                           title: Row(
                             children: [
-                              const Text("Ready to Leave?", style: TextStyle(fontSize: 16)),
+                              const Text("Ready to Leave?",
+                                  style: TextStyle(fontSize: 16)),
                               const Spacer(),
-                              IconButton(onPressed: (){
-                                Navigator.pop(context);
-                              }, icon: const Icon(Icons.highlight_remove_outlined))
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: const Icon(
+                                      Icons.highlight_remove_outlined))
                             ],
                           ),
-                          content: const Text('Select "Logout" below if you are ready to end your current session.'),
+                          content: const Text(
+                              'Select "Logout" below if you are ready to end your current session.'),
                           actions: [
                             const AlertCancelButton(),
                             GetBuilder<LogoutController>(
-                              builder: (logoutController) {
-                                return Visibility(
-                                  visible: logoutController.logoutInProgress == false,
-                                  replacement: const Center(
-                                      child :CircularProgressIndicator()),
-                                  child: TextButton(
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        final bool result = await logoutController.logout();
-                                        if (result) {
-                                          Get.offAll(() => const LoginScreen());
-                                        } else {
-                                          // Handle the case when logout fails
-                                        }
+                                builder: (logoutController) {
+                              return Visibility(
+                                visible:
+                                    logoutController.logoutInProgress == false,
+                                replacement: const Center(
+                                    child: CircularProgressIndicator()),
+                                child: TextButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      final bool result =
+                                          await logoutController.logout();
+                                      if (result) {
+                                        Get.offAll(() => const LoginScreen());
+                                      } else {
+                                        // Handle the case when logout fails
                                       }
-                                    },
-                                    style: TextButton.styleFrom(
-                                        backgroundColor: Colors.red.shade800
-                                    ),
-                                    child: const Text('Logout', style: TextStyle(color: Colors.white)),
-                                  ),
-                                );
-                              }
-                            ),
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Colors.red.shade800),
+                                  child: const Text('Logout',
+                                      style: TextStyle(color: Colors.white)),
+                                ),
+                              );
+                            }),
                           ],
                         );
                       });
@@ -320,15 +327,13 @@ class _AccountScreenState extends State<AccountScreen> {
         IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
-            Get.offAll(() => const SearchScreen(), // Use the correct search page
+            Get.offAll(
+              () => const SearchScreen(), // Use the correct search page
             );
           },
         ),
       ],
-      elevation: 10,
+      elevation: 5,
     );
   }
-
 }
-
-

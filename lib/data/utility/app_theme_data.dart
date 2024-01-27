@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppThemeData{
+class AppThemeData {
   static ThemeData lightThemeData = ThemeData(
     primaryColor: Colors.red.shade900,
     primarySwatch: Colors.red,
@@ -10,15 +10,14 @@ class AppThemeData{
         foregroundColor: Colors.white,
         elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius:
-          BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.symmetric(vertical: 12),
         textStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.5,
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 0.5,
         ),
       ),
     ),
@@ -68,16 +67,13 @@ class AppThemeData{
       // ),
       fillColor: Colors.white,
       filled: true,
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none
-      ),
+      border: OutlineInputBorder(borderSide: BorderSide.none),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide.none,
       ),
       hintStyle: TextStyle(
         color: Colors.grey,
       ),
-
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(

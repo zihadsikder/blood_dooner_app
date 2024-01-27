@@ -3,7 +3,7 @@ import 'package:blood/presentation/state_holders/controller/location_controller.
 import 'package:blood/presentation/state_holders/controller/sign_up_controller.dart';
 import 'package:blood/presentation/ui/Widget/snack_message.dart';
 import 'package:get/get.dart';
-import '../Widget/location_from.dart';
+import '../../Widget/location_from.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 

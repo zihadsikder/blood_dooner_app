@@ -1,3 +1,4 @@
+import 'package:blood/presentation/ui/screens/Auth%20Screens/login_screen.dart';
 import 'package:blood/presentation/ui/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,8 @@ class BloodApp extends StatelessWidget {
       title: 'Blood Donor App',
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      //home: const SplashScreen(),
+      home: const LoginScreen(),
       theme: AppThemeData.lightThemeData,
       initialBinding: ControllerBinder(),
     );

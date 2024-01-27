@@ -1,6 +1,5 @@
 import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
 import 'package:blood/presentation/ui/screens/Accounts/account_screen.dart';
-import 'package:blood/presentation/ui/screens/login_screen.dart';
 import 'package:blood/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +17,6 @@ class ProfileSummaryCard extends StatefulWidget {
 }
 
 class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -39,8 +37,9 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
         child: Icon(Icons.person),
       ),
       title: Text(
-        Get.find<AuthController>().model?.data.name?? 'name',
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+        Get.find<AuthController>().model?.data.name ?? 'name',
+        style:
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
       ),
       subtitle: Text(
         Get.find<AuthController>().model?.data.email ?? 'email',
@@ -50,6 +49,7 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
         onPressed: () async {
           await Get.find<AuthController>().clearAuthData();
           Get.to(()=> const SearchScreen());
+          //Get.to(() => const LoginScreen());
         },
         icon: const Icon(Icons.search_outlined, color: Colors.white),
       ),

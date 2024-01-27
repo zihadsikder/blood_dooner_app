@@ -1,5 +1,6 @@
 import 'package:blood/presentation/ui/Widget/const.dart';
 import 'package:flutter/material.dart';
+
 class PrivacyScreen extends StatefulWidget {
   const PrivacyScreen({super.key});
 
@@ -12,9 +13,12 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.red.shade900,
-        title: const Text('Privacy Policy ', style: TextStyle(
-            fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white)),
+        backgroundColor: Colors.red.shade900,
+        title: const Text('Privacy Policy ',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.white)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -35,14 +39,11 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                   ],
                 ),
               ),
-
               Text(Const.privacyPolicy),
             ],
           ),
         ),
       ),
-
     );
-
   }
 }
