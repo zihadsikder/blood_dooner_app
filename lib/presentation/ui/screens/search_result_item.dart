@@ -9,14 +9,20 @@ class SearchResultItem extends StatelessWidget {
   final String address;
   final String mobile;
 
-  const SearchResultItem({super.key,
+  final DateTime lastDonationDate;
+  final bool isEligibleToDonate;
+
+  const SearchResultItem({
+    Key? key,
     required this.name,
     required this.bloodGroup,
     required this.lastDonation,
     required this.totalDonations,
     required this.address,
     required this.mobile,
-  });
+    required this.lastDonationDate,
+    required this.isEligibleToDonate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +59,7 @@ class SearchResultItem extends StatelessWidget {
                   ),
                 ),
               ),
+              //const Icon(Icons.lock)
             ],
           ),
           subtitle: Column(
@@ -67,18 +74,24 @@ class SearchResultItem extends StatelessWidget {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              IconButton(
-                icon: Icon(Icons.phone, color: Colors.red.shade800),
-                onPressed: () {
+              // Show lock icon if the user is not eligible to donate
+              if (!isEligibleToDonate) Icon(Icons.lock, color: Colors.red.shade800),
+
+              // Show call and SMS buttons if the user is eligible to donate
+              if (isEligibleToDonate) ...[
+                IconButton(
+                  icon: Icon(Icons.phone, color: Colors.red.shade800),
+                  onPressed: () {
                     _launchPhoneDialer(mobile);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.sms, color: Colors.red.shade800),
-                onPressed: () {
-                  _launchSmsApp(mobile);
-                },
-              ),
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.sms, color: Colors.red.shade800),
+                  onPressed: () {
+                    _launchSmsApp(mobile);
+                  },
+                ),
+              ],
             ],
           ),
         ),
@@ -89,10 +102,6 @@ class SearchResultItem extends StatelessWidget {
     );
   }
 }
-// String formatPhoneNumber(String phoneNumber) {
-//   final number = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
-//   return '+88${number.substring(0, 2)} ${number.substring(2, 5)}-${number.substring(5, 8)}-${number.substring(8)}';
-// }
 
 _launchSmsApp(String phoneNumber) async {
   final smsUri =  Uri.parse('sms:$phoneNumber');

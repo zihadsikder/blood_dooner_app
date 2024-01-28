@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _weightOver50Controller = false;
   bool _obscureText = true;
 
-  String selectedBloodGroup = 'A+';
+  String selectedBloodGroup = ' ';
 
   @override
   void initState() {
@@ -205,7 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             '',
                                       ),
                                     );
-                                    if (selectedBloodGroup.isEmpty) {
+                                    if (selectedBloodGroup == ' ') {
                                       showSnackMessage(
                                           context, 'Select your blood group');
                                       return;

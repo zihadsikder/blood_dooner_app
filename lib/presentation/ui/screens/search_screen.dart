@@ -15,23 +15,23 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-
   final getDonationHistoryController = Get.find<GetDonationHistoryController>();
-
-  final SearchBloodDonorController userController =
-  Get.find<SearchBloodDonorController>();
+  final SearchBloodDonorController userController = Get.find<SearchBloodDonorController>();
   final LocationController locationController = Get.find<LocationController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String selectedBloodGroup = 'A+' ;
+  String selectedBloodGroup = ' ';
 
-  String get selectedDivision => locationController.selectedDivisionName?? '';
-  String get selectedDistrict => locationController.selectedDistrictName?? '';
-  String get selectedUpzila => locationController.selectedUpzilaName?? '';
-  String get selectedUnion => locationController.selectedUnionName?? '';
+  String get selectedDivision => locationController.selectedDivisionName ?? '';
+  String get selectedDistrict => locationController.selectedDistrictName ?? '';
+  String get selectedUpzila => locationController.selectedUpzilaName ?? '';
+  String get selectedUnion => locationController.selectedUnionName ?? '';
 
   @override
   Widget build(BuildContext context) {
+    // Define currentDate here
+    final currentDate = DateTime.now();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Find A Blood Donor"),
@@ -48,18 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                LocationFormScreen(
-                  selectedBloodGroup: selectedBloodGroup,
-                  selectedDivision: locationController.selectedDivisionName ?? '',
-                  selectedDistrict: locationController.selectedDistrictName ?? '',
-                  selectedUpzila: locationController.selectedUpzilaName ?? '',
-                  selectedUnion: locationController.selectedUnionName ?? '',
-                  onBloodGroupSelected: (bloodGroup) {
-                    setState(() {
-                      selectedBloodGroup = bloodGroup;
-                    });
-                  },
-                ),
+                bloodAndAddressForm,
                 const SizedBox(height: 16.0),
                 SizedBox(
                   width: double.infinity,
@@ -67,20 +56,18 @@ class _SearchScreenState extends State<SearchScreen> {
                       builder: (donorController) {
                         return Visibility(
                           visible: donorController.inProgress == false,
-                          replacement: const Center(
-                              child: CircularProgressIndicator()),
+                          replacement: const Center(child: CircularProgressIndicator()),
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                final bool result =
-                                await donorController.searchDonor(
+                                final bool result = await donorController.searchDonor(
                                   selectedBloodGroup,
                                   selectedDivision,
                                   selectedDistrict,
                                   selectedUpzila,
-                                  selectedUnion);
+                                  selectedUnion,
+                                );
                                 if (result) {
-
                                 } else {
                                   Get.showSnackbar(const GetSnackBar(
                                     title: 'Search Donor Fail',
@@ -91,9 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 }
                               }
                             },
-                            child: const Text(
-                              'Search',
-                            ),
+                            child: const Text('Search'),
                           ),
                         );
                       }),
@@ -104,25 +89,25 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (userController.user == null || userController.user!.data == null) {
                     return const Text('No search results');
                   }
-
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: userController.user!.data!.length,
                     itemBuilder: (context, index) {
-                      String formattedLastDonation = DateFormat('dd-mm-yyyy').format(
+                      String formattedLastDonation = DateFormat('dd-MM-yyyy').format(
                         userController.user!.data![index].lastDonation!.toLocal(),
                       );
+                      int totalDonations = getDonationHistoryController.donorHistoryList.data?.length ?? 0;
                       return SearchResultItem(
                         name: userController.user!.data![index].name ?? '',
                         bloodGroup: userController.user!.data![index].bloodGroup ?? '',
                         lastDonation: formattedLastDonation,
-                        totalDonations: getDonationHistoryController.donorHistoryList.data?.length.toString() ?? '',
-                        // totalDonations: userController.user!.data![index].mobile?.toString() ?? '',
+                        totalDonations: totalDonations.toString(),
                         mobile: userController.user!.data![index].mobile?.toString() ?? '',
                         address: userController.user!.data![index].address?.postOffice ?? '',
 
-                        // You can also include call and SMS functionality here
+                        lastDonationDate: userController.user!.data![index].lastDonation!.toLocal(),
+                        isEligibleToDonate: currentDate.difference(userController.user!.data![index].lastDonation!.toLocal()).inDays >= 90,
                       );
                     },
                   );
@@ -132,6 +117,21 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  LocationFormScreen get bloodAndAddressForm {
+    return LocationFormScreen(
+      selectedBloodGroup: selectedBloodGroup,
+      selectedDivision: locationController.selectedDivisionName ?? '',
+      selectedDistrict: locationController.selectedDistrictName ?? '',
+      selectedUpzila: locationController.selectedUpzilaName ?? '',
+      selectedUnion: locationController.selectedUnionName ?? '',
+      onBloodGroupSelected: (bloodGroup) {
+        setState(() {
+          selectedBloodGroup = bloodGroup;
+        });
+      },
     );
   }
 }

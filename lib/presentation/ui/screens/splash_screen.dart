@@ -20,7 +20,7 @@ class SplashScreen extends StatefulWidget {
   }
 
   void goToLogin() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     final bool isLoggedIn = await Get.find<AuthController>().isLoggedIn();
     if (isLoggedIn) {
       Get.offAll(() => const MainBottomNavScreen());
