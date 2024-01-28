@@ -1,5 +1,3 @@
-import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
-import 'package:blood/presentation/ui/screens/Accounts/account_screen.dart';
 import 'package:blood/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,33 +21,21 @@ class _ProfileSummaryCardState extends State<ProfileSummaryCard> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0),
       ),
-      onTap: () {
-        if (widget.enableOnTap) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AccountScreen(),
-            ),
-          );
-        }
-      },
-      leading: const CircleAvatar(
-        child: Icon(Icons.person),
+      leading: CircleAvatar(
+        backgroundColor: Colors.white,
+        child: Image.asset('assets/blogo.png'),
       ),
-      title: Text(
-        Get.find<AuthController>().model?.data.name ?? 'name',
-        style:
-            const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+      title: const Text(
+        'GIVE BLOOD  SAVE LIFE',
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
       ),
-      subtitle: Text(
-        Get.find<AuthController>().model?.data.email ?? 'email',
-        style: const TextStyle(color: Colors.white),
+      subtitle: const Text(
+          'To be a Hero! Donate Blood.',
+        style: TextStyle(color: Colors.white, fontSize: 10),
       ),
       trailing: IconButton(
         onPressed: () async {
-          await Get.find<AuthController>().clearAuthData();
           Get.to(()=> const SearchScreen());
-          //Get.to(() => const LoginScreen());
         },
         icon: const Icon(Icons.search_outlined, color: Colors.white),
       ),

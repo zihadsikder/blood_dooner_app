@@ -36,25 +36,10 @@ class _AcNameState extends State<AcName> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(height: 1, color: Colors.grey.shade100),
             TextFormField(
               decoration: const InputDecoration(
                 hintText: 'Name',
               ),
-            ),
-            Container(height: 1, color: Colors.grey.shade100),
-            const SizedBox(height: 8.0),
-            LocationFormScreen(
-            selectedBloodGroup: selectedBloodGroup,
-            selectedDivision: selectedDivision,
-            selectedDistrict: selectedDistrict,
-              selectedUpzila: selectedUpzila,
-              selectedUnion: selectedUnion,
-              onBloodGroupSelected: (bloodGroup) {
-                setState(() {
-                  selectedBloodGroup = bloodGroup;
-                });
-              },
             ),
             Container(height: 1, color: Colors.grey.shade100),
             TextFormField(
@@ -71,6 +56,22 @@ class _AcNameState extends State<AcName> {
               ),
             ),
             Container(height: 1, color: Colors.grey.shade100),
+            const SizedBox(height: 8.0),
+            LocationFormScreen(
+            selectedBloodGroup: selectedBloodGroup,
+            selectedDivision: selectedDivision,
+            selectedDistrict: selectedDistrict,
+              selectedUpzila: selectedUpzila,
+              selectedUnion: selectedUnion,
+              onBloodGroupSelected: (bloodGroup) {
+                setState(() {
+                  selectedBloodGroup = bloodGroup;
+                });
+              },
+            ),
+            //Container(height: 1, color: Colors.grey.shade100),
+
+            //Container(height: 1, color: Colors.grey.shade100),
           ],
         ),
       ),

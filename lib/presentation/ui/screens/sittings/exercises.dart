@@ -24,8 +24,8 @@ class _ExercisesState extends State<Exercises> {
             children: <Widget>[
               Image.asset('assets/fitness.jpg',
                   width: MediaQuery.of(context).size.width - 32,
-                  height: 210,
-                  fit: BoxFit.contain),
+                  height: 300,
+                  fit: BoxFit.cover),
               const SizedBox(height: 20),
               const Text(
                   '5 Exercises That Will Improve Your Poor Circulation Immediately',
@@ -47,8 +47,8 @@ class _ExercisesState extends State<Exercises> {
               const SizedBox(height: 10),
               Image.asset('assets/squat.jpg',
                   width: MediaQuery.of(context).size.width - 32,
-                  height: 210,
-                  fit: BoxFit.contain),
+                  height: 300,
+                  fit: BoxFit.cover),
               const SizedBox(height: 10),
               const Text(
                   "This exercise works the posterior subsystem (hamstrings, glutes, and lats) and thanks to the resistance band, it qualifies as both a cardio and resistance workout, says Shapiro. Start by attaching a resistance band to an anchor position—say, a tree or sturdy column—at stomach level. Hold both ends of the bands and step a foot or so away from the anchor, then squat down with your arms fully extended. Come up to a full upright position as you bend your elbows to pull in the band, keeping your elbows close to your body. Repeat 3 sets of 10-15 reps.",
@@ -79,8 +79,8 @@ class _ExercisesState extends State<Exercises> {
               const SizedBox(height: 10),
               Image.asset('assets/ankle.jpg',
                   width: MediaQuery.of(context).size.width - 32,
-                  height: 210,
-                  fit: BoxFit.contain),
+                  height: 250,
+                  fit: BoxFit.cover),
               const SizedBox(height: 10),
               const Text(
                   "This exercise works the calf muscle—a large, lower extremity muscle in close proximity to veins and arteries. \"The pumping action of the calf muscle—contracting and releasing—helps move blood and lymph through the veins and arteries of the lower leg, which are prone to blood clots and leg swelling,\" says Alice Holland, director and doctor of physical therapy at Stride Strong Physical Therapy in Portland, Oregon. From a comfortable standing position, raise your heels to transfer your weight to the balls of your feet, and squeeze your calf muscles for just 1 second. (Try not to squeeze too strongly or tightly to avoid cramping.) Repeat 3 sets of 20 reps.",
@@ -95,7 +95,7 @@ class _ExercisesState extends State<Exercises> {
               const SizedBox(height: 10),
               Image.asset('assets/breathing.png',
                   width: MediaQuery.of(context).size.width - 32,
-                  height: 210,
+                  height: 250,
                   fit: BoxFit.cover),
               const SizedBox(height: 10),
               const Text(
@@ -111,7 +111,7 @@ class _ExercisesState extends State<Exercises> {
               const SizedBox(height: 10),
               Image.asset('assets/ex-5.jpg',
                   width: MediaQuery.of(context).size.width - 32,
-                  height: 210,
+                  height: 250,
                   fit: BoxFit.cover),
               const SizedBox(height: 10),
               const Text(
@@ -127,7 +127,7 @@ class _ExercisesState extends State<Exercises> {
               const SizedBox(height: 10),
               Image.asset('assets/CRUNCHES.jpg',
                   width: MediaQuery.of(context).size.width - 32,
-                  height: 210,
+                  height: 280,
                   fit: BoxFit.cover),
               const SizedBox(height: 10),
               const Text(

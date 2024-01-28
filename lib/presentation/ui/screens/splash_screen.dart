@@ -12,28 +12,15 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+  class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
     goToLogin();
   }
 
-  // Future<void> goToLogin() async {
-  //   final bool isLogin = await Get.find<AuthController>().checkAuthState();
-  //
-  //   Future.delayed(const Duration(seconds: 2)).then((value) {
-  //     Navigator.pushAndRemoveUntil(
-  //         context,
-  //         MaterialPageRoute(
-  //             builder: (context) => isLogin
-  //                 ? const MainBottomNavScreen()
-  //                 : const LoginScreen()),
-  //             (route) => false);
-  //   });
-  // }
   void goToLogin() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     final bool isLoggedIn = await Get.find<AuthController>().isLoggedIn();
     if (isLoggedIn) {
       Get.offAll(() => const MainBottomNavScreen());
@@ -50,6 +37,9 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Spacer(),
             AppLogo(),
+            SizedBox(height: 16),
+            Text('আমি বাচাঁতে চাই একটি প্রাণ'),
+            Text('তাইতো করবো রক্তদান'),
             Spacer(),
             CircularProgressIndicator(),
             SizedBox(

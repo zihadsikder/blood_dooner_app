@@ -6,18 +6,20 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, this.height,});
+
+  final double? height;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //final TextEditingController _searchController = TextEditingController();
   final List<String> imageUrls = [
     'assets/rltn.png',
     'assets/donation.png',
     'assets/2.png',
+    //'assets/6.png',
     'assets/3.png',
     'assets/4.png',
     'assets/5.png',
@@ -44,13 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: carousalSlider,
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 12),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SearchScreen()));
+                          Get.to(() => const SearchScreen());
                         },
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: 16,
                             ),
                             Text(
-                              'Search A Donor',
+                              'FIND DONOR',
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -116,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         //Slider Container properties
         options: CarouselOptions(
-          height: 300.0,
+          height:widget.height ?? 300.0,
           enlargeCenterPage: true,
           autoPlay: true,
           aspectRatio: 16 / 9,

@@ -54,13 +54,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       Text(
-                        "A Smart Blood Donatin System",
+                        "A Smart Blood Donation System",
                         style: TextStyle(color: Colors.white, fontSize: 10),
                       ),
                     ],
                   ),
                   Image.asset(
-                    'assets/bloodbd.png',
+                    'assets/blood.png',
                     width: 150,
                     height: 80,
                   ),
