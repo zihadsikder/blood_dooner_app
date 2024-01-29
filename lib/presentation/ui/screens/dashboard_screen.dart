@@ -1,8 +1,10 @@
 import 'package:blood/data/model/service_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Widget/profile_summary_card.dart';
+import 'main_bottom_nav_screens.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -38,17 +40,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.red.shade800,
         statusBarIconBrightness: Brightness.light));
-    return SafeArea(
-      child: Scaffold(
-          body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const ProfileSummaryCard(),
-            serviceData,
-          ],
-        ),
-      )),
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAll(const MainBottomNavScreen());
+        return false;
+      },
+      child: SafeArea(
+        child: Scaffold(
+            body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const ProfileSummaryCard(),
+              serviceData,
+            ],
+          ),
+        )),
+      ),
     );
   }
 

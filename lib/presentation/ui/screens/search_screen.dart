@@ -20,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final LocationController locationController = Get.find<LocationController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String selectedBloodGroup = ' ';
+  String selectedBloodGroup = 'A+';
 
   String get selectedDivision => locationController.selectedDivisionName ?? '';
   String get selectedDistrict => locationController.selectedDistrictName ?? '';
@@ -94,6 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: userController.user!.data!.length,
                     itemBuilder: (context, index) {
+
                       String formattedLastDonation = DateFormat('dd-MM-yyyy').format(
                         userController.user!.data![index].lastDonation!.toLocal(),
                       );

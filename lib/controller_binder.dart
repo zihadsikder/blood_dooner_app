@@ -6,6 +6,7 @@ import 'package:blood/presentation/state_holders/controller/login_controller.dar
 import 'package:blood/presentation/state_holders/controller/logout_controller.dart';
 import 'package:blood/presentation/state_holders/controller/search_blood_donor_controller.dart';
 import 'package:blood/presentation/state_holders/controller/sign_up_controller.dart';
+import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
 import 'package:get/get.dart';
 
 import 'presentation/state_holders/controller/add_donation_history_controller.dart';
@@ -23,5 +24,6 @@ class ControllerBinder extends Bindings {
     Get.put(GetDonationHistoryController());
     Get.put(LogoutController());
     Get.put(ConnectivityController());
+    Get.put(const MainBottomNavScreen());
   }
 }
