@@ -161,21 +161,21 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
 
   DropdownButtonFormField<String> get bloodDropdownButtonFormField {
     return DropdownButtonFormField<String>(
-        value: widget.selectedBloodGroup,
-        onChanged: (newValue) {
-          setState(() {
-            widget.onBloodGroupSelected!(newValue!);
-          });
-        },
-        items:
-            widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-        decoration: const InputDecoration(
-            labelText: 'Blood Group', labelStyle: TextStyle(fontSize: 18)),
-      );
+      value: widget.selectedBloodGroup,
+      onChanged: (newValue) {
+        setState(() {
+          widget.onBloodGroupSelected!(newValue!);
+        });
+      },
+      items:
+      widget.bloodGroups.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: const InputDecoration(
+          labelText: 'Blood Group', labelStyle: TextStyle(fontSize: 18)),
+    );
   }
 }

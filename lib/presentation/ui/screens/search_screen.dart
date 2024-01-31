@@ -68,12 +68,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                   selectedUnion,
                                 );
                                 if (result) {
+
+                                  //locationController.clearLocation();
                                 } else {
                                   Get.showSnackbar(const GetSnackBar(
                                     title: 'Search Donor Fail',
                                     duration: Duration(seconds: 2),
                                     isDismissible: true,
-                                    message: 'Try Again',
+                                    message: 'No donor found at this moment',
                                   ));
                                 }
                               }

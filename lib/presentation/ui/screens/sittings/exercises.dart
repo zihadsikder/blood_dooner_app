@@ -25,7 +25,7 @@ class _ExercisesState extends State<Exercises> {
               Image.asset('assets/fitness.jpg',
                   width: MediaQuery.of(context).size.width - 32,
                   height: 300,
-                  fit: BoxFit.cover),
+                  fit: BoxFit.contain),
               const SizedBox(height: 20),
               const Text(
                   '5 Exercises That Will Improve Your Poor Circulation Immediately',

@@ -1,5 +1,4 @@
 import 'package:blood/presentation/ui/Widget/profile_summary_card.dart';
-import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'diet_chart.dart';
@@ -25,7 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
-          Get.offAll(const MainBottomNavScreen());
+          Get.back();
           return false;
         },
         child: SafeArea(

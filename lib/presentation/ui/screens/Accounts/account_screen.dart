@@ -5,7 +5,6 @@ import 'package:blood/presentation/ui/Widget/alert_cancel_button.dart';
 import 'package:blood/presentation/ui/Widget/profile_summary_card.dart';
 import 'package:blood/presentation/ui/screens/donation_history.dart';
 import 'package:blood/presentation/ui/screens/Auth%20Screens/login_screen.dart';
-import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +27,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
-          Get.offAll(const MainBottomNavScreen());
+          Get.back();
           return false;
         },
         child: SafeArea(
@@ -57,6 +56,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 leading: const CircleAvatar(
+                                  backgroundColor: Colors.white,
                                   backgroundImage: AssetImage('assets/blood.png'),
                                 ),
                                 title: Row(
