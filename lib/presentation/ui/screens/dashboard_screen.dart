@@ -1,5 +1,6 @@
 import 'package:blood/data/model/service_data.dart';
-import 'package:blood/presentation/ui/Widget/carusel_slider.dart';
+import 'package:blood/presentation/ui/Widget/bener_carusal.dart';
+import 'package:blood/presentation/ui/screens/main_bottom_nav_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -14,11 +15,10 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
   final List<ServiceData> websites = [
     ServiceData(
       name: 'Bus Tickets',
-      link: 'https://bdtickets.com/',
+      link: 'https://www.shohoz.com/bus-tickets',
       profilePicAsset: "assets/bus.png",
     ),
     ServiceData(
@@ -27,7 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       profilePicAsset: "assets/train.png",
     ),
     ServiceData(
-      name: 'Biman Tickets',
+      name: 'Air Tickets',
       link: 'https://www.biman-airlines.com/',
       profilePicAsset: "assets/biman.png",
     ),
@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       profilePicAsset: "assets/result.png",
     ),
     ServiceData(
-      name: 'Bd Jobs',
+      name: 'Search Jobs',
       link: 'https://www.bdjobs.com/',
       profilePicAsset: "assets/bdjobs.png",
     ),
@@ -46,11 +46,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
       link: 'https://xiclassadmission.com.bd/',
       profilePicAsset: "assets/admission.png",
     ),
-
   ];
 
   Future<void> _launchUrl(String url) async {
-    if (!await launch(url)) {
+    if (!await launchUrl(
+        url as Uri)) {
       throw Exception('Could not launch $url');
     }
   }
@@ -62,7 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         statusBarIconBrightness: Brightness.light));
     return WillPopScope(
       onWillPop: () async {
-        Get.back();
+        Get.to(const MainBottomNavScreen());
         return false;
       },
       child: SafeArea(
@@ -70,8 +70,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
           body: Column(
             children: [
               const ProfileSummaryCard(),
-              //const BannerCarousel(),
-              const CarouselSliderWidget(),
+              const BannerCarousel(
+                  height: 200.0,
+                  imageUrls: [
+                'assets/blood1.jpeg',
+                'assets/blood2.jpeg',
+                'assets/blood3.jpeg',
+                'assets/blood4.png',
+              ]),
               const SizedBox(height: 16),
               Expanded(
                 child: GridView.builder(

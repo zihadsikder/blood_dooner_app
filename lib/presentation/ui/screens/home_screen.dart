@@ -31,7 +31,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: BannerCarousel(),
+                      child: BannerCarousel(
+                          imageUrls: [
+                            'assets/rltn.png',
+                            'assets/donation.png',
+                            'assets/2.png',
+                            'assets/3.png',
+                            'assets/4.png',
+                            'assets/5.png',
+                          ]
+                      ),
                     ),
                     const SizedBox(height: 12),
                     ElevatedButton(

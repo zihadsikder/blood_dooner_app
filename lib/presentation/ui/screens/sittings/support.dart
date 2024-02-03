@@ -82,8 +82,8 @@ class _SupportState extends State<Support> {
       path: email,
     );
     String url = params.toString();
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrl(url as Uri)) {
+      await launchUrl(url as Uri);
     } else {
       throw 'Could not launch $url';
     }

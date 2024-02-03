@@ -4,40 +4,30 @@ import 'package:flutter/material.dart';
 class BannerCarousel extends StatefulWidget {
   const BannerCarousel({
     Key? key,
-    this.height,
+    this.height, required this.imageUrls
   }) : super(key: key);
 
   final double? height;
+  final List<String> imageUrls;
 
   @override
   State<BannerCarousel> createState() => _BannerCarouselState();
 }
-
 class _BannerCarouselState extends State<BannerCarousel> {
-  final List<String> imageUrls = [
-    'assets/rltn.png',
-    'assets/donation.png',
-    'assets/2.png',
-    //'assets/6.png',
-    'assets/3.png',
-    'assets/4.png',
-    'assets/5.png',
-  ];
-
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       CarouselSlider.builder(
-        itemCount: imageUrls.length,
+        itemCount: widget.imageUrls.length,
         itemBuilder: (context, index, realIndex) {
           return Container(
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
               image: DecorationImage(
-                image: AssetImage(imageUrls[index]),
+                image: AssetImage(widget.imageUrls[index]),
                 fit: BoxFit.cover,
               ),
             ),
@@ -63,7 +53,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          for (int i = 0; i < imageUrls.length; i++)
+          for (int i = 0; i < widget.imageUrls.length; i++)
             Row(
               children: [
                 Container(
