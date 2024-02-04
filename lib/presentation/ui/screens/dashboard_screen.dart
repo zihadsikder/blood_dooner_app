@@ -74,8 +74,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   height: 200.0,
                   imageUrls: [
                 'assets/blood1.jpeg',
-                'assets/blood2.jpeg',
-                'assets/blood3.jpeg',
+                'assets/blood2.png',
+                'assets/blood3.png',
                 'assets/blood4.png',
               ]),
               const SizedBox(height: 16),

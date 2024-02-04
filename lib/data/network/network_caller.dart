@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:blood/presentation/state_holders/controller/auth_controller.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import '../../presentation/state_holders/controller/auth_controller.dart';
 import 'network_response.dart';
 
 class NetworkCaller {
@@ -77,12 +77,5 @@ class NetworkCaller {
       return NetworkResponse(isSuccess: false, errorMessage: e.toString());
     }
   }
-
-// Future<void> backToLogin() async {
-//   await AuthController.clearAuthData();
-//   Navigator.pushAndRemoveUntil(
-//       TaskManagerApp.navigationKey.currentContext!,
-//       MaterialPageRoute(builder: (context) => const LoginScreen()),
-//           (route) => false);
-// }
 }
+
