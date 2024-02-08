@@ -28,6 +28,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
+          //Get.back();
           Get.to(const MainBottomNavScreen());
           return false;
         },

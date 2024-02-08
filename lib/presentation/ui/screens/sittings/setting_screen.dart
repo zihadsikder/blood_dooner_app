@@ -25,6 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
+          //Get.back();
           Get.to(const MainBottomNavScreen());
           return false;
         },
